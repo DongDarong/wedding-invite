@@ -3,7 +3,7 @@ import Home from './views/Home.vue'
 import Admin from './views/Admin.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: Home },
+  { path: '/home', name: 'home', component: Home },
   { path: '/admin', name: 'admin', component: Admin }
 ]
 
