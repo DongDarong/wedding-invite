@@ -1,111 +1,71 @@
-<template>
-  <section class="mt-12 text-center">
-    <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">
-      រាប់ថយក្រោយ
-    </h2>
-    <div class="flex items-center justify-center gap-3 opacity-40 mb-5">
-      <div class="h-[1px] w-8 bg-yellow-600"></div>
-      <span class="text-yellow-700 text-lg">❖ ❀ ❖</span>
-      <div class="h-[1px] w-8 bg-yellow-600"></div>
-    </div>
+﻿<script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
-    <div class="premium-card-frame mx-auto max-w-sm">
-      <div class="glass-panel">
-        <div class="countdown-grid">
-          <div class="countdown-item">
-            <div class="countdown-value">{{ timeLeft.days }}</div>
-            <div class="countdown-label">ថ្ងៃ</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-value">{{ timeLeft.hours }}</div>
-            <div class="countdown-label">ម៉ោង</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-value">{{ timeLeft.minutes }}</div>
-            <div class="countdown-label">នាទី</div>
-          </div>
-          <div class="countdown-item">
-            <div class="countdown-value">{{ timeLeft.seconds }}</div>
-            <div class="countdown-label">វិនាទី</div>
-          </div>
-        </div>
-        <p class="mt-4 text-xs text-blue-900/70">
-          27 មិថុនា 2026 • 8:00 AM (GMT+7)
-        </p>
-      </div>
-    </div>
-  </section>
-</template>
+const props = defineProps({
+  targetDateIso: {
+    type: String,
+    default: '2026-06-27T08:00:00+07:00'
+  }
+})
 
-<script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
-const target = new Date('2026-06-27T08:00:00+07:00').getTime()
-const timeLeft = ref({ days: '0', hours: '00', minutes: '00', seconds: '00' })
+const targetDate = computed(() => new Date(props.targetDateIso).getTime())
+const now = ref(Date.now())
 let timer = null
 
-function pad(value) {
-  return String(value).padStart(2, '0')
-}
+const timeLeft = computed(() => {
+  const diff = Math.max(0, targetDate.value - now.value)
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+  const minutes = Math.floor((diff / (1000 * 60)) % 60)
+  const seconds = Math.floor((diff / 1000) % 60)
 
-function updateCountdown() {
-  const now = Date.now()
-  const diff = Math.max(target - now, 0)
-  const totalSeconds = Math.floor(diff / 1000)
-
-  const days = Math.floor(totalSeconds / 86400)
-  const hours = Math.floor((totalSeconds % 86400) / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = totalSeconds % 60
-
-  timeLeft.value = {
-    days: String(days),
-    hours: pad(hours),
-    minutes: pad(minutes),
-    seconds: pad(seconds)
+  return {
+    days: String(days).padStart(2, '0'),
+    hours: String(hours).padStart(2, '0'),
+    minutes: String(minutes).padStart(2, '0'),
+    seconds: String(seconds).padStart(2, '0')
   }
-}
+})
+
+const units = [
+  { key: 'days', kh: 'ថ្ងៃ', en: 'ថ្ងៃ' },
+  { key: 'hours', kh: 'ម៉ោង', en: 'ម៉ោង' },
+  { key: 'minutes', kh: 'នាទី', en: 'នាទី' },
+  { key: 'seconds', kh: 'វិនាទី', en: 'វិនាទី' }
+]
 
 onMounted(() => {
-  updateCountdown()
-  timer = setInterval(updateCountdown, 1000)
+  timer = window.setInterval(() => {
+    now.value = Date.now()
+  }, 1000)
 })
 
 onBeforeUnmount(() => {
-  if (timer) clearInterval(timer)
+  if (timer) {
+    clearInterval(timer)
+  }
 })
 </script>
 
-<style scoped>
-.countdown-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
+<template>
+  <section class="animate-[fade-up_1.5s_ease]">
+    <div class="text-center mb-5">
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រាប់ថយក្រោយ</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ពេលវេលាមុនពិធី</p>
+    </div>
 
-.countdown-item {
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(31, 59, 143, 0.18);
-  border-radius: 14px;
-  padding: 10px 8px;
-}
-
-.countdown-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--gold-primary);
-  text-shadow: 0 6px 16px rgba(31, 59, 143, 0.2);
-}
-
-.countdown-label {
-  margin-top: 4px;
-  font-size: 0.75rem;
-  color: rgba(18, 36, 84, 0.75);
-}
-
-@media (max-width: 420px) {
-  .countdown-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-</style>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-[390px]:gap-2">
+      <article
+        v-for="unit in units"
+        :key="unit.key"
+        class="temple-frame"
+      >
+        <div class="temple-panel px-3 py-4 text-center h-full max-[390px]:px-2 max-[390px]:py-3">
+          <p class="font-engraved text-3xl sm:text-4xl engraved-text max-[390px]:text-2xl">{{ timeLeft[unit.key] }}</p>
+          <p class="font-khmer-body text-xs text-[#e8d3a7]/85 mt-2 max-[390px]:mt-1">{{ unit.kh }}</p>
+          <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bd9b58]/85 mt-1">{{ unit.en }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</template>

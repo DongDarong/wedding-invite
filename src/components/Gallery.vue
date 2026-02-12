@@ -1,80 +1,89 @@
+﻿<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import templeImage from '../assets/images/temple.png'
+
+const slides = [
+  {
+    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Wedding portrait in warm cinematic light'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Golden ceremonial floral detail'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0f25e?auto=format&fit=crop&w=1400&q=80',
+    alt: 'Couple silhouette with candle glow'
+  },
+  {
+    src: templeImage,
+    alt: 'Khmer temple motif artwork'
+  }
+]
+
+const currentSlide = ref(0)
+let timer = null
+
+onMounted(() => {
+  timer = window.setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % slides.length
+  }, 5000)
+})
+
+onBeforeUnmount(() => {
+  if (timer) {
+    clearInterval(timer)
+  }
+})
+</script>
+
 <template>
-  <section class="mt-16 text-center">
-    <!-- Section Header -->
-    <div class="mb-6">
-      <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">
-        រូបភាពអនុស្សាវរីយ៍
-      </h2>
-      <div class="flex items-center justify-center gap-3 opacity-40">
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-        <span class="text-yellow-700 text-lg">❖ ❀ ❖</span>
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-      </div>
+  <section class="animate-[fade-up_1.5s_ease]">
+    <div class="text-center mb-5">
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រូបភាពអនុស្សាវរីយ៍</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">សួនរូបភាពមង្គលការ</p>
     </div>
 
-    <!-- Gallery Card Container -->
-    <div class="gallery-card-frame mx-auto max-w-sm lg:max-w-2xl">
-      <div class="p-4 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm">
-        
-        <!-- Masonry-style Grid -->
-        <div class="grid grid-cols-2 gap-3">
-          <div 
-            v-for="(photo, i) in photos" 
-            :key="i"
-            :class="[
-              'overflow-hidden rounded-xl shadow-md border border-white/50 transition-transform duration-500 hover:scale-[1.02]',
-              i === 0 ? 'col-span-2 h-48' : 'h-32'
-            ]"
-          >
-            <img 
-              :src="photo" 
+    <div class="temple-frame max-w-3xl mx-auto overflow-hidden">
+      <div class="temple-panel p-4 sm:p-6 max-[390px]:p-3">
+        <div class="relative h-[270px] sm:h-[360px] max-[390px]:h-[220px] rounded-2xl overflow-hidden border border-[#f0cf8a]/25">
+          <transition name="fade" mode="out-in">
+            <img
+              :key="slides[currentSlide].src"
+              :src="slides[currentSlide].src"
+              :alt="slides[currentSlide].alt"
               class="w-full h-full object-cover"
-              alt="Wedding memory"
             >
+          </transition>
+
+          <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.7))]"></div>
+
+          <div class="absolute bottom-4 left-4 right-4 text-center">
+            <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#efd19a]">
+              អនុស្សាវរីយ៍ក្រោមពន្លឺមាស
+            </p>
           </div>
         </div>
 
+        <div class="flex justify-center gap-2 mt-4">
+          <button
+            v-for="(slide, index) in slides"
+            :key="slide.alt"
+            type="button"
+            class="h-2.5 rounded-full transition-all"
+            :class="index === currentSlide ? 'w-8 bg-[#e9c77f]' : 'w-2.5 bg-[#9c7739]/80'"
+            @click="currentSlide = index"
+          ></button>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-const photos = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1511285560982-1356c11d4606?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80"
-]
-</script>
-
 <style scoped>
-/* Typography Mapping */
-.font-khmer-title { font-family: 'Moulpali', serif; }
+.fade-enter-active,
+.fade-leave-active { transition: opacity 1.2s ease; }
 
-/* Text Gradient for Titles */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gallery card with the gold gradient "frame" */
-.gallery-card-frame {
-  position: relative;
-  padding: 8px;
-  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #c7d8ff 70%, #d4af37 100%);
-  border-radius: 20px;
-  box-shadow: 0 12px 28px -6px rgba(31, 59, 143, 0.25);
-}
-
-/* Image Hover Effect */
-img {
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gallery-card-frame:hover img {
-  transform: scale(1.05);
-}
+.fade-enter-from,
+.fade-leave-to { opacity: 0; }
 </style>

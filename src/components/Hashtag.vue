@@ -1,11 +1,11 @@
-<template>
+﻿<template>
   <section class="mt-12 text-center">
     <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">
       Hashtag
     </h2>
     <div class="flex items-center justify-center gap-3 opacity-40 mb-5">
       <div class="h-[1px] w-8 bg-yellow-600"></div>
-      <span class="text-yellow-700 text-lg">❖ ❀ ❖</span>
+      <span class="text-yellow-700 text-lg">â– â€ â–</span>
       <div class="h-[1px] w-8 bg-yellow-600"></div>
     </div>
 
@@ -25,8 +25,9 @@
 .hashtag {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--royal-700);
+  color: var(--royal-green);
   letter-spacing: 0.08em;
-  text-shadow: 0 6px 16px rgba(31, 59, 143, 0.2);
+  text-shadow: 0 6px 16px rgba(63, 51, 40, 0.2);
 }
 </style>
+

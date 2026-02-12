@@ -1,85 +1,54 @@
+﻿<script setup>
+const props = defineProps({
+  dateIso: {
+    type: String,
+    default: '2026-06-27T08:00:00+07:00'
+  },
+  monthKh: {
+    type: String,
+    default: 'មិថុនា'
+  },
+  weekdayKh: {
+    type: String,
+    default: 'ថ្ងៃសៅរ៍'
+  }
+})
+
+const date = new Date(props.dateIso)
+const eventDate = {
+  monthKh: props.monthKh,
+  monthEn: props.monthKh,
+  day: String(date.getDate()),
+  weekdayKh: props.weekdayKh,
+  weekdayEn: props.weekdayKh,
+  year: String(date.getFullYear())
+}
+</script>
+
 <template>
-  <section class="mt-16 text-center">
-    <div class="mb-6">
-      <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">Calendar</h2>
-      <div class="flex items-center justify-center gap-3 opacity-40">
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-        <span class="text-yellow-700 text-lg">❖ ❀ ❖</span>
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-      </div>
+  <section class="animate-[fade-up_1.5s_ease]">
+    <div class="text-center mb-5">
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">កាលបរិច្ឆេទមង្គលការ</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ថ្ងៃសំខាន់នៃពិធី</p>
     </div>
 
-    <div class="premium-card-frame mx-auto max-w-sm">
-      <div class="glass-panel text-center">
-        <div class="calendar-top text-xs uppercase tracking-[0.35em] text-yellow-700">
-          Save the Date
-        </div>
-        <div class="calendar-grid mt-5">
-          <div class="calendar-month">{{ month }}</div>
-          <div class="calendar-day">{{ day }}</div>
-          <div class="calendar-weekday">{{ weekday }}</div>
-          <div class="calendar-year">{{ year }}</div>
+    <div class="temple-frame max-w-md mx-auto">
+      <div class="temple-panel px-6 py-7 text-center max-[390px]:px-4 max-[390px]:py-5">
+        <p class="font-khmer-body text-sm text-[#e8d3a7]/90">{{ eventDate.monthKh }}</p>
+        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#bd9b58]">{{ eventDate.monthEn }}</p>
+
+        <p class="font-engraved text-7xl leading-none mt-3 engraved-text max-[390px]:text-6xl">{{ eventDate.day }}</p>
+
+        <p class="font-khmer-title text-lg gold-title mt-3">{{ eventDate.weekdayKh }}</p>
+        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#d4bb86]/90">{{ eventDate.weekdayEn }}</p>
+
+        <div class="ornament-divider mt-4">
+          <div class="ornament-line"></div>
+          <span class="font-engraved tracking-[0.18em]">{{ eventDate.year }}</span>
+          <div class="ornament-line"></div>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-defineProps({
-  month: {
-    type: String,
-    default: 'June'
-  },
-  day: {
-    type: String,
-    default: '27'
-  },
-  weekday: {
-    type: String,
-    default: 'Saturday'
-  },
-  year: {
-    type: String,
-    default: '2026'
-  }
-})
-</script>
-
-<style scoped>
-.calendar-grid {
-  display: grid;
-  gap: 6px;
-}
-
-.calendar-top {
-  letter-spacing: 0.35em;
-}
-
-.calendar-month {
-  font-size: 1rem;
-  color: var(--royal-700);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.calendar-day {
-  font-size: 4rem;
-  line-height: 1;
-  font-weight: 700;
-  color: var(--gold-primary);
-  text-shadow: 0 8px 18px rgba(31, 59, 143, 0.25);
-}
-
-.calendar-weekday {
-  font-size: 1rem;
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.calendar-year {
-  font-size: 0.9rem;
-  color: rgba(18, 36, 84, 0.65);
-  letter-spacing: 0.2em;
-}
-</style>

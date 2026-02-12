@@ -1,81 +1,69 @@
+﻿<script setup>
+defineProps({
+  venueKh: {
+    type: String,
+    default: 'សណ្ឋាគារ សុខា ភ្នំពេញ'
+  },
+  venueEn: {
+    type: String,
+    default: 'សណ្ឋាគារ សុខា ភ្នំពេញ'
+  },
+  addressKh: {
+    type: String,
+    default: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ'
+  },
+  addressEn: {
+    type: String,
+    default: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ'
+  },
+  mapsUrl: {
+    type: String,
+    default: 'https://maps.google.com/?q=Sokha+Phnom+Penh+Hotel'
+  }
+})
+</script>
+
 <template>
-  <section class="mt-16 text-center">
-    <!-- Section Header -->
-    <div class="mb-6">
-      <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">
-        ទីតាំងពិធី
-      </h2>
-      <div class="flex items-center justify-center gap-3 opacity-40">
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-        <span class="text-yellow-700 text-lg">❖ ❀ ❖</span>
-        <div class="h-[1px] w-8 bg-yellow-600"></div>
-      </div>
+  <section class="animate-[fade-up_1.5s_ease]">
+    <div class="text-center mb-5">
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">ទីតាំងពិធី</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ព័ត៌មានទីតាំង</p>
     </div>
 
-    <!-- Location Card -->
-    <div class="location-card mx-auto max-w-sm">
-      <div class="p-6 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm">
-        <p class="font-khmer-body text-gray-800 text-lg font-bold mb-2">
-          សណ្ឋាគារ Rosewood Phnom Penh
-        </p>
-        <p class="font-khmer-body text-gray-600 text-sm leading-relaxed">
-          ជាន់ទី៣៧ អគារ វឌ្ឍនៈ រាជធានីភ្នំពេញ
-        </p>
+    <div class="temple-frame max-w-2xl mx-auto">
+      <div class="temple-panel p-6 sm:p-8 max-[390px]:p-4">
+        <div class="grid sm:grid-cols-2 gap-6 items-center max-[390px]:gap-4">
+          <div>
+            <p class="font-khmer-title text-lg text-[#f4ddb2] max-[390px]:text-base">{{ venueKh }}</p>
+            <p class="font-khmer-body text-sm tracking-[0.04em] text-[#d1ad67] mt-1">{{ venueEn }}</p>
+
+            <div class="mt-4 space-y-2 text-sm text-[#e9d3a7]/90">
+              <p>{{ addressKh }}</p>
+              <p>{{ addressEn }}</p>
+              <p class="font-khmer-body text-xs tracking-[0.04em] text-[#cca661] max-[390px]:text-[10px]">ពិធីទទួលភ្ញៀវ ០៨:០០ ព្រឹក ដល់ ១២:០០ ថ្ងៃត្រង់</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(242,207,128,0.24),transparent_70%)]"></div>
+            <div class="relative temple-frame">
+              <div class="temple-panel p-5 text-center">
+                <p class="text-4xl text-[#d4ad66]">&#8962;</p>
+                <p class="font-khmer-body text-sm mt-2 text-[#e8d3a7]">ផែនទីទីតាំង</p>
+                <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bf9c58]">ចូលទៅកាន់ទីតាំង</p>
+                <a
+                  :href="mapsUrl"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="inline-flex mt-4 rounded-full gold-btn px-4 py-2 text-xs tracking-[0.06em] transition"
+                >
+                  បើកផែនទី
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Maps Button -->
-    <a
-      href="https://maps.google.com/?q=Rosewood+Phnom+Penh"
-      target="_blank"
-      class="maps-btn mt-8 inline-flex items-center gap-2"
-    >
-      <span class="text-lg">📍</span>
-      <span class="font-khmer-body font-bold uppercase tracking-wider">បើកក្នុង Google Maps</span>
-    </a>
   </section>
 </template>
-
-<style scoped>
-/* Typography Mapping - Shared with Header.vue */
-.font-khmer-title { font-family: 'Moulpali', serif; }
-.font-khmer-body { font-family: 'Kantumruy Pro', sans-serif; }
-
-/* Text Gradient for Titles */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Location card styling with double border effect */
-.location-card {
-  position: relative;
-  padding: 8px;
-  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #c7d8ff 70%, #d4af37 100%);
-  border-radius: 20px;
-  box-shadow: 0 12px 28px -6px rgba(31, 59, 143, 0.25);
-}
-
-/* Elegant Button */
-.maps-btn {
-  background: linear-gradient(135deg, #bf953f 0%, #1f3b8f 100%);
-  color: white;
-  padding: 14px 28px;
-  border-radius: 50px;
-  box-shadow: 0 6px 18px rgba(31, 59, 143, 0.4);
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.maps-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(31, 59, 143, 0.5);
-  filter: brightness(1.1);
-}
-
-.maps-btn:active {
-  transform: translateY(-1px);
-}
-</style>

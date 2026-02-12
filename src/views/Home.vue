@@ -1,173 +1,191 @@
-﻿<template>
-  <div
-    class="min-h-screen relative overflow-hidden before:content-[''] before:fixed before:inset-0 before:z-0 before:opacity-[0.22] before:pointer-events-none before:bg-[radial-gradient(circle_at_20%_15%,rgba(201,164,91,0.2)_0_2px,transparent_2px_100%),radial-gradient(circle_at_80%_25%,rgba(111,131,111,0.2)_0_2px,transparent_2px_100%),radial-gradient(circle_at_30%_75%,rgba(111,131,111,0.14)_0_2px,transparent_2px_100%),radial-gradient(circle_at_70%_85%,rgba(201,164,91,0.14)_0_2px,transparent_2px_100%)] before:[background-size:120px_120px]"
-  >
-
-    <!-- Curtain -->
-    <div v-if="showCurtain" class="fixed inset-0 z-[9999] flex pointer-events-none">
-      <div class="w-1/2 h-full bg-[linear-gradient(135deg,#ffffff,#e7e1d6)] shadow-[inset_0_0_60px_rgba(111,131,111,0.2)] animate-[openLeft_4.5s_cubic-bezier(.77,0,.175,1)_forwards]"></div>
-      <div class="w-1/2 h-full bg-[linear-gradient(135deg,#ffffff,#e7e1d6)] shadow-[inset_0_0_60px_rgba(111,131,111,0.2)] animate-[openRight_4.5s_cubic-bezier(.77,0,.175,1)_forwards]"></div>
-
-      <!-- Emblem -->
-      <div class="absolute inset-0 flex items-center justify-center animate-[emblemFade_3.2s_ease_forwards]">
-        <div class="text-[4rem] bg-[linear-gradient(135deg,#C9A45B,#E6C77A,#6F836F)] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)]">❖</div>
-      </div>
-    </div>
-
-    <!-- Sparkles -->
-    <div v-if="showSparkle" class="fixed inset-0 z-[9998] pointer-events-none">
-      <span
-        v-for="(s, i) in sparkles"
-        :key="i"
-        class="absolute w-[6px] h-[6px] rounded-full opacity-0 bg-[radial-gradient(circle,#fff,#d8d2c6)] drop-shadow-[0_0_6px_rgba(111,131,111,0.4)] animate-[sparkleAnim_3.5s_ease_forwards]"
-        :style="{
-          left: s.x + '%',
-          top: s.y + '%',
-          animationDelay: s.delay + 's'
-        }"
-      />
-    </div>
-
-    <!-- Video Effect Foreground -->
-    <div class="fixed inset-0 z-[15] pointer-events-none opacity-[0.12]" aria-hidden="true">
-      <video
-        :src="videoUrl"
-        autoplay
-        muted
-        loop
-        playsinline
-        class="w-full h-full object-cover scale-[1.08]"
-      />
-    </div>
-
-    <!-- Main Content -->
-    <main class="relative z-10 mx-auto max-w-lg min-h-screen px-5 bg-[linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.76)),radial-gradient(circle_at_top,#f1ede4_0%,#e6dfd3_55%,#d8d2c6_100%)] shadow-[0_18px_50px_rgba(63,51,40,0.15)] border border-[rgba(111,131,111,0.18)] rounded-[24px] lg:max-w-[60rem]">
-      <Header />
-      <div class="space-y-4 pb-20">
-        <Countdown />
-        <Location />
-        <Calendar />
-        <Timeline />
-        <Gallery />
-        <Hashtag />
-        <RSVP />
-        <Wishes />
-      </div>
-
-      <footer class="text-center pb-12 opacity-40">
-        <div class="font-khmer-title text-blue-900 text-sm">សូមអរគុណ</div>
-        <div class="text-xs text-blue-700 mt-2">❖ ❀ ❖</div>
-        <a
-          class="inline-block mt-3 text-[11px] tracking-[0.08em] uppercase text-blue-700 no-underline hover:underline"
-          href="https://dongdarong.github.io/dd-portfolio/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          © 2026 Dong Darong
-        </a>
-        <div class="flex justify-center mt-3 opacity-85">
-          <router-link to="/admin" class="inline-flex items-center justify-center px-[14px] py-2 rounded-full text-[12px] tracking-[0.08em] uppercase text-white bg-[linear-gradient(135deg,#C9A45B,#6F836F)] shadow-[0_10px_18px_rgba(111,131,111,0.3)] active:translate-y-[1px]">
-            Admin Page
-          </router-link>
-        </div>
-      </footer>
-    </main>
-
-    <audio
-      ref="audioRef"
-      :src="audioUrl"
-      autoplay
-      loop
-      playsinline
-    />
-
-    <div v-if="showAudioGate" class="fixed inset-0 z-[10000] bg-[radial-gradient(circle_at_top,#f5f0e6,#e6dfd3_55%,#d8d2c6_100%)] flex items-center justify-center">
-      <div
-        v-if="showButterfly"
-        class="absolute left-[20%] bottom-[18%] w-[34px] h-[24px] rounded-full bg-[radial-gradient(circle_at_30%_50%,#f8c9d6_0_60%,transparent_61%),radial-gradient(circle_at_70%_50%,#f8c9d6_0_60%,transparent_61%),radial-gradient(circle_at_50%_60%,#c58c7a_0_30%,transparent_31%)] drop-shadow-[0_4px_10px_rgba(138,109,59,0.2)] animate-[butterflyFly_2.2s_ease_forwards]"
-        aria-hidden="true"
-      ></div>
-      <div v-if="showStar" class="absolute right-[18%] top-[18%] text-[48px] text-[#d8d2c6] drop-shadow-[0_0_16px_rgba(111,131,111,0.6)] animate-[starPop_1.8s_ease_forwards]" aria-hidden="true">*</div>
-      <button class="bg-[linear-gradient(135deg,#C9A45B,#6F836F)] text-white border-none px-[22px] py-[14px] rounded-full text-[13px] tracking-[0.1em] uppercase shadow-[0_10px_22px_rgba(138,109,59,0.25)] active:translate-y-[1px]" @click="startAudio">
-        Tap to Enter
-      </button>
-    </div>
-
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-
+﻿<script setup>
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import CinematicIntro from '../components/CinematicIntro.vue'
 import Header from '../components/Header.vue'
 import Countdown from '../components/Countdown.vue'
-import Location from '../components/Location.vue'
 import Calendar from '../components/Calendar.vue'
+import Location from '../components/Location.vue'
 import Timeline from '../components/Timeline.vue'
 import Gallery from '../components/Gallery.vue'
 import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
-import Hashtag from '../components/Hashtag.vue'
+import weddingSong from '../assets/wealth-of-love.mp3'
 
-const showCurtain = ref(true)
-const showSparkle = ref(false)
-const sparkles = ref([])
+const showIntro = ref(true)
 const audioRef = ref(null)
-const audioUrl = new URL('../assets/eternal-love-flower.mp3', import.meta.url).href
-const videoUrl = new URL('../assets/video-effects/effects1.mp4', import.meta.url).href
-const showAudioGate = ref(true)
-const showButterfly = ref(false)
-const showStar = ref(false)
-
-function createSparkles() {
-  sparkles.value = Array.from({ length: 30 }, () => ({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 1.5
-  }))
+const weddingContent = {
+  brideKh: 'ស្រីនាង',
+  groomKh: 'ដារ៉ា',
+  brideEn: 'ស្រីនាង',
+  groomEn: 'ដារ៉ា',
+  dateISO: '2026-02-28T08:00:00+07:00',
+  monthKh: 'កុម្ភៈ',
+  weekdayKh: 'ថ្ងៃសៅរ៍',
+  venueKh: 'សណ្ឋាគារ សុខា ភ្នំពេញ',
+  venueEn: 'សណ្ឋាគារ សុខា ភ្នំពេញ',
+  addressKh: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ',
+  addressEn: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ',
+  mapsUrl: 'https://maps.google.com/?q=Sokha+Phnom+Penh+Hotel'
 }
 
-async function tryPlayAudio() {
-  if (!audioRef.value) return
+const lotusParticles = Array.from({ length: 12 }, (_, index) => ({
+  left: `${6 + index * 8}%`,
+  bottom: `${-4 - (index % 5) * 6}%`,
+  duration: `${17 + (index % 6) * 3}s`,
+  delay: `${(index % 8) * 1.2}s`
+}))
+
+const dustParticles = Array.from({ length: 18 }, (_, index) => ({
+  left: `${4 + index * 5}%`,
+  top: `${12 + (index % 9) * 8}%`,
+  duration: `${6 + (index % 4) * 1.2}s`,
+  delay: `${(index % 7) * 0.7}s`
+}))
+
+function onIntroComplete() {
+  showIntro.value = false
+}
+
+async function tryAutoPlay() {
+  const audio = audioRef.value
+  if (!audio || !audio.paused) return
+
   try {
-    await audioRef.value.play()
-    return true
-  } catch {
-    return false
+    audio.volume = 1
+    await audio.play()
+  } catch {}
+}
+
+function unlockAndPlay() {
+  tryAutoPlay()
+}
+
+function onVisibleRetry() {
+  if (!document.hidden) {
+    tryAutoPlay()
   }
 }
 
-async function startAudio() {
-  showButterfly.value = true
-  showStar.value = true
-  await tryPlayAudio()
-  setTimeout(() => {
-    showButterfly.value = false
-    showStar.value = false
-    showAudioGate.value = false
-  }, 2200)
-}
-
 onMounted(() => {
-  createSparkles()
-  tryPlayAudio().then((ok) => {
-    if (ok) showAudioGate.value = false
+  nextTick(() => {
+    tryAutoPlay()
+    setTimeout(tryAutoPlay, 120)
+    setTimeout(tryAutoPlay, 500)
   })
 
-  // sparkles appear after curtain opens
-  setTimeout(() => {
-    showSparkle.value = true
-  }, 4800)
+  window.addEventListener('pageshow', tryAutoPlay)
+  document.addEventListener('visibilitychange', onVisibleRetry)
 
-  // remove curtain
-  setTimeout(() => {
-    showCurtain.value = false
-  }, 5200)
+  window.addEventListener('pointerdown', unlockAndPlay, { passive: true })
+  window.addEventListener('touchstart', unlockAndPlay, { passive: true })
+  window.addEventListener('click', unlockAndPlay, { passive: true })
+  window.addEventListener('keydown', unlockAndPlay)
+})
 
-  // remove sparkles
-  setTimeout(() => {
-    showSparkle.value = false
-  }, 9000)
+onBeforeUnmount(() => {
+  window.removeEventListener('pageshow', tryAutoPlay)
+  document.removeEventListener('visibilitychange', onVisibleRetry)
+  window.removeEventListener('pointerdown', unlockAndPlay)
+  window.removeEventListener('touchstart', unlockAndPlay)
+  window.removeEventListener('click', unlockAndPlay)
+  window.removeEventListener('keydown', unlockAndPlay)
 })
 </script>
 
+<template>
+  <div class="royal-page min-h-screen text-[#f6e7c5]">
+    <CinematicIntro v-if="showIntro" @complete="onIntroComplete" />
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(186,150,73,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(126,84,25,0.14),transparent_35%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
+      <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(255,236,191,0.02)_0,rgba(255,236,191,0.02)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
+      <div class="silk-overlay absolute inset-0"></div>
+      <div class="fog-layer"></div>
+      <div class="fog-layer layer-2"></div>
+      <div class="fog-layer layer-3"></div>
+      <div class="film-grain absolute inset-0"></div>
+      <div class="candle-glow top-[-4rem] left-[-4rem]"></div>
+      <div class="candle-glow right-[-5rem] top-[25%]"></div>
+      <div class="candle-glow left-[35%] bottom-[-6rem]"></div>
+
+      <span
+        v-for="(p, index) in lotusParticles"
+        :key="`lotus-${index}`"
+        class="absolute text-[18px] text-[#d8b875]/55"
+        :style="{
+          left: p.left,
+          bottom: p.bottom,
+          animation: `floating ${p.duration} ease-in-out ${p.delay} infinite`
+        }"
+      >
+        &#10048;
+      </span>
+
+      <span
+        v-for="(p, index) in dustParticles"
+        :key="`dust-${index}`"
+        class="absolute w-[5px] h-[5px] rounded-full bg-[#c5b383] opacity-0"
+        :style="{
+          left: p.left,
+          top: p.top,
+          boxShadow: '0 0 16px rgba(245,211,144,0.7)',
+          animation: `floating ${p.duration} ease-in-out ${p.delay} infinite`
+        }"
+      />
+    </div>
+
+    <main class="relative z-10 mx-auto max-w-5xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 max-[390px]:px-2 max-[390px]:pt-4">
+      <div class="temple-frame">
+        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(28,45,36,0.84),rgba(18,31,25,0.9)),radial-gradient(circle_at_20%_0%,rgba(255,228,155,0.08),transparent_35%)] border-[rgba(255,223,141,0.18)]">
+          <Header
+            :bride-kh="weddingContent.brideKh"
+            :groom-kh="weddingContent.groomKh"
+            :bride-en="weddingContent.brideEn"
+            :groom-en="weddingContent.groomEn"
+          />
+
+          <div class="space-y-10 mt-8 sm:mt-12 max-[390px]:space-y-7 max-[390px]:mt-6">
+            <Countdown :target-date-iso="weddingContent.dateISO" />
+            <Calendar
+              :month-kh="weddingContent.monthKh"
+              :weekday-kh="weddingContent.weekdayKh"
+              :date-iso="weddingContent.dateISO"
+            />
+            <Location
+              :venue-kh="weddingContent.venueKh"
+              :venue-en="weddingContent.venueEn"
+              :address-kh="weddingContent.addressKh"
+              :address-en="weddingContent.addressEn"
+              :maps-url="weddingContent.mapsUrl"
+            />
+            <Timeline />
+            <Gallery />
+            <RSVP />
+            <Wishes />
+          </div>
+
+          <footer class="mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
+            <p class="font-khmer-title text-sm">សូមអរគុណសម្រាប់ពាក្យជូនពរ</p>
+            <p class="text-[11px] tracking-[0.06em] mt-2">ក្តីស្រឡាញ់ និងព្រះពរ</p>
+            <a
+              href="https://dongdarong.github.io/dd-portfolio/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-block mt-3 text-[11px] tracking-[0.12em] text-[#d7b97a] hover:text-[#f0dbb3] transition"
+            >
+              © 2026 Dong Darong
+            </a>
+            <router-link
+              to="/admin"
+              class="inline-flex mt-4 rounded-full px-4 py-2 text-xs tracking-[0.08em] gold-btn transition"
+            >
+              គ្រប់គ្រង
+            </router-link>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <audio ref="audioRef" :src="weddingSong" loop preload="auto" autoplay playsinline></audio>
+  </div>
+</template>

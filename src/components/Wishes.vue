@@ -1,210 +1,378 @@
-<template>
-<section class="mt-20 text-center">
-
-  <!-- Title -->
-  <h2 class="font-khmer text-xl gold mb-3">
-    សារជូនពរ
-  </h2>
-
-  <div class="ornament">❖ ❀ ❖</div>
-
-  <!-- Wish Card -->
-  <div class="wish-card">
-
-    <input
-      v-model="name"
-      placeholder="ឈ្មោះភ្ញៀវ"
-      class="input"
-    >
-
-    <textarea
-      v-model="msg"
-      placeholder="សរសេរសារជូនពរ..."
-      class="input h-24"
-    ></textarea>
-
-    <button @click="send" class="btn w-full">
-      ផ្ញើសារជូនពរ
-    </button>
-
-  </div>
-
-  <!-- Slideshow -->
-  <div v-if="msgs.length" class="slideshow mt-8">
-
-    <transition name="slide" mode="out-in">
-      <div :key="slideIndex" class="slide-bubble">
-
-        <b class="name">
-          {{ msgs[slideIndex].name }}
-        </b>
-
-        <p>
-          {{ msgs[slideIndex].text }}
-        </p>
-
-      </div>
-    </transition>
-
-  </div>
-
-
-</section>
-</template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
+﻿<script setup>
+import { computed, onMounted, ref } from 'vue'
 import { db } from '../firebase'
-import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 const name = ref('')
-const msg = ref('')
-const msgs = ref([])
-const slideIndex = ref(0)
+const message = ref('')
+const messages = ref([])
+const status = ref('')
+const sending = ref(false)
 
-const send = async ()=>{
-  if(!name.value || !msg.value) return
+const latestMessages = computed(() => messages.value.slice(0, 6))
 
-  await addDoc(collection(db,"messages"),{
-    name:name.value,
-    text:msg.value,
-    time:Date.now()
-  })
+async function submitWish() {
+  status.value = ''
 
-  name.value=''
-  msg.value=''
-}
+  if (!name.value || !message.value) {
+    status.value = 'សូមបញ្ចូលឈ្មោះ និងពាក្យជូនពរ'
+    return
+  }
 
-onMounted(()=>{
-  onSnapshot(query(collection(db,"messages"),orderBy("time","desc")),
-    s=>{
-      msgs.value=s.docs.map(d=>d.data())
+  sending.value = true
+
+  try {
+    await addDoc(collection(db, 'messages'), {
+      name: name.value,
+      text: message.value,
+      time: Date.now()
     })
 
-  setInterval(()=>{
-    if(msgs.value.length)
-      slideIndex.value =
-        (slideIndex.value+1) % msgs.value.length
-  },4000)
+    status.value = 'សូមអរគុណសម្រាប់ពាក្យជូនពរ'
+    name.value = ''
+    message.value = ''
+  } catch (error) {
+    status.value = 'មិនអាចផ្ញើសារបាន សូមព្យាយាមម្ដងទៀត'
+  } finally {
+    sending.value = false
+  }
+}
+
+onMounted(() => {
+  onSnapshot(query(collection(db, 'messages'), orderBy('time', 'desc')), (snapshot) => {
+    messages.value = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+  })
 })
 </script>
 
+<template>
+  <section class="wishes-section animate-[fade-up_1.5s_ease]">
+    <div class="blessing-shell max-w-4xl mx-auto">
+      <div class="blessing-frame p-[1px] rounded-[24px]">
+        <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
+          <div class="text-center">
+            <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ទាំងសារជូនពរ</h3>
+            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#dfbd7f]/75 mt-2">ពាក្យជូនពរដ៏មានតម្លៃ</p>
+          </div>
+
+          <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
+            <input
+              v-model="name"
+              class="blessing-input"
+              placeholder="ឈ្មោះ"
+            >
+            <textarea
+              v-model="message"
+              rows="5"
+              class="blessing-input blessing-textarea"
+              placeholder="សូមសរសេរពាក្យជូនពរ"
+            ></textarea>
+
+            <button
+              type="submit"
+              class="blessing-button w-full rounded-xl px-5 py-3 font-khmer-body text-xs tracking-[0.06em] transition"
+              :disabled="sending"
+            >
+              {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើពាក្យជូនពរ' }}
+            </button>
+
+            <p v-if="status" class="text-sm text-center text-[#e8d3a7] break-words">{{ status }}</p>
+          </form>
+
+          <div class="mt-6 sm:mt-7">
+            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#cfa968]/80 text-center mb-3">
+              សារជូនពរចុងក្រោយ
+            </p>
+            <div class="wishes-list space-y-2.5 sm:space-y-3 max-h-[290px] sm:max-h-[320px] overflow-auto pr-1">
+              <article
+                v-for="wish in latestMessages"
+                :key="wish.id"
+                class="blessing-note rounded-xl px-4 py-3"
+              >
+                <p class="font-khmer-title text-sm text-[#f3ddb0]">{{ wish.name || 'ភ្ញៀវ' }}</p>
+                <p class="text-sm text-[#ead6ad]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
+              </article>
+
+              <p v-if="latestMessages.length === 0" class="text-sm text-[#d5ba86]/75 text-center py-4">
+                មិនទាន់មានសារជូនពរ
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
 <style scoped>
-
-/* Gold title */
-.gold{
-background:linear-gradient(90deg,#bf953f,#fcf6ba,#7da0f2);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.blessing-shell {
+  position: relative;
 }
 
-/* Ornament */
-.ornament{
-font-size:18px;
-color:#1f3b8f;
-margin-bottom:14px;
+.blessing-shell::before {
+  content: '';
+  position: absolute;
+  inset: -2rem -1rem auto;
+  height: 11rem;
+  background: radial-gradient(circle at center, rgba(242, 198, 113, 0.2), transparent 68%);
+  filter: blur(18px);
+  pointer-events: none;
 }
 
-/* Card */
-.wish-card{
-border:4px double #1f3b8f;
-padding:20px;
-border-radius:18px;
-background:linear-gradient(#f6f9ff,#e7efff);
-box-shadow:0 20px 40px rgba(31,59,143,.18);
+.blessing-frame {
+  background: linear-gradient(
+    140deg,
+    rgba(243, 219, 157, 0.9) 0%,
+    rgba(201, 164, 91, 0.82) 27%,
+    rgba(64, 92, 72, 0.9) 58%,
+    rgba(232, 201, 128, 0.84) 100%
+  );
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 235, 180, 0.2);
 }
 
-/* Inputs */
-.input{
-width:100%;
-border:2px solid rgba(31,59,143,.25);
-padding:12px;
-margin:8px 0;
-border-radius:8px;
-background:white;
-outline:none;
+.blessing-panel {
+  background:
+    radial-gradient(circle at 30% 12%, rgba(202, 155, 77, 0.14), transparent 38%),
+    linear-gradient(165deg, #16231d 0%, #21382d 44%, #16231d 100%);
+  border: 1px solid rgba(236, 195, 112, 0.2);
+  box-shadow:
+    inset 0 12px 24px rgba(255, 211, 131, 0.06),
+    inset 0 -18px 26px rgba(0, 0, 0, 0.45);
 }
 
-.input:focus{
-border-color:#1f3b8f;
-box-shadow:0 0 8px rgba(47,91,209,.35);
+.blessing-title {
+  color: #f3d9a8;
+  text-shadow:
+    0 1px 0 #8a642a,
+    0 10px 24px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(201, 164, 91, 0.24);
 }
 
-/* Button */
-.btn{
-background:linear-gradient(135deg,#bf953f,#1f3b8f);
-color:white;
-padding:12px;
-border-radius:8px;
-letter-spacing:.05em;
-box-shadow:0 8px 16px rgba(31,59,143,.3);
-transition:.25s;
+.blessing-input {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(240, 198, 116, 0.26);
+  background:
+    linear-gradient(160deg, rgba(20, 31, 25, 0.94), rgba(12, 20, 16, 0.95)),
+    radial-gradient(circle at top, rgba(255, 215, 145, 0.08), transparent 42%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 236, 195, 0.08),
+    inset 0 -14px 24px rgba(0, 0, 0, 0.42);
+  color: #f5dfb2;
+  padding: 0.78rem 0.95rem;
+  transition: all 180ms ease;
 }
 
-.btn:hover{
-transform:translateY(-2px);
+.blessing-input:focus {
+  outline: none;
+  border-color: rgba(255, 221, 152, 0.58);
+  box-shadow:
+    0 0 0 3px rgba(236, 191, 102, 0.14),
+    inset 0 1px 0 rgba(255, 236, 195, 0.1);
 }
 
-/* Slideshow */
-.slide-bubble{
-margin:auto;
-width:90%;
-padding:18px;
-border-radius:22px;
-background:linear-gradient(#f6f9ff,#e5efff);
-box-shadow:0 10px 20px rgba(31,59,143,.18);
-white-space:pre-wrap;
-word-break:break-word;
-overflow-wrap:anywhere;
+.blessing-input::placeholder {
+  color: rgba(242, 210, 148, 0.48);
 }
 
-/* Slide animation */
-.slide-enter-active,
-.slide-leave-active{
-transition:all .7s ease;
+.blessing-textarea {
+  min-height: 7.2rem;
+  resize: vertical;
 }
 
-.slide-enter-from{
-opacity:0;
-transform:translateX(40px);
+.blessing-button {
+  border: 1px solid rgba(255, 220, 140, 0.45);
+  background: linear-gradient(135deg, #eed39a 0%, #c9a45b 42%, #4d6d58 100%);
+  color: #1a241b;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 244, 213, 0.5);
 }
 
-.slide-leave-to{
-opacity:0;
-transform:translateX(-40px);
+.blessing-button:hover:not(:disabled) {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
 }
 
-/* Message bubbles */
-.bubble{
-padding:14px;
-border-radius:18px;
-margin:8px 0;
-width:80%;
-box-shadow:0 6px 12px rgba(31,59,143,.15);
-background:#f6f9ff;
-white-space:pre-wrap;
-word-break:break-word;
-overflow-wrap:anywhere;
+.blessing-button:disabled {
+  opacity: 0.62;
 }
 
-.left{margin-right:auto}
-.right{margin-left:auto;background:#e5efff}
-
-.name{
-color:#1f3b8f;
-display:block;
-margin-bottom:4px;
+.blessing-note {
+  border: 1px solid rgba(241, 201, 123, 0.16);
+  background:
+    linear-gradient(160deg, rgba(23, 34, 28, 0.94), rgba(14, 24, 19, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 232, 182, 0.06),
+    0 10px 16px rgba(0, 0, 0, 0.34);
 }
 
-/* Fade animation */
-.fade-enter-active,
-.fade-leave-active{
-transition:opacity .6s ease;
+.wishes-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-.fade-enter-from,
-.fade-leave-to{
-opacity:0;
+.wishes-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dfbb79, #4f6e59);
+  border-radius: 999px;
 }
 
+@media (max-width: 480px) {
+  .blessing-panel {
+    padding: 1rem;
+  }
+
+  .blessing-title {
+    font-size: 1.15rem;
+  }
+
+  .blessing-input {
+    min-height: 2.72rem;
+    font-size: 0.9rem;
+  }
+
+  .blessing-textarea {
+    min-height: 5.8rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .blessing-panel {
+    padding: 0.95rem;
+  }
+
+  .blessing-input {
+    min-height: 2.64rem;
+    font-size: 0.86rem;
+    padding: 0.7rem 0.78rem;
+  }
+
+  .blessing-textarea {
+    min-height: 5.4rem;
+  }
+
+  .blessing-button {
+    min-height: 2.62rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+  }
+
+  .wishes-list {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 414px) {
+  .blessing-panel {
+    padding: 0.88rem;
+  }
+
+  .blessing-input {
+    min-height: 2.58rem;
+    font-size: 0.84rem;
+  }
+
+  .blessing-button {
+    min-height: 2.54rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .blessing-panel {
+    padding: 0.82rem;
+  }
+
+  .blessing-title {
+    font-size: 1.02rem;
+  }
+
+  .blessing-input {
+    min-height: 2.48rem;
+    font-size: 0.82rem;
+    padding: 0.56rem 0.68rem;
+  }
+
+  .blessing-textarea {
+    min-height: 5rem;
+  }
+
+  .blessing-button {
+    min-height: 2.44rem;
+    font-size: 0.6rem;
+  }
+
+  .wishes-list {
+    max-height: 232px;
+  }
+}
+
+@media (max-width: 375px) {
+  .blessing-input {
+    min-height: 2.4rem;
+    font-size: 0.8rem;
+    padding: 0.52rem 0.64rem;
+  }
+
+  .blessing-button {
+    min-height: 2.36rem;
+    font-size: 0.58rem;
+  }
+
+  .wishes-list {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 360px) {
+  .blessing-panel {
+    padding: 0.74rem;
+  }
+
+  .blessing-input {
+    min-height: 2.34rem;
+    font-size: 0.78rem;
+    padding: 0.48rem 0.6rem;
+  }
+
+  .blessing-textarea {
+    min-height: 4.6rem;
+  }
+
+  .blessing-button {
+    min-height: 2.3rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+  }
+
+  .wishes-list {
+    max-height: 210px;
+  }
+}
+
+@media (max-width: 320px) {
+  .blessing-title {
+    font-size: 0.94rem;
+  }
+
+  .blessing-input {
+    min-height: 2.24rem;
+    font-size: 0.74rem;
+    padding: 0.44rem 0.52rem;
+  }
+
+  .blessing-button {
+    min-height: 2.22rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+  }
+
+  .wishes-list {
+    max-height: 188px;
+  }
+}
 </style>

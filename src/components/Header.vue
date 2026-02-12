@@ -1,85 +1,55 @@
-<template>
-  <div class="header-container text-center">
-    
-    <!-- Decorative Top Icon -->
-    <div class="mb-6 animate-float">
-      <svg class="w-12 h-12 mx-auto text-yellow-600/80" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    </div>
-
-    <!-- Title -->
-    <p class="font-khmer-title text-yellow-800 text-sm tracking-widest mb-2 uppercase opacity-80">
-      ពិធីរៀបអាពាហ៍ពិពាហ៍
-    </p>
-    <p class="font-khmer-body text-gray-500 text-xs mb-8">
-      WEDDING INVITATION
-    </p>
-
-    <!-- Names -->
-    <div class="space-y-2 mb-8">
-      <h1 class="font-script text-7xl text-gradient-gold leading-tight">{{ bride }}</h1>
-      <div class="flex items-center justify-center gap-4 opacity-60">
-        <div class="h-[1px] w-12 bg-yellow-600"></div>
-        <span class="font-script text-3xl text-yellow-700">&</span>
-        <div class="h-[1px] w-12 bg-yellow-600"></div>
-      </div>
-      <h1 class="font-script text-7xl text-gradient-gold leading-tight">{{ groom }}</h1>
-    </div>
-
-    <!-- Date -->
-    <div class="mb-10 relative z-10">
-      <p class="font-khmer-body text-gray-800 text-lg font-bold">
-        {{ date }}
-      </p>
-      <p class="font-khmer-body text-gray-500 text-sm mt-1">
-        Save the Date
-      </p>
-    </div>
-
-  </div>
-</template>
-
-<script setup>
+﻿<script setup>
 defineProps({
-  bride: {
+  brideKh: {
     type: String,
-    default: 'Emma'
+    default: 'ស្រីនាង'
   },
-  groom: {
+  groomKh: {
     type: String,
-    default: 'Liam'
+    default: 'ដារ៉ា'
   },
-  date: {
+  brideEn: {
     type: String,
-    default: 'ថ្ងៃសៅរ៍ ទី២៥ ខែមិថុនា ឆ្នាំ២០២៦'
+    default: 'ស្រីនាង'
+  },
+  groomEn: {
+    type: String,
+    default: 'ដារ៉ា'
   }
 })
 </script>
 
-<style scoped>
-/* Typography Mapping */
-/* Ensure these fonts are imported in your main index.html or App.vue */
-.font-script { font-family: 'Noto Serif Khmer', serif; }
-.font-khmer-title { font-family: 'Moulpali', serif; }
-.font-khmer-body { font-family: 'Kantumruy Pro', sans-serif; }
+<template>
+  <header class="text-center pt-8 animate-[fade-up_1.5s_ease] max-[390px]:pt-5">
+    <p class="font-khmer-body text-[11px] tracking-[0.08em] text-[#c9a45b]/80 max-[390px]:text-[10px]">
+      ពិធីមង្គលតាមប្រពៃណី
+    </p>
+    <h2 class="font-khmer-title text-lg sm:text-xl mt-4 gold-title max-[390px]:mt-3 max-[390px]:text-base">សិរីមង្គលអាពាហ៍ពិពាហ៍</h2>
+    <p class="mt-2 text-xs tracking-[0.08em] text-[#d7bf8a]/80 max-[390px]:text-[10px]">
+      លិខិតអញ្ជើញចូលរួមពិធី
+    </p>
 
-/* Text Gradient for Names */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 1px 1px 2px rgba(18,36,84,0.15);
-}
+    <div class="ornament-divider mt-6">
+      <div class="ornament-line"></div>
+      <span class="text-sm">&#10022; &#10048; &#10022;</span>
+      <div class="ornament-line"></div>
+    </div>
 
-/* Floating Animation */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0px); }
-}
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-</style>
+    <div class="mt-8 space-y-3 max-[390px]:mt-6 max-[390px]:space-y-2">
+      <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ brideKh }}</h1>
+      <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ brideEn }}</p>
+
+      <p class="font-engraved text-xl text-[#d7bf8a]/95">&</p>
+
+      <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ groomKh }}</h1>
+      <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ groomEn }}</p>
+    </div>
+
+    <div class="ornament-divider mt-8 mb-2 max-[390px]:mt-6">
+      <div class="ornament-line"></div>
+      <span class="text-[11px] tracking-[0.08em] max-[390px]:text-[10px]">ថ្ងៃសៅរ៍ ទី២៨ ខែកុម្ភៈ ឆ្នាំ២០២៦</span>
+      <div class="ornament-line"></div>
+    </div>
+  </header>
+</template>
+
