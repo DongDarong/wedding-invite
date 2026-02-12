@@ -43,6 +43,19 @@
       <footer class="text-center pb-12 opacity-40">
         <div class="font-khmer-title text-yellow-800 text-sm">សូមអរគុណ</div>
         <div class="text-xs text-yellow-700 mt-2">❖ ❀ ❖</div>
+        <a
+          class="copyright-link"
+          href="https://dongdarong.github.io/dd-portfolio/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          © 2026 Dong Darong
+        </a>
+        <div class="admin-link-row">
+          <router-link to="/admin" class="admin-link-btn">
+            Admin Page
+          </router-link>
+        </div>
       </footer>
     </main>
 
@@ -277,6 +290,46 @@ body{
 
 .audio-gate-btn:active{
   transform:translateY(1px);
+}
+
+.admin-link-row{
+  display:flex;
+  justify-content:center;
+  margin:14px 0 0;
+  opacity:.85;
+}
+
+.admin-link-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#bf953f,#8a6d3b);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 8px 16px rgba(138,109,59,.2);
+}
+
+.admin-link-btn:active{
+  transform:translateY(1px);
+}
+
+.copyright-link{
+  display:inline-block;
+  margin-top:12px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#8a6d3b;
+  text-decoration:none;
+}
+
+.copyright-link:hover{
+  text-decoration:underline;
 }
 
 .butterfly{
