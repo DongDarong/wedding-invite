@@ -2,32 +2,32 @@
 <section class="mt-20 text-center">
 
   <!-- Title -->
-  <h2 class="font-khmer text-2xl mb-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 bg-clip-text text-transparent">
+  <h2 class="font-khmer text-2xl mb-3 bg-gradient-to-r from-yellow-600 via-yellow-300 to-blue-600 bg-clip-text text-transparent">
     ការបញ្ជាក់ចូលរួម
   </h2>
 
-  <div class="text-lg text-yellow-500 mb-4">❖ ❀ ❖</div>
+  <div class="text-lg text-blue-600 mb-4">❖ ❀ ❖</div>
 
   <!-- RSVP Card -->
-  <div class="border-4 border-double border-yellow-500 p-5 rounded-3xl bg-gradient-to-b from-orange-50 to-yellow-50 shadow-2xl max-w-md mx-auto">
+  <div class="border-4 border-double border-blue-700/60 p-5 rounded-3xl bg-gradient-to-b from-blue-50 to-yellow-50 shadow-2xl max-w-md mx-auto">
 
     <input
       v-model="name"
       placeholder="ឈ្មោះភ្ញៀវកិត្តិយស"
-      class="w-full border-2 border-yellow-300 px-3 py-2 my-2 rounded-lg bg-white outline-none transition-all focus:border-yellow-600 focus:shadow-md"
+      class="w-full border-2 border-blue-300 px-3 py-2 my-2 rounded-lg bg-white outline-none transition-all focus:border-blue-600 focus:shadow-md"
     >
 
-    <select v-model="att" class="w-full border-2 border-yellow-300 px-3 py-2 my-2 rounded-lg bg-white outline-none transition-all focus:border-yellow-600 focus:shadow-md">
+    <select v-model="att" class="w-full border-2 border-blue-300 px-3 py-2 my-2 rounded-lg bg-white outline-none transition-all focus:border-blue-600 focus:shadow-md">
       <option disabled value="">ជ្រើសរើសស្ថានភាព</option>
       <option>នឹងចូលរួមដោយរីករាយ</option>
       <option>សូមអភ័យទោស មិនអាចចូលរួមបាន</option>
     </select>
 
-    <button @click="send" class="w-full bg-gradient-to-r from-yellow-700 to-yellow-900 text-white px-3 py-3 rounded-lg tracking-widest shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all font-semibold mt-2">
+    <button @click="send" class="w-full bg-gradient-to-r from-yellow-700 to-blue-900 text-white px-3 py-3 rounded-lg tracking-widest shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all font-semibold mt-2">
       បញ្ជាក់ការចូលរួម
     </button>
 
-    <p v-if="status" class="mt-3 text-yellow-800 font-bold">
+    <p v-if="status" class="mt-3 text-blue-900 font-bold">
       {{ status }}
     </p>
 

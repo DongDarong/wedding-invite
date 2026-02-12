@@ -1,23 +1,25 @@
 ﻿<template>
-  <div class="app-wrapper min-h-screen relative overflow-hidden">
+  <div
+    class="min-h-screen relative overflow-hidden before:content-[''] before:fixed before:inset-0 before:z-0 before:opacity-[0.22] before:pointer-events-none before:bg-[radial-gradient(circle_at_20%_15%,rgba(201,164,91,0.2)_0_2px,transparent_2px_100%),radial-gradient(circle_at_80%_25%,rgba(111,131,111,0.2)_0_2px,transparent_2px_100%),radial-gradient(circle_at_30%_75%,rgba(111,131,111,0.14)_0_2px,transparent_2px_100%),radial-gradient(circle_at_70%_85%,rgba(201,164,91,0.14)_0_2px,transparent_2px_100%)] before:[background-size:120px_120px]"
+  >
 
     <!-- Curtain -->
-    <div v-if="showCurtain" class="curtain-container">
-      <div class="panel left"></div>
-      <div class="panel right"></div>
+    <div v-if="showCurtain" class="fixed inset-0 z-[9999] flex pointer-events-none">
+      <div class="w-1/2 h-full bg-[linear-gradient(135deg,#ffffff,#e7e1d6)] shadow-[inset_0_0_60px_rgba(111,131,111,0.2)] animate-[openLeft_4.5s_cubic-bezier(.77,0,.175,1)_forwards]"></div>
+      <div class="w-1/2 h-full bg-[linear-gradient(135deg,#ffffff,#e7e1d6)] shadow-[inset_0_0_60px_rgba(111,131,111,0.2)] animate-[openRight_4.5s_cubic-bezier(.77,0,.175,1)_forwards]"></div>
 
       <!-- Emblem -->
-      <div class="emblem-container">
-        <div class="emblem">❖</div>
+      <div class="absolute inset-0 flex items-center justify-center animate-[emblemFade_3.2s_ease_forwards]">
+        <div class="text-[4rem] bg-[linear-gradient(135deg,#C9A45B,#E6C77A,#6F836F)] text-transparent bg-clip-text drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)]">❖</div>
       </div>
     </div>
 
     <!-- Sparkles -->
-    <div v-if="showSparkle" class="sparkle-layer">
+    <div v-if="showSparkle" class="fixed inset-0 z-[9998] pointer-events-none">
       <span
         v-for="(s, i) in sparkles"
         :key="i"
-        class="sparkle"
+        class="absolute w-[6px] h-[6px] rounded-full opacity-0 bg-[radial-gradient(circle,#fff,#d8d2c6)] drop-shadow-[0_0_6px_rgba(111,131,111,0.4)] animate-[sparkleAnim_3.5s_ease_forwards]"
         :style="{
           left: s.x + '%',
           top: s.y + '%',
@@ -26,8 +28,20 @@
       />
     </div>
 
+    <!-- Video Effect Foreground -->
+    <div class="fixed inset-0 z-[15] pointer-events-none opacity-[0.12]" aria-hidden="true">
+      <video
+        :src="videoUrl"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover scale-[1.08]"
+      />
+    </div>
+
     <!-- Main Content -->
-    <main class="app-content relative z-10 mx-auto max-w-lg min-h-screen home-container">
+    <main class="relative z-10 mx-auto max-w-lg min-h-screen px-5 bg-[linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.76)),radial-gradient(circle_at_top,#f1ede4_0%,#e6dfd3_55%,#d8d2c6_100%)] shadow-[0_18px_50px_rgba(63,51,40,0.15)] border border-[rgba(111,131,111,0.18)] rounded-[24px] lg:max-w-[60rem]">
       <Header />
       <div class="space-y-4 pb-20">
         <Countdown />
@@ -41,18 +55,18 @@
       </div>
 
       <footer class="text-center pb-12 opacity-40">
-        <div class="font-khmer-title text-yellow-800 text-sm">សូមអរគុណ</div>
-        <div class="text-xs text-yellow-700 mt-2">❖ ❀ ❖</div>
+        <div class="font-khmer-title text-blue-900 text-sm">សូមអរគុណ</div>
+        <div class="text-xs text-blue-700 mt-2">❖ ❀ ❖</div>
         <a
-          class="copyright-link"
+          class="inline-block mt-3 text-[11px] tracking-[0.08em] uppercase text-blue-700 no-underline hover:underline"
           href="https://dongdarong.github.io/dd-portfolio/"
           target="_blank"
           rel="noopener noreferrer"
         >
           © 2026 Dong Darong
         </a>
-        <div class="admin-link-row">
-          <router-link to="/admin" class="admin-link-btn">
+        <div class="flex justify-center mt-3 opacity-85">
+          <router-link to="/admin" class="inline-flex items-center justify-center px-[14px] py-2 rounded-full text-[12px] tracking-[0.08em] uppercase text-white bg-[linear-gradient(135deg,#C9A45B,#6F836F)] shadow-[0_10px_18px_rgba(111,131,111,0.3)] active:translate-y-[1px]">
             Admin Page
           </router-link>
         </div>
@@ -67,10 +81,14 @@
       playsinline
     />
 
-    <div v-if="showAudioGate" class="audio-gate">
-      <div v-if="showButterfly" class="butterfly" aria-hidden="true"></div>
-      <div v-if="showStar" class="star-burst" aria-hidden="true">*</div>
-      <button class="audio-gate-btn" @click="startAudio">
+    <div v-if="showAudioGate" class="fixed inset-0 z-[10000] bg-[radial-gradient(circle_at_top,#f5f0e6,#e6dfd3_55%,#d8d2c6_100%)] flex items-center justify-center">
+      <div
+        v-if="showButterfly"
+        class="absolute left-[20%] bottom-[18%] w-[34px] h-[24px] rounded-full bg-[radial-gradient(circle_at_30%_50%,#f8c9d6_0_60%,transparent_61%),radial-gradient(circle_at_70%_50%,#f8c9d6_0_60%,transparent_61%),radial-gradient(circle_at_50%_60%,#c58c7a_0_30%,transparent_31%)] drop-shadow-[0_4px_10px_rgba(138,109,59,0.2)] animate-[butterflyFly_2.2s_ease_forwards]"
+        aria-hidden="true"
+      ></div>
+      <div v-if="showStar" class="absolute right-[18%] top-[18%] text-[48px] text-[#d8d2c6] drop-shadow-[0_0_16px_rgba(111,131,111,0.6)] animate-[starPop_1.8s_ease_forwards]" aria-hidden="true">*</div>
+      <button class="bg-[linear-gradient(135deg,#C9A45B,#6F836F)] text-white border-none px-[22px] py-[14px] rounded-full text-[13px] tracking-[0.1em] uppercase shadow-[0_10px_22px_rgba(138,109,59,0.25)] active:translate-y-[1px]" @click="startAudio">
         Tap to Enter
       </button>
     </div>
@@ -96,6 +114,7 @@ const showSparkle = ref(false)
 const sparkles = ref([])
 const audioRef = ref(null)
 const audioUrl = new URL('../assets/eternal-love-flower.mp3', import.meta.url).href
+const videoUrl = new URL('../assets/video-effects/effects1.mp4', import.meta.url).href
 const showAudioGate = ref(true)
 const showButterfly = ref(false)
 const showStar = ref(false)
@@ -151,225 +170,4 @@ onMounted(() => {
   }, 9000)
 })
 </script>
-
-<style>
-/* Khmer Fonts */
-:root{
-  --gold:#bf953f;
-  --cream:#fffaf3;
-}
-
-body{
-  margin:0;
-  background:var(--cream);
-}
-
-.font-khmer-title{font-family:'Moul',cursive}
-.font-khmer-body{font-family:'Battambang',sans-serif}
-
-/* App background */
-.app-content{
-  background:linear-gradient(to bottom,var(--cream),#ffe7cc);
-  box-shadow:0 0 100px rgba(184,137,0,.05);
-  padding:0 20px;
-}
-
-/* Curtain */
-.curtain-container{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:flex;
-  pointer-events:none;
-}
-
-.panel{
-  width:50%;
-  height:100%;
-  background:linear-gradient(135deg,#ffffff,#f0ece3);
-  box-shadow:inset 0 0 50px rgba(184,137,0,.15);
-}
-
-.panel.left{
-  animation:openLeft 4.5s cubic-bezier(.77,0,.175,1) forwards;
-}
-
-.panel.right{
-  animation:openRight 4.5s cubic-bezier(.77,0,.175,1) forwards;
-}
-
-@keyframes openLeft{
-  0%{transform:translateX(0)}
-  40%{transform:translateX(0)}
-  100%{transform:translateX(-100%)}
-}
-
-@keyframes openRight{
-  0%{transform:translateX(0)}
-  40%{transform:translateX(0)}
-  100%{transform:translateX(100%)}
-}
-
-/* Emblem */
-.emblem-container{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  animation:emblemFade 3.2s ease forwards;
-}
-
-.emblem{
-  font-size:4rem;
-  background:linear-gradient(135deg,#bf953f,#fcf6ba,#aa771c);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.1));
-}
-
-@keyframes emblemFade{
-  0%{opacity:0; transform:scale(.7)}
-  30%{opacity:1; transform:scale(1)}
-  70%{opacity:1}
-  100%{opacity:0; transform:scale(1.4)}
-}
-
-/* Sparkles */
-.sparkle-layer{
-  position:fixed;
-  inset:0;
-  z-index:9998;
-  pointer-events:none;
-}
-
-.sparkle{
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:radial-gradient(circle,#fff,#ffe9a8);
-  border-radius:50%;
-  opacity:0;
-  animation:sparkleAnim 3.5s ease forwards;
-  filter:drop-shadow(0 0 6px rgba(191,149,63,.8));
-}
-
-@keyframes sparkleAnim{
-  0%{opacity:0; transform:scale(0)}
-  50%{opacity:1; transform:scale(1.8)}
-  100%{opacity:0; transform:scale(0)}
-}
-
-@media (min-width: 1024px) {
-  .home-container {
-    max-width: 60rem;
-  }
-}
-
-.audio-gate{
-  position:fixed;
-  inset:0;
-  z-index:10000;
-  background:radial-gradient(circle at top,#fff7ea,#f8ead3 55%,#f1dec3 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.audio-gate-btn{
-  background:linear-gradient(135deg,#bf953f,#8a6d3b);
-  color:#fff;
-  border:none;
-  padding:14px 22px;
-  border-radius:999px;
-  font-size:13px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  box-shadow:0 10px 22px rgba(138,109,59,.25);
-}
-
-.audio-gate-btn:active{
-  transform:translateY(1px);
-}
-
-.admin-link-row{
-  display:flex;
-  justify-content:center;
-  margin:14px 0 0;
-  opacity:.85;
-}
-
-.admin-link-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px 14px;
-  border-radius:999px;
-  font-size:12px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  background:linear-gradient(135deg,#bf953f,#8a6d3b);
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 8px 16px rgba(138,109,59,.2);
-}
-
-.admin-link-btn:active{
-  transform:translateY(1px);
-}
-
-.copyright-link{
-  display:inline-block;
-  margin-top:12px;
-  font-size:11px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:#8a6d3b;
-  text-decoration:none;
-}
-
-.copyright-link:hover{
-  text-decoration:underline;
-}
-
-.butterfly{
-  position:absolute;
-  left:20%;
-  bottom:18%;
-  width:34px;
-  height:24px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 50%, #f8c9d6 0 60%, transparent 61%),
-    radial-gradient(circle at 70% 50%, #f8c9d6 0 60%, transparent 61%),
-    radial-gradient(circle at 50% 60%, #c58c7a 0 30%, transparent 31%);
-  filter:drop-shadow(0 4px 10px rgba(138,109,59,.2));
-  animation:butterflyFly 2.2s ease forwards;
-}
-
-@keyframes butterflyFly{
-  0%{transform:translate(0,0) scale(.7); opacity:0}
-  10%{opacity:1}
-  40%{transform:translate(120px,-120px) scale(1)}
-  70%{transform:translate(240px,-220px) scale(.9)}
-  100%{transform:translate(320px,-300px) scale(.6); opacity:0}
-}
-
-.star-burst{
-  position:absolute;
-  right:18%;
-  top:18%;
-  font-size:48px;
-  color:#ffd36b;
-  text-shadow:0 0 16px rgba(255,211,107,.7);
-  animation:starPop 1.8s ease forwards;
-}
-
-@keyframes starPop{
-  0%{transform:scale(.4) rotate(0deg); opacity:0}
-  30%{transform:scale(1.2) rotate(20deg); opacity:1}
-  100%{transform:scale(.9) rotate(40deg); opacity:0}
-}
-
-</style>
 

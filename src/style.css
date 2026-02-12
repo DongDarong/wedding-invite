@@ -1,5 +1,5 @@
 /* Khmer Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Moul&family=Battambang:wght@400;700&family=Noto+Sans+Khmer:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Moulpali&family=Noto+Serif+Khmer:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 /* ==============================
@@ -8,36 +8,44 @@
 ============================== */
 
 :root {
-  --gold-primary: #bf953f;
-  --gold-mid: #d4af37;
-  --gold-light: #fcf6ba;
-  --gold-dark: #8a6d3b;
-  --cream-bg: #fffaf3;
-  --glass-white: rgba(255, 255, 255, 0.4);
+  --royal-green: #6F836F;
+  --gold-primary: #C9A45B;
+  --gold-mid: #C9A45B;
+  --gold-light: #E6C77A;
+  --gold-dark: #8C6B4F;
+  --temple-brown: #8C6B4F;
+  --parchment: #D8D2C6;
+  --cream-bg: #D8D2C6;
+  --glass-white: rgba(255, 255, 255, 0.45);
+  --ink: #3f3328;
 }
 
 /* Base body */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans Khmer', system-ui, sans-serif;
-  background: linear-gradient(to bottom, var(--cream-bg), #ffe7cc);
+  font-family: 'Kantumruy Pro', system-ui, sans-serif;
+  background: transparent;
   background-attachment: fixed;
-  color: #3e2723;
+  color: var(--ink);
 }
 
 /* Khmer Typography */
 .font-khmer {
-  font-family: 'Moul', serif;
+  font-family: 'Moulpali', serif;
+}
+
+.font-khmer-title {
+  font-family: 'Moulpali', serif;
 }
 
 .font-khmer-body {
-  font-family: 'Battambang', sans-serif;
+  font-family: 'Kantumruy Pro', sans-serif;
 }
 
 /* Gold gradient text */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background: linear-gradient(135deg, #C9A45B, #E6C77A, #8C6B4F, #9db39d, #6F836F);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -50,22 +58,23 @@ body {
   background: linear-gradient(
     135deg,
     var(--gold-mid) 0%,
-    var(--gold-light) 50%,
+    var(--gold-light) 45%,
+    #cdd9cd 70%,
     var(--gold-mid) 100%
   );
   border-radius: 20px;
-  box-shadow: 0 10px 25px -5px rgba(184, 137, 0, 0.2);
+  box-shadow: 0 12px 30px -6px rgba(111, 131, 111, 0.35);
 }
 
 /* Glass panel */
 .glass-panel {
   padding: 2rem;
-  background: var(--glass-white);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(111, 131, 111, 0.2);
+  box-shadow: 0 10px 22px -8px rgba(60, 50, 38, 0.25);
 }
 
 /* Message bubble */
@@ -73,9 +82,9 @@ body {
   padding: 1rem;
   border-radius: 1.25rem;
   margin: 0.5rem 0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-  background: #fff;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow: 0 10px 18px rgba(111, 131, 111, 0.2);
+  background: #ffffff;
+  border: 1px solid rgba(111, 131, 111, 0.18);
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -83,19 +92,19 @@ body {
 
 /* Inputs */
 .wedding-input {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(184, 137, 0, 0.3);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(111, 131, 111, 0.25);
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
-  color: #5d4037;
+  color: var(--ink);
   outline: none;
   transition: all 0.3s ease;
 }
 
 .wedding-input:focus {
-  border-color: var(--gold-primary);
+  border-color: var(--royal-green);
   background: white;
-  box-shadow: 0 0 0 4px rgba(191, 149, 63, 0.1);
+  box-shadow: 0 0 0 4px rgba(111, 131, 111, 0.2);
 }
 
 /* Gold button */
@@ -103,12 +112,12 @@ body {
   background: linear-gradient(
     135deg,
     var(--gold-primary) 0%,
-    var(--gold-dark) 100%
+    var(--royal-green) 100%
   );
   color: white;
   padding: 0.875rem;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 15px rgba(138, 109, 59, 0.3);
+  box-shadow: 0 6px 18px rgba(111, 131, 111, 0.4);
   transition: all 0.3s ease;
   font-weight: bold;
 }
@@ -116,7 +125,7 @@ body {
 .btn-gold:hover:not(:disabled) {
   transform: translateY(-2px);
   filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(138, 109, 59, 0.4);
+  box-shadow: 0 8px 24px rgba(111, 131, 111, 0.5);
 }
 
 /* Ornament divider */
@@ -126,13 +135,13 @@ body {
   justify-content: center;
   gap: 0.75rem;
   opacity: 0.5;
-  color: var(--gold-dark);
+  color: var(--royal-green);
 }
 
 .ornament-line {
   height: 1px;
   width: 2rem;
-  background-color: var(--gold-dark);
+  background-color: var(--royal-green);
 }
 
 /* Soft gold pulse */
@@ -147,4 +156,93 @@ body {
 
 .animate-pulse-soft {
   animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes openLeft{
+  0%{transform:translateX(0)}
+  40%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
+}
+
+@keyframes openRight{
+  0%{transform:translateX(0)}
+  40%{transform:translateX(0)}
+  100%{transform:translateX(100%)}
+}
+
+@keyframes emblemFade{
+  0%{opacity:0; transform:scale(.7)}
+  30%{opacity:1; transform:scale(1)}
+  70%{opacity:1}
+  100%{opacity:0; transform:scale(1.4)}
+}
+
+@keyframes sparkleAnim{
+  0%{opacity:0; transform:scale(0)}
+  50%{opacity:1; transform:scale(1.8)}
+  100%{opacity:0; transform:scale(0)}
+}
+
+@keyframes butterflyFly{
+  0%{transform:translate(0,0) scale(.7); opacity:0}
+  10%{opacity:1}
+  40%{transform:translate(120px,-120px) scale(1)}
+  70%{transform:translate(240px,-220px) scale(.9)}
+  100%{transform:translate(320px,-300px) scale(.6); opacity:0}
+}
+
+@keyframes starPop{
+  0%{transform:scale(.4) rotate(0deg); opacity:0}
+  30%{transform:scale(1.2) rotate(20deg); opacity:1}
+  100%{transform:scale(.9) rotate(40deg); opacity:0}
+}
+
+/* Khmer palette utility overrides */
+.text-yellow-800,
+.text-yellow-700,
+.text-yellow-600,
+.text-yellow-500 {
+  color: var(--gold-primary) !important;
+}
+
+.text-blue-900,
+.text-blue-700,
+.text-blue-600 {
+  color: var(--royal-green) !important;
+}
+
+.bg-yellow-600 {
+  background-color: var(--gold-primary) !important;
+}
+
+.border-yellow-600,
+.border-yellow-500,
+.border-yellow-300 {
+  border-color: var(--gold-primary) !important;
+}
+
+.border-blue-700,
+.border-blue-300 {
+  border-color: var(--royal-green) !important;
+}
+
+.from-yellow-700,
+.from-yellow-600 {
+  --tw-gradient-from: var(--gold-primary) !important;
+  --tw-gradient-to: rgba(201, 164, 91, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.via-yellow-300 {
+  --tw-gradient-to: rgba(230, 199, 122, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--gold-light), var(--tw-gradient-to) !important;
+}
+
+.to-yellow-900 {
+  --tw-gradient-to: var(--temple-brown) !important;
+}
+
+.to-blue-900,
+.to-blue-600 {
+  --tw-gradient-to: var(--royal-green) !important;
 }

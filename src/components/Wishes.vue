@@ -93,7 +93,7 @@ onMounted(()=>{
 
 /* Gold title */
 .gold{
-background:linear-gradient(90deg,#b88900,#ffe08a,#b88900);
+background:linear-gradient(90deg,#bf953f,#fcf6ba,#7da0f2);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -101,23 +101,23 @@ background:linear-gradient(90deg,#b88900,#ffe08a,#b88900);
 /* Ornament */
 .ornament{
 font-size:18px;
-color:#d4af37;
+color:#1f3b8f;
 margin-bottom:14px;
 }
 
 /* Card */
 .wish-card{
-border:4px double #d4af37;
+border:4px double #1f3b8f;
 padding:20px;
 border-radius:18px;
-background:linear-gradient(#fff9f2,#ffeed8);
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+background:linear-gradient(#f6f9ff,#e7efff);
+box-shadow:0 20px 40px rgba(31,59,143,.18);
 }
 
 /* Inputs */
 .input{
 width:100%;
-border:2px solid #e7c97a;
+border:2px solid rgba(31,59,143,.25);
 padding:12px;
 margin:8px 0;
 border-radius:8px;
@@ -126,18 +126,18 @@ outline:none;
 }
 
 .input:focus{
-border-color:#b88900;
-box-shadow:0 0 8px rgba(212,175,55,.4);
+border-color:#1f3b8f;
+box-shadow:0 0 8px rgba(47,91,209,.35);
 }
 
 /* Button */
 .btn{
-background:linear-gradient(135deg,#b88900,#7a5600);
+background:linear-gradient(135deg,#bf953f,#1f3b8f);
 color:white;
 padding:12px;
 border-radius:8px;
 letter-spacing:.05em;
-box-shadow:0 8px 16px rgba(0,0,0,.2);
+box-shadow:0 8px 16px rgba(31,59,143,.3);
 transition:.25s;
 }
 
@@ -151,8 +151,8 @@ margin:auto;
 width:90%;
 padding:18px;
 border-radius:22px;
-background:linear-gradient(#fff9f2,#ffeccf);
-box-shadow:0 10px 20px rgba(0,0,0,.15);
+background:linear-gradient(#f6f9ff,#e5efff);
+box-shadow:0 10px 20px rgba(31,59,143,.18);
 white-space:pre-wrap;
 word-break:break-word;
 overflow-wrap:anywhere;
@@ -180,18 +180,18 @@ padding:14px;
 border-radius:18px;
 margin:8px 0;
 width:80%;
-box-shadow:0 6px 12px rgba(0,0,0,.1);
-background:#fff9f2;
+box-shadow:0 6px 12px rgba(31,59,143,.15);
+background:#f6f9ff;
 white-space:pre-wrap;
 word-break:break-word;
 overflow-wrap:anywhere;
 }
 
 .left{margin-right:auto}
-.right{margin-left:auto;background:#ffeccf}
+.right{margin-left:auto;background:#e5efff}
 
 .name{
-color:#8b6b00;
+color:#1f3b8f;
 display:block;
 margin-bottom:4px;
 }

@@ -60,17 +60,17 @@ defineProps({
 <style scoped>
 /* Typography Mapping */
 /* Ensure these fonts are imported in your main index.html or App.vue */
-.font-script { font-family: 'Great Vibes', cursive; }
-.font-khmer-title { font-family: 'Moul', cursive; }
-.font-khmer-body { font-family: 'Battambang', sans-serif; }
+.font-script { font-family: 'Noto Serif Khmer', serif; }
+.font-khmer-title { font-family: 'Moulpali', serif; }
+.font-khmer-body { font-family: 'Kantumruy Pro', sans-serif; }
 
 /* Text Gradient for Names */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(18,36,84,0.15);
 }
 
 /* Floating Animation */

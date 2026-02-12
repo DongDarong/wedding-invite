@@ -11,9 +11,9 @@
 
     <div class="premium-card-frame mx-auto max-w-sm">
       <div class="glass-panel text-center">
-        <div class="text-sm text-yellow-800/70">Share your photos with</div>
+        <div class="text-sm text-blue-900/70">Share your photos with</div>
         <div class="hashtag mt-2">#EmmaLiam2026</div>
-        <p class="mt-3 text-xs text-yellow-800/70">
+        <p class="mt-3 text-xs text-blue-900/70">
           Tag us on social media so we can see your beautiful moments.
         </p>
       </div>
@@ -25,7 +25,8 @@
 .hashtag {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #8a6d3b;
+  color: var(--royal-700);
   letter-spacing: 0.08em;
+  text-shadow: 0 6px 16px rgba(31, 59, 143, 0.2);
 }
 </style>

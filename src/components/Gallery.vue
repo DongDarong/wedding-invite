@@ -50,11 +50,11 @@ const photos = [
 
 <style scoped>
 /* Typography Mapping */
-.font-khmer-title { font-family: 'Moul', cursive; }
+.font-khmer-title { font-family: 'Moulpali', serif; }
 
 /* Text Gradient for Titles */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,9 +64,9 @@ const photos = [
 .gallery-card-frame {
   position: relative;
   padding: 8px;
-  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 50%, #d4af37 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #c7d8ff 70%, #d4af37 100%);
   border-radius: 20px;
-  box-shadow: 0 10px 25px -5px rgba(184, 137, 0, 0.2);
+  box-shadow: 0 12px 28px -6px rgba(31, 59, 143, 0.25);
 }
 
 /* Image Hover Effect */

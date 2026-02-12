@@ -58,7 +58,7 @@ defineProps({
 
 .calendar-month {
   font-size: 1rem;
-  color: #8a6d3b;
+  color: var(--royal-700);
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -67,19 +67,19 @@ defineProps({
   font-size: 4rem;
   line-height: 1;
   font-weight: 700;
-  color: #bf953f;
-  text-shadow: 0 6px 18px rgba(191, 149, 63, 0.25);
+  color: var(--gold-primary);
+  text-shadow: 0 8px 18px rgba(31, 59, 143, 0.25);
 }
 
 .calendar-weekday {
   font-size: 1rem;
-  color: #5d4037;
+  color: var(--ink);
   font-weight: 600;
 }
 
 .calendar-year {
   font-size: 0.9rem;
-  color: #7c6a53;
+  color: rgba(18, 36, 84, 0.65);
   letter-spacing: 0.2em;
 }
 </style>

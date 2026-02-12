@@ -29,7 +29,7 @@
             <div class="countdown-label">វិនាទី</div>
           </div>
         </div>
-        <p class="mt-4 text-xs text-yellow-800/70">
+        <p class="mt-4 text-xs text-blue-900/70">
           27 មិថុនា 2026 • 8:00 AM (GMT+7)
         </p>
       </div>
@@ -84,8 +84,8 @@ onBeforeUnmount(() => {
 }
 
 .countdown-item {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(31, 59, 143, 0.18);
   border-radius: 14px;
   padding: 10px 8px;
 }
@@ -93,13 +93,14 @@ onBeforeUnmount(() => {
 .countdown-value {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #8a6d3b;
+  color: var(--gold-primary);
+  text-shadow: 0 6px 16px rgba(31, 59, 143, 0.2);
 }
 
 .countdown-label {
   margin-top: 4px;
   font-size: 0.75rem;
-  color: rgba(93, 64, 55, 0.8);
+  color: rgba(18, 36, 84, 0.75);
 }
 
 @media (max-width: 420px) {

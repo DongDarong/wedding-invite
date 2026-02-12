@@ -38,12 +38,12 @@
 
 <style scoped>
 /* Typography Mapping - Shared with Header.vue */
-.font-khmer-title { font-family: 'Moul', cursive; }
-.font-khmer-body { font-family: 'Battambang', sans-serif; }
+.font-khmer-title { font-family: 'Moulpali', serif; }
+.font-khmer-body { font-family: 'Kantumruy Pro', sans-serif; }
 
 /* Text Gradient for Titles */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #a8baf6, #7da0f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -53,25 +53,25 @@
 .location-card {
   position: relative;
   padding: 8px;
-  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 50%, #d4af37 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #c7d8ff 70%, #d4af37 100%);
   border-radius: 20px;
-  box-shadow: 0 10px 25px -5px rgba(184, 137, 0, 0.2);
+  box-shadow: 0 12px 28px -6px rgba(31, 59, 143, 0.25);
 }
 
 /* Elegant Button */
 .maps-btn {
-  background: linear-gradient(135deg, #bf953f 0%, #8a6d3b 100%);
+  background: linear-gradient(135deg, #bf953f 0%, #1f3b8f 100%);
   color: white;
   padding: 14px 28px;
   border-radius: 50px;
-  box-shadow: 0 4px 15px rgba(138, 109, 59, 0.4);
+  box-shadow: 0 6px 18px rgba(31, 59, 143, 0.4);
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .maps-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(138, 109, 59, 0.5);
+  box-shadow: 0 10px 22px rgba(31, 59, 143, 0.5);
   filter: brightness(1.1);
 }
 
