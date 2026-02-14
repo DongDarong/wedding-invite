@@ -1,5 +1,5 @@
-﻿<script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+<script setup>
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 const imageModules = import.meta.glob('../assets/images/*.{jpg,jpeg,png,webp,gif}', {
   eager: true,
@@ -13,22 +13,105 @@ const slides = Object.entries(imageModules)
     alt: `Wedding memory photo ${index + 1}`
   }))
 
+const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
 const currentSlide = ref(0)
+const isMobile = ref(mobileMediaQuery ? mobileMediaQuery.matches : false)
+const imageOrientations = ref(new Map())
 let timer = null
-const hasSlides = slides.length > 0
 
-onMounted(() => {
-  if (slides.length <= 1) return
+const visibleSlides = computed(() => slides.filter((slide) => {
+  const orientation = imageOrientations.value.get(slide.src)
+
+  if (!orientation) return true
+
+  if (isMobile.value) {
+    return orientation === 'portrait'
+  }
+
+  return orientation !== 'portrait'
+}))
+
+const hasSlides = computed(() => visibleSlides.value.length > 0)
+const activeSlide = computed(() => (hasSlides.value ? visibleSlides.value[currentSlide.value] : null))
+const currentImageSrc = computed(() => (activeSlide.value ? activeSlide.value.src : ''))
+const currentIsLandscape = computed(() => imageOrientations.value.get(currentImageSrc.value) === 'landscape')
+
+function detectImageOrientations() {
+  slides.forEach((slide) => {
+    const image = new Image()
+    image.onload = () => {
+      const nextMap = new Map(imageOrientations.value)
+      if (image.naturalHeight > image.naturalWidth) {
+        nextMap.set(slide.src, 'portrait')
+      } else if (image.naturalWidth > image.naturalHeight) {
+        nextMap.set(slide.src, 'landscape')
+      } else {
+        nextMap.set(slide.src, 'square')
+      }
+      imageOrientations.value = nextMap
+    }
+    image.src = slide.src
+  })
+}
+
+function updateMobileState() {
+  isMobile.value = mobileMediaQuery ? mobileMediaQuery.matches : false
+}
+
+function syncAutoSlide() {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+
+  if (visibleSlides.value.length <= 1) return
 
   timer = window.setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % slides.length
+    currentSlide.value = (currentSlide.value + 1) % visibleSlides.value.length
   }, 5000)
+}
+
+function attachMediaListener(query, handler) {
+  if (!query) return
+  if (typeof query.addEventListener === 'function') {
+    query.addEventListener('change', handler)
+    return
+  }
+  if (typeof query.addListener === 'function') {
+    query.addListener(handler)
+  }
+}
+
+function detachMediaListener(query, handler) {
+  if (!query) return
+  if (typeof query.removeEventListener === 'function') {
+    query.removeEventListener('change', handler)
+    return
+  }
+  if (typeof query.removeListener === 'function') {
+    query.removeListener(handler)
+  }
+}
+
+watch(visibleSlides, () => {
+  if (currentSlide.value >= visibleSlides.value.length) {
+    currentSlide.value = 0
+  }
+  syncAutoSlide()
+})
+
+onMounted(() => {
+  updateMobileState()
+  detectImageOrientations()
+  attachMediaListener(mobileMediaQuery, updateMobileState)
+  syncAutoSlide()
 })
 
 onBeforeUnmount(() => {
   if (timer) {
     clearInterval(timer)
   }
+  detachMediaListener(mobileMediaQuery, updateMobileState)
 })
 </script>
 
@@ -39,47 +122,58 @@ onBeforeUnmount(() => {
       <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">សួនរូបភាពមង្គលការ</p>
     </div>
 
-    <div class="temple-frame max-w-3xl mx-auto overflow-hidden">
-      <div class="temple-panel p-4 sm:p-6 max-[390px]:p-3">
-        <div
-          class="relative h-[270px] sm:h-[360px] max-[390px]:h-[220px] rounded-2xl overflow-hidden border border-[#f0cf8a]/25"
-        >
+    <div class="max-w-4xl mx-auto">
+      <div
+        class="gallery-stage relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9] max-h-[78vh] rounded-2xl overflow-hidden shadow-[0_16px_44px_rgba(0,0,0,0.55)] sm:shadow-[0_22px_58px_rgba(0,0,0,0.62)]"
+      >
+          <img
+            v-if="hasSlides && currentIsLandscape"
+            :src="currentImageSrc"
+            alt=""
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 z-[1] hidden max-[768px]:block w-full h-full object-cover scale-[1.08] blur-xl opacity-80"
+          >
           <transition v-if="hasSlides" name="fade" mode="out-in">
-            <img
-              :key="slides[currentSlide].src"
-              :src="slides[currentSlide].src"
-              :alt="slides[currentSlide].alt"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-contain scale-[1.03] saturate-90 brightness-90"
+            <div
+              :key="activeSlide.src"
+              class="cinematic-zoom relative z-[1] w-full h-full"
+              :class="currentIsLandscape ? 'landscape-mobile' : ''"
             >
+              <img
+                :src="activeSlide.src"
+                :alt="activeSlide.alt"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-contain object-center p-1.5 sm:p-2 lg:p-2.5"
+                :class="currentIsLandscape ? 'max-[768px]:p-0 max-[768px]:scale-[0.95]' : ''"
+              >
+            </div>
           </transition>
           <div
             v-else
             class="h-full w-full grid place-items-center bg-[linear-gradient(145deg,rgba(45,67,57,0.88),rgba(19,31,24,0.95))] text-[#d9c18d]"
           >
-            <p class="font-khmer-body text-sm tracking-[0.06em]">No gallery images found</p>
+            <p class="font-khmer-body text-sm tracking-[0.06em]">No matching images for this screen size</p>
           </div>
 
-          <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.78))]"></div>
+          <div class="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32))] sm:bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.52))]"></div>
 
-          <div class="absolute bottom-4 left-4 right-4 text-center">
-            <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#efd19a]">
+          <div class="absolute z-[3] bottom-3 sm:bottom-4 left-4 right-4 text-center">
+            <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#f2d7a1] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
               អនុស្សាវរីយ៍ក្រោមពន្លឺមាស
             </p>
           </div>
-        </div>
+      </div>
 
-        <div v-if="slides.length > 1" class="flex justify-center gap-2 mt-4">
-          <button
-            v-for="(slide, index) in slides"
-            :key="slide.alt"
-            type="button"
-            class="h-2.5 rounded-full transition-all"
-            :class="index === currentSlide ? 'w-8 bg-[#e9c77f]' : 'w-2.5 bg-[#9c7739]/80'"
-            @click="currentSlide = index"
-          ></button>
-        </div>
+      <div v-if="visibleSlides.length > 1" class="flex justify-center gap-2 mt-3.5 sm:mt-4">
+        <button
+          v-for="(slide, index) in visibleSlides"
+          :key="slide.alt"
+          type="button"
+          class="h-2.5 rounded-full transition-all duration-300"
+          :class="index === currentSlide ? 'w-8 bg-[#f1d18a] shadow-[0_0_10px_rgba(241,209,138,0.8)]' : 'w-2.5 bg-[#a27c3b]/75'"
+          @click="currentSlide = index"
+        ></button>
       </div>
     </div>
   </section>
@@ -91,4 +185,34 @@ onBeforeUnmount(() => {
 
 .fade-enter-from,
 .fade-leave-to { opacity: 0; }
+
+.gallery-stage {
+  background: #0d1713;
+}
+
+.cinematic-zoom {
+  transform-origin: 50% 50%;
+  will-change: transform;
+  animation: ken-burns 6.8s ease-out both;
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+@media (max-width: 768px) {
+  .cinematic-zoom {
+    animation-duration: 5.2s;
+  }
+
+  .cinematic-zoom.landscape-mobile {
+    animation-name: ken-burns-landscape-mobile;
+  }
+
+  @keyframes ken-burns-landscape-mobile {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.04); }
+  }
+}
 </style>
