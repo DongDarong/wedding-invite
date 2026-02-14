@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700&family=Cinzel:wght@400;600;700&family=Suwannaphum:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Khmer:wght@300;400;500;700&family=Noto+Serif+Khmer:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --royal-black: #0f1a15;
-  --royal-night: #1a2c23;
-  --royal-gold: #c9a45b;
-  --royal-gold-light: #e8cf90;
-  --royal-gold-dark: #7e642d;
-  --smoke: #1d2c24;
-  --ink: #f6e7c5;
-  --panel: rgba(20, 34, 28, 0.78);
-  --panel-soft: rgba(26, 42, 34, 0.64);
-  --line: rgba(201, 164, 91, 0.34);
+  --royal-black: #1b1309;
+  --royal-night: #2a1d10;
+  --royal-gold: #e6c27a;
+  --royal-gold-light: #f2d7a1;
+  --royal-gold-dark: #f0cf8a;
+  --smoke: #2f2112;
+  --ink: #f2d7a1;
+  --panel: rgba(39, 27, 14, 0.8);
+  --panel-soft: rgba(45, 31, 16, 0.66);
+  --line: rgba(230, 194, 122, 0.34);
 }
 
 *,
@@ -33,26 +33,26 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  font-family: 'Battambang', sans-serif;
+  font-family: 'Noto Sans Khmer', 'Battambang', sans-serif;
   background:
-    radial-gradient(circle at 20% 0%, rgba(186, 150, 73, 0.24), transparent 34%),
-    radial-gradient(circle at 80% 20%, rgba(86, 123, 90, 0.22), transparent 42%),
-    linear-gradient(140deg, #1a2c23 0%, #14241d 56%, #21362a 100%);
+    radial-gradient(circle at 20% 0%, rgba(242, 215, 161, 0.22), transparent 34%),
+    radial-gradient(circle at 80% 20%, rgba(230, 194, 122, 0.2), transparent 42%),
+    linear-gradient(140deg, #2a1d10 0%, #1b1309 56%, #3b2916 100%);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-y: none;
 }
 
 .font-khmer-title {
-  font-family: 'Suwannaphum', serif;
+  font-family: 'Noto Serif Khmer', 'Suwannaphum', serif;
 }
 
 .font-khmer-body {
-  font-family: 'Battambang', sans-serif;
+  font-family: 'Noto Sans Khmer', 'Battambang', sans-serif;
 }
 
 .font-engraved {
-  font-family: 'Cinzel', 'Suwannaphum', serif;
+  font-family: 'Cinzel', 'Noto Serif Khmer', serif;
 }
 
 .royal-page {
@@ -81,13 +81,13 @@ body {
   padding: 1px;
   background: linear-gradient(
     130deg,
-    rgba(245, 224, 174, 0.88) 0%,
-    rgba(201, 164, 91, 0.84) 28%,
-    rgba(64, 92, 72, 0.88) 58%,
-    rgba(235, 206, 132, 0.74) 100%
+    rgba(242, 215, 161, 0.88) 0%,
+    rgba(230, 194, 122, 0.84) 30%,
+    rgba(112, 78, 36, 0.82) 60%,
+    rgba(240, 207, 138, 0.76) 100%
   );
   box-shadow:
-    inset 0 0 0 1px rgba(255, 233, 168, 0.3),
+    inset 0 0 0 1px rgba(242, 215, 161, 0.28),
     0 22px 60px rgba(0, 0, 0, 0.7);
 }
 
@@ -95,7 +95,7 @@ body {
   content: '';
   position: absolute;
   inset: 0.55rem;
-  border: 1px solid rgba(255, 223, 141, 0.26);
+  border: 1px solid rgba(242, 215, 161, 0.24);
   border-radius: 0.95rem;
   pointer-events: none;
 }
@@ -104,14 +104,14 @@ body {
   position: relative;
   border-radius: 1rem;
   background:
-    linear-gradient(130deg, rgba(28, 45, 36, 0.78), rgba(18, 31, 25, 0.92)),
-    radial-gradient(circle at 20% 0%, rgba(255, 228, 155, 0.1), transparent 35%);
+    linear-gradient(130deg, rgba(53, 37, 20, 0.8), rgba(30, 21, 12, 0.92)),
+    radial-gradient(circle at 20% 0%, rgba(242, 215, 161, 0.12), transparent 35%);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 223, 141, 0.15);
+  border: 1px solid rgba(242, 215, 161, 0.16);
 }
 
 .gold-title {
-  background: linear-gradient(120deg, #f6e2b0, #c9a45b 30%, #dce7cb 52%, #8c6a2b 76%, #e9d092);
+  background: linear-gradient(120deg, #fff2d6, #f2d7a1 30%, #e6c27a 52%, #be8f45 76%, #f0cf8a);
   background-size: 200% auto;
   color: transparent;
   -webkit-text-fill-color: transparent;
@@ -119,15 +119,15 @@ body {
   background-clip: text;
   text-shadow:
     0 3px 8px rgba(0, 0, 0, 0.9),
-    0 0 20px rgba(201, 164, 91, 0.2);
+    0 0 20px rgba(230, 194, 122, 0.24);
   animation: gold-flow 8s linear infinite;
 }
 
 .engraved-text {
-  color: #f0dfb8;
+  color: #f7e7c2;
   text-shadow:
-    0 1px 0 #6d582a,
-    0 2px 0 #4a6a52,
+    0 1px 0 #7f5a22,
+    0 2px 0 #4f3a1c,
     0 8px 24px rgba(0, 0, 0, 0.75);
 }
 
@@ -137,7 +137,7 @@ body {
   height: 18rem;
   border-radius: 999px;
   filter: blur(36px);
-  background: radial-gradient(circle, rgba(231, 193, 110, 0.26), rgba(231, 193, 110, 0));
+  background: radial-gradient(circle, rgba(242, 215, 161, 0.3), rgba(242, 215, 161, 0));
   animation: breathing 8s ease-in-out infinite;
 }
 
@@ -149,12 +149,12 @@ body {
 
 .silk-overlay {
   background:
-    radial-gradient(circle at 0% 0%, rgba(255, 225, 151, 0.06), transparent 36%),
-    radial-gradient(circle at 100% 40%, rgba(174, 205, 160, 0.06), transparent 38%),
+    radial-gradient(circle at 0% 0%, rgba(242, 215, 161, 0.08), transparent 36%),
+    radial-gradient(circle at 100% 40%, rgba(230, 194, 122, 0.08), transparent 38%),
     repeating-linear-gradient(
       110deg,
-      rgba(255, 240, 205, 0.02) 0px,
-      rgba(255, 240, 205, 0.02) 2px,
+      rgba(242, 215, 161, 0.025) 0px,
+      rgba(242, 215, 161, 0.025) 2px,
       transparent 2px,
       transparent 5px
     );
@@ -163,7 +163,7 @@ body {
 .fog-layer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 25% 55%, rgba(164, 181, 132, 0.12), transparent 45%);
+  background: radial-gradient(circle at 25% 55%, rgba(230, 194, 122, 0.12), transparent 45%);
   filter: blur(24px);
   animation: fog-drift 26s ease-in-out infinite;
 }
@@ -179,9 +179,9 @@ body {
 }
 
 .gold-btn {
-  border: 1px solid rgba(255, 219, 131, 0.5);
-  background: linear-gradient(135deg, #e8c983 0%, #c9a45b 42%, #4c6d58 100%);
-  color: #172018;
+  border: 1px solid rgba(242, 215, 161, 0.5);
+  background: linear-gradient(135deg, #f2d7a1 0%, #e6c27a 42%, #8f6430 100%);
+  color: #2c1f10;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
 }
 
@@ -215,26 +215,26 @@ button {
 .royal-input {
   width: 100%;
   border-radius: 0.8rem;
-  border: 1px solid rgba(227, 197, 132, 0.32);
-  background: rgba(18, 30, 24, 0.78);
-  color: #f8e7c4;
+  border: 1px solid rgba(242, 215, 161, 0.3);
+  background: rgba(30, 21, 12, 0.8);
+  color: #f6dfb1;
   padding: 0.75rem 0.95rem;
 }
 
 .royal-input:focus {
   outline: none;
-  border-color: rgba(255, 225, 151, 0.65);
-  box-shadow: 0 0 0 3px rgba(255, 214, 130, 0.15);
+  border-color: rgba(242, 215, 161, 0.65);
+  box-shadow: 0 0 0 3px rgba(230, 194, 122, 0.16);
 }
 
 .royal-input::placeholder {
-  color: rgba(248, 217, 155, 0.5);
+  color: rgba(242, 215, 161, 0.5);
 }
 
 .royal-scroll {
-  border-left: 1px solid rgba(255, 219, 131, 0.35);
-  border-right: 1px solid rgba(255, 219, 131, 0.18);
-  background: linear-gradient(180deg, rgba(30, 45, 36, 0.74), rgba(16, 27, 22, 0.78));
+  border-left: 1px solid rgba(242, 215, 161, 0.35);
+  border-right: 1px solid rgba(242, 215, 161, 0.18);
+  background: linear-gradient(180deg, rgba(58, 40, 23, 0.74), rgba(31, 22, 12, 0.8));
 }
 
 @keyframes gold-flow {

@@ -3,26 +3,26 @@ const events = [
   {
     timeKh: '០៧:៣០ ព្រឹក',
     titleKh: 'ទទួលភ្ញៀវកិត្តិយស',
-    timeEn: '០៧:៣០ ព្រឹក',
-    titleEn: 'ទទួលភ្ញៀវកិត្តិយស'
+    timeEn: '07:30 AM',
+    titleEn: 'Reception of Guests'
   },
   {
     timeKh: '០៨:៣០ ព្រឹក',
     titleKh: 'ពិធីបួងសួង និងសំពះផ្ទឹម',
-    timeEn: '០៨:៣០ ព្រឹក',
-    titleEn: 'ពិធីបួងសួង និងសំពះផ្ទឹម'
+    timeEn: '08:30 AM',
+    titleEn: 'Wedding Ceremony and Toast'
   },
   {
     timeKh: '១០:០០ ព្រឹក',
     titleKh: 'ពិធីចងដៃប្រពៃណីខ្មែរ',
-    timeEn: '១០:០០ ព្រឹក',
-    titleEn: 'ពិធីចងដៃប្រពៃណីខ្មែរ'
+    timeEn: '10:00 AM',
+    titleEn: 'Khmer Traditional Wedding Ceremony'
   },
   {
     timeKh: '១១:៣០ ថ្ងៃត្រង់',
     titleKh: 'អាហារសាមគ្គី និងថតរូប',
-    timeEn: '១១:៣០ ថ្ងៃត្រង់',
-    titleEn: 'អាហារសាមគ្គី និងថតរូប'
+    timeEn: '11:30 AM',
+    titleEn: 'Catering and Photo Session'
   }
 ]
 </script>
@@ -30,8 +30,8 @@ const events = [
 <template>
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
-      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">កម្មវិធីពិធីការ</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">លំដាប់ពេលវេលាពិធី</p>
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">កម្មវិធីមង្គលការ</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Wedding Program</p>
     </div>
 
     <div class="temple-frame max-w-2xl mx-auto">

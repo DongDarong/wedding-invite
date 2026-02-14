@@ -253,9 +253,9 @@ onBeforeUnmount(() => {
 .admin-bg {
   position: relative;
   background:
-    radial-gradient(circle at 20% 0%, rgba(186, 150, 73, 0.26), transparent 35%),
-    radial-gradient(circle at 90% 15%, rgba(126, 84, 25, 0.15), transparent 35%),
-    linear-gradient(140deg, #1a2c23 0%, #14241d 56%, #21362a 100%);
+    radial-gradient(circle at 20% 0%, rgba(242, 215, 161, 0.24), transparent 35%),
+    radial-gradient(circle at 90% 15%, rgba(230, 194, 122, 0.16), transparent 35%),
+    linear-gradient(140deg, #2a1d10 0%, #1b1309 56%, #3b2916 100%);
 }
 
 .admin-overlay {
@@ -265,8 +265,8 @@ onBeforeUnmount(() => {
   background:
     repeating-linear-gradient(
       115deg,
-      rgba(255, 236, 191, 0.02) 0,
-      rgba(255, 236, 191, 0.02) 2px,
+      rgba(242, 215, 161, 0.025) 0,
+      rgba(242, 215, 161, 0.025) 2px,
       transparent 2px,
       transparent 6px
     );
@@ -275,18 +275,18 @@ onBeforeUnmount(() => {
 
 .temple-panel {
   background:
-    linear-gradient(130deg, rgba(28, 45, 36, 0.84), rgba(18, 31, 25, 0.9)),
-    radial-gradient(circle at 20% 0%, rgba(255, 228, 155, 0.08), transparent 35%);
-  border: 1px solid rgba(255, 223, 141, 0.18);
+    linear-gradient(130deg, rgba(53, 37, 20, 0.84), rgba(30, 21, 12, 0.9)),
+    radial-gradient(circle at 20% 0%, rgba(242, 215, 161, 0.12), transparent 35%);
+  border: 1px solid rgba(242, 215, 161, 0.2);
 }
 
 .table-wrap {
   overflow-x: auto;
   border-radius: 14px;
-  border: 1px solid rgba(212, 175, 95, 0.24);
-  background: linear-gradient(180deg, rgba(19, 33, 27, 0.82), rgba(15, 25, 21, 0.92));
+  border: 1px solid rgba(242, 215, 161, 0.26);
+  background: linear-gradient(180deg, rgba(41, 29, 16, 0.82), rgba(29, 20, 11, 0.92));
   box-shadow:
-    inset 0 1px 0 rgba(255, 229, 168, 0.08),
+    inset 0 1px 0 rgba(242, 215, 161, 0.08),
     0 16px 30px rgba(0, 0, 0, 0.32);
 }
 
@@ -302,10 +302,10 @@ onBeforeUnmount(() => {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(246, 223, 172, 0.9);
-  background: linear-gradient(180deg, rgba(58, 81, 66, 0.8), rgba(36, 56, 46, 0.9));
+  color: rgba(242, 215, 161, 0.9);
+  background: linear-gradient(180deg, rgba(92, 65, 35, 0.82), rgba(61, 43, 24, 0.9));
   padding: 11px 13px;
-  border-bottom: 1px solid rgba(212, 175, 95, 0.35);
+  border-bottom: 1px solid rgba(230, 194, 122, 0.35);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -314,16 +314,16 @@ onBeforeUnmount(() => {
 .admin-table tbody td {
   padding: 12px 13px;
   vertical-align: top;
-  border-bottom: 1px solid rgba(212, 175, 95, 0.16);
-  background: rgba(21, 35, 29, 0.55);
+  border-bottom: 1px solid rgba(230, 194, 122, 0.16);
+  background: rgba(34, 24, 14, 0.55);
 }
 
 .admin-table tbody tr:nth-child(even) td {
-  background: rgba(24, 40, 32, 0.58);
+  background: rgba(40, 28, 17, 0.58);
 }
 
 .admin-table tbody tr:hover td {
-  background: rgba(41, 61, 49, 0.62);
+  background: rgba(58, 41, 24, 0.62);
 }
 
 .admin-table tbody tr:last-child td {
@@ -357,8 +357,8 @@ onBeforeUnmount(() => {
     padding: 10px 12px;
     margin: 8px 6px;
     border-radius: 10px;
-    background: rgba(22, 36, 30, 0.78);
-    border-bottom: 1px solid rgba(212, 175, 95, 0.2);
+    background: rgba(36, 25, 14, 0.78);
+    border-bottom: 1px solid rgba(230, 194, 122, 0.2);
   }
 
   .admin-table tbody td {
@@ -366,7 +366,7 @@ onBeforeUnmount(() => {
     justify-content: space-between;
     gap: 12px;
     padding: 6px 0;
-    border-bottom: 1px dashed rgba(212, 175, 95, 0.18);
+    border-bottom: 1px dashed rgba(230, 194, 122, 0.18);
     background: transparent;
   }
 
@@ -375,7 +375,7 @@ onBeforeUnmount(() => {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(217, 184, 117, 0.85);
+    color: rgba(230, 194, 122, 0.88);
   }
 
   .admin-table tbody tr td:last-child {
