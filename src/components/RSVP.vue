@@ -44,7 +44,7 @@ async function sendRSVP() {
   <section class="rsvp-section animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
       <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">បញ្ជាក់ការចូលរួម</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ព័ត៌មានចូលរួមពិធី</p>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Confirm participation</p>
     </div>
 
     <div class="temple-frame max-w-2xl mx-auto">

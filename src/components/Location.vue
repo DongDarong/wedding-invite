@@ -30,8 +30,8 @@ defineProps({
 <template>
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
-      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">ទីតាំងពិធី</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ព័ត៌មានទីតាំង</p>
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">ទីតាំងពិធីបង្គលការ</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Wedding's location</p>
     </div>
 
     <div class="temple-frame max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ defineProps({
               <div class="temple-panel p-5 text-center">
                 <p class="text-4xl text-[#d4ad66]">&#8962;</p>
                 <p class="font-khmer-body text-sm mt-2 text-[#e8d3a7]">ផែនទីទីតាំង</p>
-                <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bf9c58]">ចូលទៅកាន់ទីតាំង</p>
+                <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bf9c58]">Location map</p>
                 <a
                   :href="mapsUrls"
                   target="_blank"

@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
       <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រូបភាពអនុស្សាវរីយ៍</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">សួនរូបភាពមង្គលការ</p>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Souvenir pictures</p>
     </div>
 
     <div class="max-w-4xl mx-auto">

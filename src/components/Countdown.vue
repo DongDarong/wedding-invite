@@ -28,10 +28,10 @@ const timeLeft = computed(() => {
 })
 
 const units = [
-  { key: 'days', kh: 'ថ្ងៃ', en: 'ថ្ងៃ' },
-  { key: 'hours', kh: 'ម៉ោង', en: 'ម៉ោង' },
-  { key: 'minutes', kh: 'នាទី', en: 'នាទី' },
-  { key: 'seconds', kh: 'វិនាទី', en: 'វិនាទី' }
+  { key: 'days', kh: 'ថ្ងៃ', en: 'day' },
+  { key: 'hours', kh: 'ម៉ោង', en: 'hour' },
+  { key: 'minutes', kh: 'នាទី', en: 'minute' },
+  { key: 'seconds', kh: 'វិនាទី', en: 'second' }
 ]
 
 onMounted(() => {
@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
       <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រាប់ថយក្រោយ</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">ពេលវេលាមុនពិធី</p>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Countdown</p>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-[390px]:gap-2">

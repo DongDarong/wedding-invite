@@ -15,6 +15,22 @@ defineProps({
   groomEn: {
     type: String,
     default: 'កូនប្រុស'
+  },
+  brideFatherKh: {
+    type: String,
+    default: 'វុន ចំរ៉ុង'
+  },
+  brideMotherKh: {
+    type: String,
+    default: 'ឈឿន សុឃឿន'
+  },
+  groomFatherKh: {
+    type: String,
+    default: 'វឿន សំអាត'
+  },
+  groomMotherKh: {
+    type: String,
+    default: 'ថោង សុភាព'
   }
 })
 </script>
@@ -38,11 +54,17 @@ defineProps({
     <div class="mt-8 space-y-3 max-[390px]:mt-6 max-[390px]:space-y-2">
       <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ brideKh }}</h1>
       <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ brideEn }}</p>
+      <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
+         លោក {{ brideFatherKh }} និង លោកស្រី {{ brideMotherKh }}
+      </p>
 
       <p class="font-engraved text-xl text-[#d7bf8a]/95">&</p>
 
       <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ groomKh }}</h1>
       <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ groomEn }}</p>
+      <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
+         លោក {{ groomFatherKh }} និង លោកស្រី {{ groomMotherKh }}
+      </p>
     </div>
 
     <div class="ornament-divider mt-8 mb-2 max-[390px]:mt-6">

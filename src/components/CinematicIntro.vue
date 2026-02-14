@@ -23,9 +23,16 @@ function completeIntro() {
 </script>
 
 <template>
-  <section class="intro-root fixed inset-0 z-[60] overflow-hidden bg-[#13211b]" :class="{ 'intro-lite': lite }">
+  <section
+    class="intro-root fixed inset-0 z-[60] overflow-hidden bg-[#13211b]"
+    :class="{ 'intro-lite': lite }"
+    @dragstart.prevent
+  >
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(206,164,86,0.22),transparent_45%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
+    <div class="absolute inset-0 intro-vignette"></div>
+    <div class="absolute inset-0 intro-aurora"></div>
     <div v-if="!lite" class="absolute inset-0 film-grain"></div>
+    <div v-if="!lite" class="absolute inset-0 intro-sparkles"></div>
     <div class="fog-layer"></div>
     <div v-if="!lite" class="fog-layer layer-2"></div>
 
@@ -35,7 +42,8 @@ function completeIntro() {
     </div>
 
     <div class="absolute inset-0 flex items-center justify-center px-8 mt-auto text-center">
-      <div class="max-w-2xl space-y-5">
+      <div class="intro-center max-w-2xl space-y-5" :class="{ 'intro-center-lite': lite }">
+        <div class="intro-ornament"></div>
         <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#d7b97a]/80 intro-fade" :class="{ 'intro-fade-lite': lite }">
           លិខិតអញ្ជើញកម្មពិធីមង្គលការ
         </p>
@@ -48,12 +56,13 @@ function completeIntro() {
         <div class="pt-2">
           <button
             type="button"
-            class="gold-btn font-khmer-body rounded-full px-6 py-2.5 text-xs tracking-[0.14em] transition"
+            class="gold-btn intro-cta font-khmer-body rounded-full px-7 py-2.5 text-xs tracking-[0.16em] transition"
             @click="completeIntro"
           >
             បើកធៀបអញ្ជើញ
           </button>
         </div>
+        <div class="intro-ornament ornament-bottom"></div>
       </div>
     </div>
 
@@ -65,6 +74,33 @@ function completeIntro() {
 .intro-root {
   contain: layout paint style;
   transform: translateZ(0);
+  touch-action: none;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.intro-vignette {
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(6, 12, 10, 0.6) 100%);
+}
+
+.intro-aurora {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(214, 169, 88, 0.18), transparent 42%),
+    radial-gradient(circle at 85% 18%, rgba(109, 154, 108, 0.2), transparent 38%),
+    radial-gradient(circle at 50% 110%, rgba(255, 211, 130, 0.16), transparent 45%);
+  filter: blur(16px);
+  animation: aurora-breathe 10s ease-in-out infinite;
+}
+
+.intro-sparkles {
+  background:
+    radial-gradient(circle at 16% 26%, rgba(255, 230, 176, 0.56) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 22%, rgba(255, 231, 180, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 58% 66%, rgba(255, 234, 190, 0.45) 0 1px, transparent 2px),
+    radial-gradient(circle at 28% 74%, rgba(255, 224, 154, 0.42) 0 1px, transparent 2px);
+  animation: sparkle-float 8s linear infinite;
 }
 
 .temple-door {
@@ -81,6 +117,51 @@ function completeIntro() {
   border-top: 1px solid rgba(255, 221, 145, 0.4);
   border-bottom: 1px solid rgba(255, 221, 145, 0.4);
   will-change: transform;
+}
+
+.intro-center {
+  position: relative;
+  padding: clamp(1.2rem, 2.3vw, 2.2rem) clamp(1rem, 2.8vw, 2.5rem);
+  border: 1px solid rgba(255, 223, 150, 0.28);
+  border-radius: 30px;
+  background:
+    linear-gradient(120deg, rgba(20, 34, 28, 0.72), rgba(14, 25, 21, 0.82)),
+    radial-gradient(circle at 50% 0%, rgba(255, 224, 153, 0.16), transparent 56%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 154, 0.34),
+    inset 0 0 48px rgba(255, 220, 144, 0.06),
+    0 28px 54px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  animation: center-fade-in 1.2s ease 0.2s both;
+}
+
+.intro-center::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 225, 152, 0.16);
+  pointer-events: none;
+}
+
+.intro-center-lite {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 154, 0.28),
+    0 20px 36px rgba(0, 0, 0, 0.34);
+}
+
+.intro-ornament {
+  height: 1px;
+  width: min(420px, 68vw);
+  margin: 0 auto 0.8rem;
+  background: linear-gradient(90deg, transparent, rgba(255, 228, 167, 0.85), transparent);
+  opacity: 0;
+  animation: reveal-fade 2.6s ease 1.4s forwards;
+}
+
+.ornament-bottom {
+  margin: 0.8rem auto 0;
+  animation-delay: 2s;
 }
 
 .left-door {
@@ -109,6 +190,14 @@ function completeIntro() {
   opacity: 0;
   animation: reveal-fade 3.2s ease 2.4s forwards;
   will-change: transform, opacity;
+}
+
+.intro-cta {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 236, 191, 0.45);
+}
+
+.intro-cta:hover {
+  transform: translateY(-1px) scale(1.01);
 }
 
 .intro-beam {
@@ -195,9 +284,35 @@ function completeIntro() {
   100% { transform: translateX(120%); opacity: 0; }
 }
 
+@keyframes aurora-breathe {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 0.75; }
+  50% { transform: scale(1.08) translateY(-1.2%); opacity: 1; }
+}
+
+@keyframes sparkle-float {
+  0% { transform: translateY(0); opacity: 0.45; }
+  50% { opacity: 0.95; }
+  100% { transform: translateY(-12px); opacity: 0.45; }
+}
+
+@keyframes center-fade-in {
+  0% { opacity: 0; transform: translateY(16px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media (max-width: 768px) {
   .intro-root {
     backface-visibility: hidden;
+  }
+
+  .intro-center {
+    width: min(94vw, 650px);
+    border-radius: 22px;
+    padding: 1.1rem 0.95rem 1.25rem;
+  }
+
+  .intro-center::before {
+    border-radius: 17px;
   }
 
   .intro-fade {

@@ -54,8 +54,8 @@ onMounted(() => {
       <div class="blessing-frame p-[1px] rounded-[24px]">
         <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
           <div class="text-center">
-            <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ទាំងសារជូនពរ</h3>
-            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#dfbd7f]/75 mt-2">ពាក្យជូនពរដ៏មានតម្លៃ</p>
+            <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ញើរសារជូនពរ</h3>
+            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#dfbd7f]/75 mt-2">Send a greeting message</p>
           </div>
 
           <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
