@@ -55,7 +55,7 @@ onMounted(() => {
         <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
           <div class="text-center">
             <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ញើរសារជូនពរ</h3>
-            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#dfbd7f]/75 mt-2">Send a greeting message</p>
+            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#E6C27A]/80 mt-2">Send a greeting message</p>
           </div>
 
           <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
@@ -79,11 +79,11 @@ onMounted(() => {
               {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើពាក្យជូនពរ' }}
             </button>
 
-            <p v-if="status" class="text-sm text-center text-[#e8d3a7] break-words">{{ status }}</p>
+            <p v-if="status" class="text-sm text-center text-[#F2D7A1] break-words">{{ status }}</p>
           </form>
 
           <div class="mt-6 sm:mt-7">
-            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#cfa968]/80 text-center mb-3">
+            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#E6C27A]/85 text-center mb-3">
               សារជូនពរចុងក្រោយ
             </p>
             <div class="wishes-list space-y-2.5 sm:space-y-3 max-h-[290px] sm:max-h-[320px] overflow-auto pr-1">
@@ -92,11 +92,11 @@ onMounted(() => {
                 :key="wish.id"
                 class="blessing-note rounded-xl px-4 py-3"
               >
-                <p class="font-khmer-title text-sm text-[#f3ddb0]">{{ wish.name || 'ភ្ញៀវ' }}</p>
-                <p class="text-sm text-[#ead6ad]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
+                <p class="font-khmer-title text-sm text-[#F2D7A1]">{{ wish.name || 'ភ្ញៀវ' }}</p>
+                <p class="text-sm text-[#F0CF8A]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
               </article>
 
-              <p v-if="latestMessages.length === 0" class="text-sm text-[#d5ba86]/75 text-center py-4">
+              <p v-if="latestMessages.length === 0" class="text-sm text-[#E6C27A]/75 text-center py-4">
                 មិនទាន់មានសារជូនពរ
               </p>
             </div>
@@ -117,7 +117,7 @@ onMounted(() => {
   position: absolute;
   inset: -2rem -1rem auto;
   height: 11rem;
-  background: radial-gradient(circle at center, rgba(242, 198, 113, 0.2), transparent 68%);
+  background: radial-gradient(circle at center, rgba(230, 194, 122, 0.22), transparent 68%);
   filter: blur(18px);
   pointer-events: none;
 }
@@ -125,59 +125,59 @@ onMounted(() => {
 .blessing-frame {
   background: linear-gradient(
     140deg,
-    rgba(243, 219, 157, 0.9) 0%,
-    rgba(201, 164, 91, 0.82) 27%,
-    rgba(64, 92, 72, 0.9) 58%,
-    rgba(232, 201, 128, 0.84) 100%
+    rgba(242, 215, 161, 0.9) 0%,
+    rgba(230, 194, 122, 0.84) 30%,
+    rgba(111, 78, 37, 0.9) 58%,
+    rgba(240, 207, 138, 0.84) 100%
   );
   box-shadow:
     0 26px 60px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 235, 180, 0.2);
+    inset 0 0 0 1px rgba(242, 215, 161, 0.24);
 }
 
 .blessing-panel {
   background:
-    radial-gradient(circle at 30% 12%, rgba(202, 155, 77, 0.14), transparent 38%),
-    linear-gradient(165deg, #16231d 0%, #21382d 44%, #16231d 100%);
-  border: 1px solid rgba(236, 195, 112, 0.2);
+    radial-gradient(circle at 30% 12%, rgba(230, 194, 122, 0.16), transparent 38%),
+    linear-gradient(165deg, #2a1d10 0%, #3a2916 44%, #2a1d10 100%);
+  border: 1px solid rgba(242, 215, 161, 0.24);
   box-shadow:
-    inset 0 12px 24px rgba(255, 211, 131, 0.06),
+    inset 0 12px 24px rgba(242, 215, 161, 0.08),
     inset 0 -18px 26px rgba(0, 0, 0, 0.45);
 }
 
 .blessing-title {
-  color: #f3d9a8;
+  color: #f2d7a1;
   text-shadow:
-    0 1px 0 #8a642a,
+    0 1px 0 #7f5a22,
     0 10px 24px rgba(0, 0, 0, 0.65),
-    0 0 14px rgba(201, 164, 91, 0.24);
+    0 0 14px rgba(230, 194, 122, 0.24);
 }
 
 .blessing-input {
   width: 100%;
   border-radius: 0.9rem;
-  border: 1px solid rgba(240, 198, 116, 0.26);
+  border: 1px solid rgba(242, 215, 161, 0.28);
   background:
-    linear-gradient(160deg, rgba(20, 31, 25, 0.94), rgba(12, 20, 16, 0.95)),
-    radial-gradient(circle at top, rgba(255, 215, 145, 0.08), transparent 42%);
+    linear-gradient(160deg, rgba(36, 25, 14, 0.94), rgba(22, 16, 10, 0.95)),
+    radial-gradient(circle at top, rgba(242, 215, 161, 0.08), transparent 42%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 236, 195, 0.08),
+    inset 0 1px 0 rgba(242, 215, 161, 0.08),
     inset 0 -14px 24px rgba(0, 0, 0, 0.42);
-  color: #f5dfb2;
+  color: #f2d7a1;
   padding: 0.78rem 0.95rem;
   transition: all 180ms ease;
 }
 
 .blessing-input:focus {
   outline: none;
-  border-color: rgba(255, 221, 152, 0.58);
+  border-color: rgba(242, 215, 161, 0.62);
   box-shadow:
-    0 0 0 3px rgba(236, 191, 102, 0.14),
-    inset 0 1px 0 rgba(255, 236, 195, 0.1);
+    0 0 0 3px rgba(230, 194, 122, 0.16),
+    inset 0 1px 0 rgba(242, 215, 161, 0.1);
 }
 
 .blessing-input::placeholder {
-  color: rgba(242, 210, 148, 0.48);
+  color: rgba(242, 215, 161, 0.5);
 }
 
 .blessing-textarea {
@@ -186,12 +186,12 @@ onMounted(() => {
 }
 
 .blessing-button {
-  border: 1px solid rgba(255, 220, 140, 0.45);
-  background: linear-gradient(135deg, #eed39a 0%, #c9a45b 42%, #4d6d58 100%);
-  color: #1a241b;
+  border: 1px solid rgba(242, 215, 161, 0.45);
+  background: linear-gradient(135deg, #f2d7a1 0%, #e6c27a 42%, #8f6430 100%);
+  color: #2c1f10;
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 244, 213, 0.5);
+    inset 0 1px 0 rgba(242, 215, 161, 0.5);
 }
 
 .blessing-button:hover:not(:disabled) {
@@ -204,11 +204,11 @@ onMounted(() => {
 }
 
 .blessing-note {
-  border: 1px solid rgba(241, 201, 123, 0.16);
+  border: 1px solid rgba(242, 215, 161, 0.18);
   background:
-    linear-gradient(160deg, rgba(23, 34, 28, 0.94), rgba(14, 24, 19, 0.96));
+    linear-gradient(160deg, rgba(39, 27, 15, 0.94), rgba(24, 17, 10, 0.96));
   box-shadow:
-    inset 0 1px 0 rgba(255, 232, 182, 0.06),
+    inset 0 1px 0 rgba(242, 215, 161, 0.08),
     0 10px 16px rgba(0, 0, 0, 0.34);
 }
 
@@ -217,7 +217,7 @@ onMounted(() => {
 }
 
 .wishes-list::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #dfbb79, #4f6e59);
+  background: linear-gradient(180deg, #f2d7a1, #8f6430);
   border-radius: 999px;
 }
 

@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="royal-page min-h-[100dvh] text-[#f6e7c5]">
+  <div class="royal-page min-h-[100dvh] text-[#f2d7a1]">
     <CinematicIntro
       v-if="showIntro"
       :duration-ms="isMobile ? 2400 : 7600"
@@ -139,8 +139,8 @@ onBeforeUnmount(() => {
     />
 
     <div class="fixed inset-0 pointer-events-none z-0">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(186,150,73,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(126,84,25,0.14),transparent_35%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
-      <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(255,236,191,0.02)_0,rgba(255,236,191,0.02)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(242,215,161,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(230,194,122,0.18),transparent_35%),linear-gradient(140deg,#2a1d10_0%,#1b1309_56%,#3b2916_100%)]"></div>
+      <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(242,215,161,0.025)_0,rgba(242,215,161,0.025)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
       <div class="silk-overlay absolute inset-0"></div>
       <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer"></div>
       <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer layer-2"></div>
@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
       <span
         v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : lotusParticles)"
         :key="`lotus-${index}`"
-        class="absolute text-[18px] text-[#d8b875]/55"
+        class="absolute text-[18px] text-[#f0cf8a]/55"
         :style="{
           left: p.left,
           bottom: p.bottom,
@@ -166,11 +166,11 @@ onBeforeUnmount(() => {
       <span
         v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : dustParticles)"
         :key="`dust-${index}`"
-        class="absolute w-[5px] h-[5px] rounded-full bg-[#c5b383] opacity-0"
+        class="absolute w-[5px] h-[5px] rounded-full bg-[#e6c27a] opacity-0"
         :style="{
           left: p.left,
           top: p.top,
-          boxShadow: '0 0 16px rgba(245,211,144,0.7)',
+          boxShadow: '0 0 16px rgba(230,194,122,0.72)',
           animation: `floating ${p.duration} ease-in-out ${p.delay} infinite`
         }"
       />
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 
     <main class="relative z-10 mx-auto max-w-5xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 max-[390px]:px-2 max-[390px]:pt-4">
       <div class="temple-frame">
-        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(28,45,36,0.84),rgba(18,31,25,0.9)),radial-gradient(circle_at_20%_0%,rgba(255,228,155,0.08),transparent_35%)] border-[rgba(255,223,141,0.18)]">
+        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(53,37,20,0.84),rgba(30,21,12,0.9)),radial-gradient(circle_at_20%_0%,rgba(242,215,161,0.12),transparent_35%)] border-[rgba(242,215,161,0.18)]">
           <Header
             :bride-kh="weddingContent.brideKh"
             :groom-kh="weddingContent.groomKh"
@@ -201,14 +201,14 @@ onBeforeUnmount(() => {
             <Wishes />
           </div>
 
-          <footer class="mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
+          <footer class="mt-12 text-center text-[#f0cf8a]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
             <p class="font-khmer-title text-sm">សូមអរគុណសម្រាប់ពាក្យជូនពរ</p>
             <p class="text-[11px] tracking-[0.06em] mt-2">ក្តីស្រឡាញ់ និងព្រះពរ</p>
             <a
               href="https://dongdarong.github.io/dd-portfolio/"
               target="_blank"
               rel="noreferrer"
-              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#d7b97a] hover:text-[#f0dbb3] transition"
+              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#e6c27a] hover:text-[#f2d7a1] transition"
             >
               © Dong Darong (Click)
             </a>
