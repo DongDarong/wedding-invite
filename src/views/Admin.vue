@@ -253,8 +253,13 @@ onBeforeUnmount(() => {
 .admin-bg {
   position: relative;
   background:
+<<<<<<< HEAD
     radial-gradient(circle at 20% 0%, rgba(31, 53, 41, 0.24), transparent 35%),
     radial-gradient(circle at 90% 15%, rgba(45, 67, 57, 0.16), transparent 35%),
+=======
+    radial-gradient(circle at 20% 0%, rgba(241, 209, 138, 0.24), transparent 35%),
+    radial-gradient(circle at 90% 15%, rgba(212, 175, 55, 0.16), transparent 35%),
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
     linear-gradient(140deg, #2a1d10 0%, #1b1309 56%, #3b2916 100%);
 }
 
@@ -265,8 +270,13 @@ onBeforeUnmount(() => {
   background:
     repeating-linear-gradient(
       115deg,
+<<<<<<< HEAD
       rgba(31, 53, 41, 0.025) 0,
       rgba(31, 53, 41, 0.025) 2px,
+=======
+      rgba(241, 209, 138, 0.025) 0,
+      rgba(241, 209, 138, 0.025) 2px,
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
       transparent 2px,
       transparent 6px
     );
@@ -276,17 +286,29 @@ onBeforeUnmount(() => {
 .temple-panel {
   background:
     linear-gradient(130deg, rgba(53, 37, 20, 0.84), rgba(30, 21, 12, 0.9)),
+<<<<<<< HEAD
     radial-gradient(circle at 20% 0%, rgba(31, 53, 41, 0.12), transparent 35%);
   border: 1px solid rgba(31, 53, 41, 0.2);
+=======
+    radial-gradient(circle at 20% 0%, rgba(241, 209, 138, 0.12), transparent 35%);
+  border: 1px solid rgba(241, 209, 138, 0.2);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
 }
 
 .table-wrap {
   overflow-x: auto;
   border-radius: 14px;
+<<<<<<< HEAD
   border: 1px solid rgba(31, 53, 41, 0.26);
   background: linear-gradient(180deg, rgba(41, 29, 16, 0.82), rgba(29, 20, 11, 0.92));
   box-shadow:
     inset 0 1px 0 rgba(31, 53, 41, 0.08),
+=======
+  border: 1px solid rgba(241, 209, 138, 0.26);
+  background: linear-gradient(180deg, rgba(41, 29, 16, 0.82), rgba(29, 20, 11, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(241, 209, 138, 0.08),
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
     0 16px 30px rgba(0, 0, 0, 0.32);
 }
 
@@ -302,10 +324,17 @@ onBeforeUnmount(() => {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+<<<<<<< HEAD
   color: rgba(31, 53, 41, 0.9);
   background: linear-gradient(180deg, rgba(92, 65, 35, 0.82), rgba(61, 43, 24, 0.9));
   padding: 11px 13px;
   border-bottom: 1px solid rgba(45, 67, 57, 0.35);
+=======
+  color: rgba(241, 209, 138, 0.9);
+  background: linear-gradient(180deg, rgba(92, 65, 35, 0.82), rgba(61, 43, 24, 0.9));
+  padding: 11px 13px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
   position: sticky;
   top: 0;
   z-index: 1;
@@ -314,7 +343,11 @@ onBeforeUnmount(() => {
 .admin-table tbody td {
   padding: 12px 13px;
   vertical-align: top;
+<<<<<<< HEAD
   border-bottom: 1px solid rgba(45, 67, 57, 0.16);
+=======
+  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
   background: rgba(34, 24, 14, 0.55);
 }
 
@@ -358,7 +391,11 @@ onBeforeUnmount(() => {
     margin: 8px 6px;
     border-radius: 10px;
     background: rgba(36, 25, 14, 0.78);
+<<<<<<< HEAD
     border-bottom: 1px solid rgba(45, 67, 57, 0.2);
+=======
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
   }
 
   .admin-table tbody td {
@@ -366,7 +403,11 @@ onBeforeUnmount(() => {
     justify-content: space-between;
     gap: 12px;
     padding: 6px 0;
+<<<<<<< HEAD
     border-bottom: 1px dashed rgba(45, 67, 57, 0.18);
+=======
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.18);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
     background: transparent;
   }
 
@@ -375,7 +416,11 @@ onBeforeUnmount(() => {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+<<<<<<< HEAD
     color: rgba(45, 67, 57, 0.88);
+=======
+    color: rgba(212, 175, 55, 0.88);
+>>>>>>> 43aa2a9670a957d67fb98471e7708bee6f0140ba
   }
 
   .admin-table tbody tr td:last-child {
