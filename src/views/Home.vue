@@ -13,11 +13,12 @@ import weddingSong from '../assets/wealth-of-love.mp3'
 
 const showIntro = ref(true)
 const audioRef = ref(null)
+const isMobile = ref(false)
 const weddingContent = {
-  brideKh: 'ស្រីនាង',
-  groomKh: 'ដារ៉ា',
-  brideEn: 'ស្រីនាង',
-  groomEn: 'ដារ៉ា',
+  brideKh: 'រ៉ុង រីណា',
+  groomKh: 'ឈឿន រ៉ាឆា',
+  brideEn: 'កូនស្រី',
+  groomEn: 'កូនប្រុស',
   dateISO: '2026-02-28T08:00:00+07:00',
   monthKh: 'កុម្ភៈ',
   weekdayKh: 'ថ្ងៃសៅរ៍',
@@ -41,6 +42,10 @@ const dustParticles = Array.from({ length: 18 }, (_, index) => ({
   duration: `${6 + (index % 4) * 1.2}s`,
   delay: `${(index % 7) * 0.7}s`
 }))
+
+function updateMobileState() {
+  isMobile.value = window.matchMedia('(max-width: 768px)').matches
+}
 
 function onIntroComplete() {
   showIntro.value = false
@@ -67,6 +72,7 @@ function onVisibleRetry() {
 }
 
 onMounted(() => {
+  updateMobileState()
   nextTick(() => {
     tryAutoPlay()
     setTimeout(tryAutoPlay, 120)
@@ -80,6 +86,7 @@ onMounted(() => {
   window.addEventListener('touchstart', unlockAndPlay, { passive: true })
   window.addEventListener('click', unlockAndPlay, { passive: true })
   window.addEventListener('keydown', unlockAndPlay)
+  window.addEventListener('resize', updateMobileState, { passive: true })
 })
 
 onBeforeUnmount(() => {
@@ -89,27 +96,33 @@ onBeforeUnmount(() => {
   window.removeEventListener('touchstart', unlockAndPlay)
   window.removeEventListener('click', unlockAndPlay)
   window.removeEventListener('keydown', unlockAndPlay)
+  window.removeEventListener('resize', updateMobileState)
 })
 </script>
 
 <template>
   <div class="royal-page min-h-screen text-[#f6e7c5]">
-    <CinematicIntro v-if="showIntro" @complete="onIntroComplete" />
+    <CinematicIntro
+      v-if="showIntro"
+      :duration-ms="isMobile ? 4200 : 7600"
+      :lite="isMobile"
+      @complete="onIntroComplete"
+    />
 
     <div class="fixed inset-0 pointer-events-none z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(186,150,73,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(126,84,25,0.14),transparent_35%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
       <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(255,236,191,0.02)_0,rgba(255,236,191,0.02)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
       <div class="silk-overlay absolute inset-0"></div>
       <div class="fog-layer"></div>
-      <div class="fog-layer layer-2"></div>
-      <div class="fog-layer layer-3"></div>
-      <div class="film-grain absolute inset-0"></div>
+      <div v-if="!isMobile" class="fog-layer layer-2"></div>
+      <div v-if="!isMobile" class="fog-layer layer-3"></div>
+      <div v-if="!isMobile" class="film-grain absolute inset-0"></div>
       <div class="candle-glow top-[-4rem] left-[-4rem]"></div>
-      <div class="candle-glow right-[-5rem] top-[25%]"></div>
-      <div class="candle-glow left-[35%] bottom-[-6rem]"></div>
+      <div v-if="!isMobile" class="candle-glow right-[-5rem] top-[25%]"></div>
+      <div v-if="!isMobile" class="candle-glow left-[35%] bottom-[-6rem]"></div>
 
       <span
-        v-for="(p, index) in lotusParticles"
+        v-for="(p, index) in (isMobile ? lotusParticles.slice(0, 6) : lotusParticles)"
         :key="`lotus-${index}`"
         class="absolute text-[18px] text-[#d8b875]/55"
         :style="{
@@ -122,7 +135,7 @@ onBeforeUnmount(() => {
       </span>
 
       <span
-        v-for="(p, index) in dustParticles"
+        v-for="(p, index) in (isMobile ? dustParticles.slice(0, 8) : dustParticles)"
         :key="`dust-${index}`"
         class="absolute w-[5px] h-[5px] rounded-full bg-[#c5b383] opacity-0"
         :style="{

@@ -2,19 +2,19 @@
 defineProps({
   brideKh: {
     type: String,
-    default: 'ស្រីនាង'
+    default: 'រ៉ុង រីណា'
   },
   groomKh: {
     type: String,
-    default: 'ដារ៉ា'
+    default: 'ឈឿន រ៉ាឆា'
   },
   brideEn: {
     type: String,
-    default: 'ស្រីនាង'
+    default: 'កូនស្រី'
   },
   groomEn: {
     type: String,
-    default: 'ដារ៉ា'
+    default: 'កូនប្រុស'
   }
 })
 </script>

@@ -1,23 +1,18 @@
 ﻿<script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import templeImage from '../assets/images/temple.png'
 
 const slides = [
   {
-    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80',
+    src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=75',
     alt: 'Wedding portrait in warm cinematic light'
   },
   {
-    src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80',
+    src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=75',
     alt: 'Golden ceremonial floral detail'
   },
   {
-    src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0f25e?auto=format&fit=crop&w=1400&q=80',
+    src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0f25e?auto=format&fit=crop&w=900&q=75',
     alt: 'Couple silhouette with candle glow'
-  },
-  {
-    src: templeImage,
-    alt: 'Khmer temple motif artwork'
   }
 ]
 
@@ -52,6 +47,8 @@ onBeforeUnmount(() => {
               :key="slides[currentSlide].src"
               :src="slides[currentSlide].src"
               :alt="slides[currentSlide].alt"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover"
             >
           </transition>

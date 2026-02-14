@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+Khmer:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700&family=Cinzel:wght@400;600;700&family=Suwannaphum:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -37,7 +37,7 @@ body {
 }
 
 .font-khmer-title {
-  font-family: 'Noto Serif Khmer', serif;
+  font-family: 'Suwannaphum', serif;
 }
 
 .font-khmer-body {
@@ -45,7 +45,7 @@ body {
 }
 
 .font-engraved {
-  font-family: 'Cinzel', 'Noto Serif Khmer', serif;
+  font-family: 'Cinzel', 'Suwannaphum', serif;
 }
 
 .royal-page {
@@ -269,5 +269,35 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .candle-glow {
+    width: 12rem;
+    height: 12rem;
+    filter: blur(20px);
+    opacity: 0.45;
+  }
+
+  .fog-layer {
+    filter: blur(14px);
+    opacity: 0.5;
+    animation-duration: 34s;
+  }
+
+  .temple-panel {
+    backdrop-filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,35 +1,46 @@
 ﻿<script setup>
 import { onMounted } from 'vue'
 
+const props = defineProps({
+  durationMs: {
+    type: Number,
+    default: 7600
+  },
+  lite: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const emit = defineEmits(['complete'])
 
 onMounted(() => {
-  window.setTimeout(() => emit('complete'), 7600)
+  window.setTimeout(() => emit('complete'), props.durationMs)
 })
 </script>
 
 <template>
   <section class="fixed inset-0 z-[60] overflow-hidden bg-[#13211b]">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(206,164,86,0.22),transparent_45%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
-    <div class="absolute inset-0 film-grain"></div>
+    <div v-if="!lite" class="absolute inset-0 film-grain"></div>
     <div class="fog-layer"></div>
-    <div class="fog-layer layer-2"></div>
+    <div v-if="!lite" class="fog-layer layer-2"></div>
 
     <div class="absolute inset-0 flex">
       <div class="temple-door left-door w-1/2 h-full"></div>
       <div class="temple-door right-door w-1/2 h-full"></div>
     </div>
 
-    <div class="absolute inset-0 flex items-center justify-center px-8 text-center">
+    <div class="absolute inset-0 flex items-center justify-center px-8 mt-auto text-center">
       <div class="max-w-2xl space-y-5">
-        <p class="font-khmer-body text-[11px] tracking-[0.08em] text-[#d7b97a]/80 intro-fade">
+        <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#d7b97a]/80 intro-fade">
           លិខិតអញ្ជើញពិធីមង្គលការ
         </p>
         <h1 class="font-khmer-title text-4xl sm:text-5xl md:text-6xl gold-title intro-title">
-          ពិធីអាពាហ៍ពិពាហ៍
+          រីណា និង រ៉ាឆា
         </h1>
         <p class="font-engraved text-base sm:text-xl engraved-text intro-subtitle">
-          ស្រីនាង និង ដារ៉ា
+          ពិធីអាពាហ៍ពិពាហ៍
         </p>
       </div>
     </div>
