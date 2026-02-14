@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
           <div class="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32))] sm:bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.52))]"></div>
 
           <div class="absolute z-[3] bottom-3 sm:bottom-4 left-4 right-4 text-center">
-            <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#f2d7a1] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
+            <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#B22222] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
               អនុស្សាវរីយ៍ក្រោមពន្លឺមាស
             </p>
           </div>
