@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import CinematicIntro from '../components/CinematicIntro.vue'
 import Header from '../components/Header.vue'
@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="royal-page min-h-[100dvh] text-[#B22222]">
+  <div class="royal-page min-h-[100dvh] text-[#1F3529]">
     <CinematicIntro
       v-if="showIntro"
       :duration-ms="isMobile ? 2400 : 7600"
@@ -139,8 +139,8 @@ onBeforeUnmount(() => {
     />
 
     <div class="fixed inset-0 pointer-events-none z-0">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(178,34,34,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(158,27,50,0.18),transparent_35%),linear-gradient(140deg,#2a1d10_0%,#1b1309_56%,#3b2916_100%)]"></div>
-      <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(178,34,34,0.025)_0,rgba(178,34,34,0.025)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(31,53,41,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(45,67,57,0.18),transparent_35%),linear-gradient(140deg,#2a1d10_0%,#1b1309_56%,#3b2916_100%)]"></div>
+      <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(31,53,41,0.025)_0,rgba(31,53,41,0.025)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
       <div class="silk-overlay absolute inset-0"></div>
       <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer"></div>
       <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer layer-2"></div>
@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
       <span
         v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : lotusParticles)"
         :key="`lotus-${index}`"
-        class="absolute text-[18px] text-[#8B0000]/55"
+        class="absolute text-[18px] text-[#1B2820]/55"
         :style="{
           left: p.left,
           bottom: p.bottom,
@@ -166,11 +166,11 @@ onBeforeUnmount(() => {
       <span
         v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : dustParticles)"
         :key="`dust-${index}`"
-        class="absolute w-[5px] h-[5px] rounded-full bg-[#9E1B32] opacity-0"
+        class="absolute w-[5px] h-[5px] rounded-full bg-[#2D4339] opacity-0"
         :style="{
           left: p.left,
           top: p.top,
-          boxShadow: '0 0 16px rgba(158,27,50,0.72)',
+          boxShadow: '0 0 16px rgba(45,67,57,0.72)',
           animation: `floating ${p.duration} ease-in-out ${p.delay} infinite`
         }"
       />
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 
     <main class="relative z-10 mx-auto max-w-5xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 max-[390px]:px-2 max-[390px]:pt-4">
       <div class="temple-frame">
-        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(53,37,20,0.84),rgba(30,21,12,0.9)),radial-gradient(circle_at_20%_0%,rgba(178,34,34,0.12),transparent_35%)] border-[rgba(178,34,34,0.18)]">
+        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(53,37,20,0.84),rgba(30,21,12,0.9)),radial-gradient(circle_at_20%_0%,rgba(31,53,41,0.12),transparent_35%)] border-[rgba(31,53,41,0.18)]">
           <Header
             :bride-kh="weddingContent.brideKh"
             :groom-kh="weddingContent.groomKh"
@@ -201,14 +201,14 @@ onBeforeUnmount(() => {
             <Wishes />
           </div>
 
-          <footer class="mt-12 text-center text-[#8B0000]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
+          <footer class="mt-12 text-center text-[#1B2820]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
             <p class="font-khmer-title text-sm">សូមអរគុណសម្រាប់ពាក្យជូនពរ</p>
             <p class="text-[11px] tracking-[0.06em] mt-2">ក្តីស្រឡាញ់ និងព្រះពរ</p>
             <a
               href="https://dongdarong.github.io/dd-portfolio/"
               target="_blank"
               rel="noreferrer"
-              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#9E1B32] hover:text-[#B22222] transition"
+              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#2D4339] hover:text-[#1F3529] transition"
             >
               © Dong Darong (Click)
             </a>

@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { computed, onMounted, ref } from 'vue'
 import { db } from '../firebase'
 import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
@@ -55,7 +55,7 @@ onMounted(() => {
         <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
           <div class="text-center">
             <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ញើរសារជូនពរ</h3>
-            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#9E1B32]/80 mt-2">Send a greeting message</p>
+            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#2D4339]/80 mt-2">Send a greeting message</p>
           </div>
 
           <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
@@ -79,11 +79,11 @@ onMounted(() => {
               {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើពាក្យជូនពរ' }}
             </button>
 
-            <p v-if="status" class="text-sm text-center text-[#B22222] break-words">{{ status }}</p>
+            <p v-if="status" class="text-sm text-center text-[#1F3529] break-words">{{ status }}</p>
           </form>
 
           <div class="mt-6 sm:mt-7">
-            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#9E1B32]/85 text-center mb-3">
+            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#2D4339]/85 text-center mb-3">
               សារជូនពរចុងក្រោយ
             </p>
             <div class="wishes-list space-y-2.5 sm:space-y-3 max-h-[290px] sm:max-h-[320px] overflow-auto pr-1">
@@ -92,11 +92,11 @@ onMounted(() => {
                 :key="wish.id"
                 class="blessing-note rounded-xl px-4 py-3"
               >
-                <p class="font-khmer-title text-sm text-[#B22222]">{{ wish.name || 'ភ្ញៀវ' }}</p>
-                <p class="text-sm text-[#8B0000]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
+                <p class="font-khmer-title text-sm text-[#1F3529]">{{ wish.name || 'ភ្ញៀវ' }}</p>
+                <p class="text-sm text-[#1B2820]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
               </article>
 
-              <p v-if="latestMessages.length === 0" class="text-sm text-[#9E1B32]/75 text-center py-4">
+              <p v-if="latestMessages.length === 0" class="text-sm text-[#2D4339]/75 text-center py-4">
                 មិនទាន់មានសារជូនពរ
               </p>
             </div>
@@ -117,7 +117,7 @@ onMounted(() => {
   position: absolute;
   inset: -2rem -1rem auto;
   height: 11rem;
-  background: radial-gradient(circle at center, rgba(158, 27, 50, 0.22), transparent 68%);
+  background: radial-gradient(circle at center, rgba(45, 67, 57, 0.22), transparent 68%);
   filter: blur(18px);
   pointer-events: none;
 }
@@ -125,59 +125,59 @@ onMounted(() => {
 .blessing-frame {
   background: linear-gradient(
     140deg,
-    rgba(178, 34, 34, 0.9) 0%,
-    rgba(158, 27, 50, 0.84) 30%,
+    rgba(31, 53, 41, 0.9) 0%,
+    rgba(45, 67, 57, 0.84) 30%,
     rgba(111, 78, 37, 0.9) 58%,
-    rgba(139, 0, 0, 0.84) 100%
+    rgba(27, 40, 32, 0.84) 100%
   );
   box-shadow:
     0 26px 60px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(178, 34, 34, 0.24);
+    inset 0 0 0 1px rgba(31, 53, 41, 0.24);
 }
 
 .blessing-panel {
   background:
-    radial-gradient(circle at 30% 12%, rgba(158, 27, 50, 0.16), transparent 38%),
+    radial-gradient(circle at 30% 12%, rgba(45, 67, 57, 0.16), transparent 38%),
     linear-gradient(165deg, #2a1d10 0%, #3a2916 44%, #2a1d10 100%);
-  border: 1px solid rgba(178, 34, 34, 0.24);
+  border: 1px solid rgba(31, 53, 41, 0.24);
   box-shadow:
-    inset 0 12px 24px rgba(178, 34, 34, 0.08),
+    inset 0 12px 24px rgba(31, 53, 41, 0.08),
     inset 0 -18px 26px rgba(0, 0, 0, 0.45);
 }
 
 .blessing-title {
-  color: #B22222;
+  color: #1F3529;
   text-shadow:
     0 1px 0 #7f5a22,
     0 10px 24px rgba(0, 0, 0, 0.65),
-    0 0 14px rgba(158, 27, 50, 0.24);
+    0 0 14px rgba(45, 67, 57, 0.24);
 }
 
 .blessing-input {
   width: 100%;
   border-radius: 0.9rem;
-  border: 1px solid rgba(178, 34, 34, 0.28);
+  border: 1px solid rgba(31, 53, 41, 0.28);
   background:
     linear-gradient(160deg, rgba(36, 25, 14, 0.94), rgba(22, 16, 10, 0.95)),
-    radial-gradient(circle at top, rgba(178, 34, 34, 0.08), transparent 42%);
+    radial-gradient(circle at top, rgba(31, 53, 41, 0.08), transparent 42%);
   box-shadow:
-    inset 0 1px 0 rgba(178, 34, 34, 0.08),
+    inset 0 1px 0 rgba(31, 53, 41, 0.08),
     inset 0 -14px 24px rgba(0, 0, 0, 0.42);
-  color: #B22222;
+  color: #1F3529;
   padding: 0.78rem 0.95rem;
   transition: all 180ms ease;
 }
 
 .blessing-input:focus {
   outline: none;
-  border-color: rgba(178, 34, 34, 0.62);
+  border-color: rgba(31, 53, 41, 0.62);
   box-shadow:
-    0 0 0 3px rgba(158, 27, 50, 0.16),
-    inset 0 1px 0 rgba(178, 34, 34, 0.1);
+    0 0 0 3px rgba(45, 67, 57, 0.16),
+    inset 0 1px 0 rgba(31, 53, 41, 0.1);
 }
 
 .blessing-input::placeholder {
-  color: rgba(178, 34, 34, 0.5);
+  color: rgba(31, 53, 41, 0.5);
 }
 
 .blessing-textarea {
@@ -186,12 +186,12 @@ onMounted(() => {
 }
 
 .blessing-button {
-  border: 1px solid rgba(178, 34, 34, 0.45);
-  background: linear-gradient(135deg, #B22222 0%, #9E1B32 42%, #8f6430 100%);
+  border: 1px solid rgba(31, 53, 41, 0.45);
+  background: linear-gradient(135deg, #1F3529 0%, #2D4339 42%, #8f6430 100%);
   color: #2c1f10;
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(178, 34, 34, 0.5);
+    inset 0 1px 0 rgba(31, 53, 41, 0.5);
 }
 
 .blessing-button:hover:not(:disabled) {
@@ -204,11 +204,11 @@ onMounted(() => {
 }
 
 .blessing-note {
-  border: 1px solid rgba(178, 34, 34, 0.18);
+  border: 1px solid rgba(31, 53, 41, 0.18);
   background:
     linear-gradient(160deg, rgba(39, 27, 15, 0.94), rgba(24, 17, 10, 0.96));
   box-shadow:
-    inset 0 1px 0 rgba(178, 34, 34, 0.08),
+    inset 0 1px 0 rgba(31, 53, 41, 0.08),
     0 10px 16px rgba(0, 0, 0, 0.34);
 }
 
@@ -217,7 +217,7 @@ onMounted(() => {
 }
 
 .wishes-list::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #B22222, #8f6430);
+  background: linear-gradient(180deg, #1F3529, #8f6430);
   border-radius: 999px;
 }
 
