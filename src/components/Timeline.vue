@@ -47,7 +47,7 @@ const events = [
 
             <p class="font-khmer-body text-sm text-[#f3ddb0] max-[390px]:text-xs">{{ event.timeKh }}</p>
             <p class="font-khmer-title text-lg text-[#f5dfb3] mt-1 max-[390px]:text-base">{{ event.titleKh }}</p>
-            <p class="font-khmer-body text-[11px] tracking-[0.05em] text-[#1B2820] mt-2 max-[390px]:text-[10px]">
+            <p class="font-khmer-body text-[11px] tracking-[0.05em] text-[#7e642d] mt-2 max-[390px]:text-[10px]">
               {{ event.timeEn }} • {{ event.titleEn }}
             </p>
           </article>

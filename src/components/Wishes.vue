@@ -55,7 +55,7 @@ onMounted(() => {
         <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
           <div class="text-center">
             <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ញើរសារជូនពរ</h3>
-            <p class="text-[11px] sm:text-xs tracking-[0.06em] text-[#2D4339]/80 mt-2">Send a greeting message</p>
+            <p class="blessing-subtitle text-[11px] sm:text-xs tracking-[0.06em] mt-2">Send a greeting message</p>
           </div>
 
           <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
@@ -79,11 +79,11 @@ onMounted(() => {
               {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើពាក្យជូនពរ' }}
             </button>
 
-            <p v-if="status" class="text-sm text-center text-[#1F3529] break-words">{{ status }}</p>
+            <p v-if="status" class="blessing-status text-sm text-center break-words">{{ status }}</p>
           </form>
 
           <div class="mt-6 sm:mt-7">
-            <p class="font-khmer-body text-xs tracking-[0.06em] text-[#2D4339]/85 text-center mb-3">
+            <p class="blessing-recent-label font-khmer-body text-xs tracking-[0.06em] text-center mb-3">
               សារជូនពរចុងក្រោយ
             </p>
             <div class="wishes-list space-y-2.5 sm:space-y-3 max-h-[290px] sm:max-h-[320px] overflow-auto pr-1">
@@ -92,11 +92,11 @@ onMounted(() => {
                 :key="wish.id"
                 class="blessing-note rounded-xl px-4 py-3"
               >
-                <p class="font-khmer-title text-sm text-[#1F3529]">{{ wish.name || 'ភ្ញៀវ' }}</p>
-                <p class="text-sm text-[#1B2820]/90 mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
+                <p class="blessing-note-name font-khmer-title text-sm">{{ wish.name || 'ភ្ញៀវ' }}</p>
+                <p class="blessing-note-text text-sm mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
               </article>
 
-              <p v-if="latestMessages.length === 0" class="text-sm text-[#2D4339]/75 text-center py-4">
+              <p v-if="latestMessages.length === 0" class="blessing-empty text-sm text-center py-4">
                 មិនទាន់មានសារជូនពរ
               </p>
             </div>
@@ -112,12 +112,25 @@ onMounted(() => {
   position: relative;
 }
 
+.wishes-section {
+  --wish-black: var(--royal-black);
+  --wish-night: var(--royal-night);
+  --wish-gold: var(--royal-gold);
+  --wish-gold-light: var(--royal-gold-light);
+  --wish-gold-dark: var(--royal-gold-dark);
+  --wish-smoke: var(--smoke);
+  --wish-ink: var(--ink);
+  --wish-panel: var(--panel);
+  --wish-panel-soft: var(--panel-soft);
+  --wish-line: var(--line);
+}
+
 .blessing-shell::before {
   content: '';
   position: absolute;
   inset: -2rem -1rem auto;
   height: 11rem;
-  background: radial-gradient(circle at center, rgba(45, 67, 57, 0.22), transparent 68%);
+  background: radial-gradient(circle at center, rgba(232, 207, 144, 0.22), transparent 68%);
   filter: blur(18px);
   pointer-events: none;
 }
@@ -125,59 +138,59 @@ onMounted(() => {
 .blessing-frame {
   background: linear-gradient(
     140deg,
-    rgba(31, 53, 41, 0.9) 0%,
-    rgba(45, 67, 57, 0.84) 30%,
-    rgba(111, 78, 37, 0.9) 58%,
-    rgba(27, 40, 32, 0.84) 100%
+    color-mix(in srgb, var(--wish-gold) 90%, transparent) 0%,
+    color-mix(in srgb, var(--wish-gold-light) 84%, transparent) 30%,
+    color-mix(in srgb, var(--wish-night) 86%, transparent) 58%,
+    color-mix(in srgb, var(--wish-gold-dark) 84%, transparent) 100%
   );
   box-shadow:
     0 26px 60px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(31, 53, 41, 0.24);
+    inset 0 0 0 1px color-mix(in srgb, var(--wish-gold) 24%, transparent);
 }
 
 .blessing-panel {
   background:
-    radial-gradient(circle at 30% 12%, rgba(45, 67, 57, 0.16), transparent 38%),
-    linear-gradient(165deg, #2a1d10 0%, #3a2916 44%, #2a1d10 100%);
-  border: 1px solid rgba(31, 53, 41, 0.24);
+    radial-gradient(circle at 30% 12%, rgba(232, 207, 144, 0.16), transparent 38%),
+    linear-gradient(165deg, var(--wish-night) 0%, var(--wish-smoke) 44%, var(--wish-night) 100%);
+  border: 1px solid color-mix(in srgb, var(--wish-gold) 24%, transparent);
   box-shadow:
-    inset 0 12px 24px rgba(31, 53, 41, 0.08),
+    inset 0 12px 24px color-mix(in srgb, var(--wish-gold) 8%, transparent),
     inset 0 -18px 26px rgba(0, 0, 0, 0.45);
 }
 
 .blessing-title {
-  color: #1F3529;
+  color: var(--wish-gold-light);
   text-shadow:
-    0 1px 0 #7f5a22,
+    0 1px 0 var(--wish-gold-dark),
     0 10px 24px rgba(0, 0, 0, 0.65),
-    0 0 14px rgba(45, 67, 57, 0.24);
+    0 0 14px rgba(232, 207, 144, 0.24);
 }
 
 .blessing-input {
   width: 100%;
   border-radius: 0.9rem;
-  border: 1px solid rgba(31, 53, 41, 0.28);
+  border: 1px solid color-mix(in srgb, var(--wish-gold) 28%, transparent);
   background:
-    linear-gradient(160deg, rgba(36, 25, 14, 0.94), rgba(22, 16, 10, 0.95)),
-    radial-gradient(circle at top, rgba(31, 53, 41, 0.08), transparent 42%);
+    linear-gradient(160deg, color-mix(in srgb, var(--wish-black) 94%, transparent), color-mix(in srgb, var(--wish-night) 95%, transparent)),
+    radial-gradient(circle at top, color-mix(in srgb, var(--wish-gold) 8%, transparent), transparent 42%);
   box-shadow:
-    inset 0 1px 0 rgba(31, 53, 41, 0.08),
+    inset 0 1px 0 color-mix(in srgb, var(--wish-gold) 8%, transparent),
     inset 0 -14px 24px rgba(0, 0, 0, 0.42);
-  color: #1F3529;
+  color: var(--wish-gold-light);
   padding: 0.78rem 0.95rem;
   transition: all 180ms ease;
 }
 
 .blessing-input:focus {
   outline: none;
-  border-color: rgba(31, 53, 41, 0.62);
+  border-color: color-mix(in srgb, var(--wish-gold) 62%, transparent);
   box-shadow:
-    0 0 0 3px rgba(45, 67, 57, 0.16),
-    inset 0 1px 0 rgba(31, 53, 41, 0.1);
+    0 0 0 3px rgba(232, 207, 144, 0.16),
+    inset 0 1px 0 color-mix(in srgb, var(--wish-gold) 10%, transparent);
 }
 
 .blessing-input::placeholder {
-  color: rgba(31, 53, 41, 0.5);
+  color: color-mix(in srgb, var(--wish-gold) 50%, transparent);
 }
 
 .blessing-textarea {
@@ -186,12 +199,12 @@ onMounted(() => {
 }
 
 .blessing-button {
-  border: 1px solid rgba(31, 53, 41, 0.45);
-  background: linear-gradient(135deg, #1F3529 0%, #2D4339 42%, #8f6430 100%);
-  color: #2c1f10;
+  border: 1px solid color-mix(in srgb, var(--wish-gold) 45%, transparent);
+  background: linear-gradient(135deg, var(--wish-gold-light) 0%, var(--wish-gold) 42%, var(--wish-gold-dark) 100%);
+  color: var(--wish-night);
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(31, 53, 41, 0.5);
+    inset 0 1px 0 color-mix(in srgb, var(--wish-gold) 50%, transparent);
 }
 
 .blessing-button:hover:not(:disabled) {
@@ -204,12 +217,36 @@ onMounted(() => {
 }
 
 .blessing-note {
-  border: 1px solid rgba(31, 53, 41, 0.18);
+  border: 1px solid color-mix(in srgb, var(--wish-gold) 18%, transparent);
   background:
-    linear-gradient(160deg, rgba(39, 27, 15, 0.94), rgba(24, 17, 10, 0.96));
+    linear-gradient(160deg, color-mix(in srgb, var(--wish-black) 94%, transparent), color-mix(in srgb, var(--wish-night) 96%, transparent));
   box-shadow:
-    inset 0 1px 0 rgba(31, 53, 41, 0.08),
+    inset 0 1px 0 color-mix(in srgb, var(--wish-gold) 8%, transparent),
     0 10px 16px rgba(0, 0, 0, 0.34);
+}
+
+.blessing-subtitle {
+  color: color-mix(in srgb, var(--wish-gold) 80%, transparent);
+}
+
+.blessing-status {
+  color: var(--wish-gold-light);
+}
+
+.blessing-recent-label {
+  color: color-mix(in srgb, var(--wish-gold) 85%, transparent);
+}
+
+.blessing-note-name {
+  color: var(--wish-gold-light);
+}
+
+.blessing-note-text {
+  color: color-mix(in srgb, var(--wish-gold-dark) 90%, transparent);
+}
+
+.blessing-empty {
+  color: color-mix(in srgb, var(--wish-gold) 75%, transparent);
 }
 
 .wishes-list::-webkit-scrollbar {
@@ -217,7 +254,7 @@ onMounted(() => {
 }
 
 .wishes-list::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1F3529, #8f6430);
+  background: linear-gradient(180deg, var(--wish-gold-light), var(--wish-gold-dark));
   border-radius: 999px;
 }
 

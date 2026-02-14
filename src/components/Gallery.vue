@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
           </transition>
           <div
             v-else
-            class="h-full w-full grid place-items-center bg-[linear-gradient(145deg,rgba(45,67,57,0.88),rgba(19,31,24,0.95))] text-[#d9c18d]"
+            class="h-full w-full grid place-items-center bg-[linear-gradient(145deg,rgba(232, 207, 144,0.88),rgba(19,31,24,0.95))] text-[#d9c18d]"
           >
             <p class="font-khmer-body text-sm tracking-[0.06em]">No matching images for this screen size</p>
           </div>
@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
           <div class="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32))] sm:bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.52))]"></div>
 
           <div class="absolute z-[3] bottom-3 sm:bottom-4 left-4 right-4 text-center">
-            <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#1F3529] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
+            <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#e8cf90] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
               អនុស្សាវរីយ៍ក្រោមពន្លឺមាស
             </p>
           </div>
@@ -171,7 +171,7 @@ onBeforeUnmount(() => {
           :key="slide.alt"
           type="button"
           class="h-2.5 rounded-full transition-all duration-300"
-          :class="index === currentSlide ? 'w-8 bg-[#1F3529] shadow-[0_0_10px_rgba(31,53,41,0.8)]' : 'w-2.5 bg-[#a27c3b]/75'"
+          :class="index === currentSlide ? 'w-8 bg-[#e8cf90] shadow-[0_0_10px_rgba(201, 164, 91,0.8)]' : 'w-2.5 bg-[#a27c3b]/75'"
           @click="currentSlide = index"
         ></button>
       </div>

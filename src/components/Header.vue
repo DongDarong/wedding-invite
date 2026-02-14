@@ -37,7 +37,7 @@ defineProps({
 
 <template>
   <header class="text-center pt-8 animate-[fade-up_1.5s_ease] max-[390px]:pt-5">
-    <p class="font-khmer-body text-[11px] tracking-[0.08em] text-[#1B2820]/80 max-[390px]:text-[10px]">
+    <p class="font-khmer-body text-[11px] tracking-[0.08em] text-[#7e642d]/80 max-[390px]:text-[10px]">
       ពិធីមង្គលតាមប្រពៃណី
     </p>
     <h2 class="font-khmer-title text-lg sm:text-xl mt-4 gold-title max-[390px]:mt-3 max-[390px]:text-base">សិរីមង្គលអាពាហ៍ពិពាហ៍</h2>

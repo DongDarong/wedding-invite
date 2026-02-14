@@ -24,11 +24,11 @@ function completeIntro() {
 
 <template>
   <section
-    class="intro-root fixed inset-0 z-[60] overflow-hidden bg-[#1b1309]"
+    class="intro-root fixed inset-0 z-[60] overflow-hidden bg-[#0f1a15]"
     :class="{ 'intro-lite': lite }"
     @dragstart.prevent
   >
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(45,67,57,0.24),transparent_45%),linear-gradient(140deg,#2a1d10_0%,#1b1309_56%,#3b2916_100%)]"></div>
+    <div class="absolute inset-0 intro-backdrop"></div>
     <div class="absolute inset-0 intro-vignette"></div>
     <div class="absolute inset-0 intro-aurora"></div>
     <div v-if="!lite" class="absolute inset-0 film-grain"></div>
@@ -44,7 +44,7 @@ function completeIntro() {
     <div class="absolute inset-0 flex items-center justify-center px-8 mt-auto text-center">
       <div class="intro-center max-w-2xl space-y-5" :class="{ 'intro-center-lite': lite }">
         <div class="intro-ornament"></div>
-        <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#2D4339]/85 intro-fade" :class="{ 'intro-fade-lite': lite }">
+        <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#c9a45b]/85 intro-fade" :class="{ 'intro-fade-lite': lite }">
           លិខិតអញ្ជើញកម្មពិធីមង្គលការ
         </p>
         <h1 class="font-khmer-title text-4xl sm:text-5xl md:text-6xl gold-title intro-title" :class="{ 'intro-title-lite': lite }">
@@ -81,55 +81,61 @@ function completeIntro() {
   -webkit-user-drag: none;
 }
 
+.intro-backdrop {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(232, 207, 144, 0.24), transparent 45%),
+    linear-gradient(140deg, #1a2c23 0%, #0f1a15 56%, #1d2c24 100%);
+}
+
 .intro-vignette {
-  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(10, 7, 4, 0.62) 100%);
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(15, 26, 21, 0.62) 100%);
 }
 
 .intro-aurora {
   background:
-    radial-gradient(circle at 10% 20%, rgba(31, 53, 41, 0.18), transparent 42%),
-    radial-gradient(circle at 85% 18%, rgba(45, 67, 57, 0.2), transparent 38%),
-    radial-gradient(circle at 50% 110%, rgba(27, 40, 32, 0.16), transparent 45%);
+    radial-gradient(circle at 10% 20%, rgba(201, 164, 91, 0.18), transparent 42%),
+    radial-gradient(circle at 85% 18%, rgba(232, 207, 144, 0.2), transparent 38%),
+    radial-gradient(circle at 50% 110%, rgba(126, 100, 45, 0.16), transparent 45%);
   filter: blur(16px);
   animation: aurora-breathe 10s ease-in-out infinite;
 }
 
 .intro-sparkles {
   background:
-    radial-gradient(circle at 16% 26%, rgba(31, 53, 41, 0.56) 0 1px, transparent 2px),
-    radial-gradient(circle at 78% 22%, rgba(45, 67, 57, 0.5) 0 1px, transparent 2px),
-    radial-gradient(circle at 58% 66%, rgba(27, 40, 32, 0.45) 0 1px, transparent 2px),
-    radial-gradient(circle at 28% 74%, rgba(31, 53, 41, 0.42) 0 1px, transparent 2px);
+    radial-gradient(circle at 16% 26%, rgba(201, 164, 91, 0.56) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 22%, rgba(232, 207, 144, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 58% 66%, rgba(126, 100, 45, 0.45) 0 1px, transparent 2px),
+    radial-gradient(circle at 28% 74%, rgba(201, 164, 91, 0.42) 0 1px, transparent 2px);
   animation: sparkle-float 8s linear infinite;
 }
 
 .temple-door {
   background:
-    linear-gradient(180deg, rgba(53, 37, 20, 0.95), rgba(22, 16, 10, 0.98)),
+    linear-gradient(180deg, rgba(26, 42, 34, 0.95), rgba(15, 26, 21, 0.98)),
     repeating-linear-gradient(
       90deg,
-      rgba(31, 53, 41, 0.11) 0,
-      rgba(31, 53, 41, 0.11) 2px,
+      rgba(201, 164, 91, 0.11) 0,
+      rgba(201, 164, 91, 0.11) 2px,
       transparent 2px,
       transparent 12px
     );
   box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.9);
-  border-top: 1px solid rgba(31, 53, 41, 0.4);
-  border-bottom: 1px solid rgba(31, 53, 41, 0.4);
+  border-top: 1px solid rgba(201, 164, 91, 0.4);
+  border-bottom: 1px solid rgba(201, 164, 91, 0.4);
   will-change: transform;
 }
 
 .intro-center {
   position: relative;
   padding: clamp(1.2rem, 2.3vw, 2.2rem) clamp(1rem, 2.8vw, 2.5rem);
-  border: 1px solid rgba(31, 53, 41, 0.28);
+  border: 1px solid rgba(201, 164, 91, 0.28);
   border-radius: 30px;
   background:
-    linear-gradient(120deg, rgba(44, 31, 18, 0.72), rgba(29, 20, 12, 0.82)),
-    radial-gradient(circle at 50% 0%, rgba(31, 53, 41, 0.16), transparent 56%);
+    linear-gradient(120deg, rgba(20, 34, 28, 0.72), rgba(26, 42, 34, 0.82)),
+    radial-gradient(circle at 50% 0%, rgba(201, 164, 91, 0.16), transparent 56%);
   box-shadow:
-    inset 0 1px 0 rgba(31, 53, 41, 0.34),
-    inset 0 0 48px rgba(45, 67, 57, 0.08),
+    inset 0 1px 0 rgba(201, 164, 91, 0.34),
+    inset 0 0 48px rgba(232, 207, 144, 0.08),
     0 28px 54px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
   animation: center-fade-in 1.2s ease 0.2s both;
@@ -140,13 +146,13 @@ function completeIntro() {
   position: absolute;
   inset: 7px;
   border-radius: 24px;
-  border: 1px solid rgba(31, 53, 41, 0.18);
+  border: 1px solid rgba(201, 164, 91, 0.18);
   pointer-events: none;
 }
 
 .intro-center-lite {
   box-shadow:
-    inset 0 1px 0 rgba(31, 53, 41, 0.28),
+    inset 0 1px 0 rgba(201, 164, 91, 0.28),
     0 20px 36px rgba(0, 0, 0, 0.34);
 }
 
@@ -154,7 +160,7 @@ function completeIntro() {
   height: 1px;
   width: min(420px, 68vw);
   margin: 0 auto 0.8rem;
-  background: linear-gradient(90deg, transparent, rgba(27, 40, 32, 0.85), transparent);
+  background: linear-gradient(90deg, transparent, rgba(126, 100, 45, 0.85), transparent);
   opacity: 0;
   animation: reveal-fade 2.6s ease 1.4s forwards;
 }
@@ -165,12 +171,12 @@ function completeIntro() {
 }
 
 .left-door {
-  border-right: 1px solid rgba(31, 53, 41, 0.36);
+  border-right: 1px solid rgba(201, 164, 91, 0.36);
   animation: open-left 7s cubic-bezier(0.7, 0, 0.2, 1) forwards;
 }
 
 .right-door {
-  border-left: 1px solid rgba(31, 53, 41, 0.36);
+  border-left: 1px solid rgba(201, 164, 91, 0.36);
   animation: open-right 7s cubic-bezier(0.7, 0, 0.2, 1) forwards;
 }
 
@@ -193,7 +199,7 @@ function completeIntro() {
 }
 
 .intro-cta {
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(31, 53, 41, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(201, 164, 91, 0.45);
 }
 
 .intro-cta:hover {
@@ -204,9 +210,9 @@ function completeIntro() {
   background: linear-gradient(
     110deg,
     transparent 32%,
-    rgba(45, 67, 57, 0.2) 48%,
-    rgba(31, 53, 41, 0.45) 52%,
-    rgba(27, 40, 32, 0.18) 56%,
+    rgba(232, 207, 144, 0.2) 48%,
+    rgba(201, 164, 91, 0.45) 52%,
+    rgba(126, 100, 45, 0.18) 56%,
     transparent 72%
   );
   transform: translateX(-120%);
