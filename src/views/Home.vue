@@ -26,11 +26,7 @@ const weddingContent = {
   dateISO: '2026-02-28T08:00:00+07:00',
   monthKh: 'កុម្ភៈ',
   weekdayKh: 'ថ្ងៃសៅរ៍',
-  venueKh: 'សណ្ឋាគារ សុខា ភ្នំពេញ',
-  venueEn: 'សណ្ឋាគារ សុខា ភ្នំពេញ',
-  addressKh: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ',
-  addressEn: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ',
-  mapsUrl: 'https://maps.google.com/?q=Sokha+Phnom+Penh+Hotel'
+  eventTimeKh: 'ថ្ងៃសៅរ៍ ២៨ កុម្ភៈ ឆ្នាំ ២០២៦ វេលាម៉ោង១១:០០ ថ្ងៃត្រង់'
 }
 
 const lotusParticles = Array.from({ length: 12 }, (_, index) => ({
@@ -198,11 +194,6 @@ onBeforeUnmount(() => {
               :date-iso="weddingContent.dateISO"
             />
             <Location
-              :venue-kh="weddingContent.venueKh"
-              :venue-en="weddingContent.venueEn"
-              :address-kh="weddingContent.addressKh"
-              :address-en="weddingContent.addressEn"
-              :maps-url="weddingContent.mapsUrl"
             />
             <Timeline />
             <Gallery />
@@ -217,9 +208,9 @@ onBeforeUnmount(() => {
               href="https://dongdarong.github.io/dd-portfolio/"
               target="_blank"
               rel="noreferrer"
-              class="inline-block mt-3 text-[11px] tracking-[0.12em] text-[#d7b97a] hover:text-[#f0dbb3] transition"
+              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#d7b97a] hover:text-[#f0dbb3] transition"
             >
-              © 2026 Dong Darong
+              © Dong Darong (Click)
             </a>
             <router-link
               to="/admin"

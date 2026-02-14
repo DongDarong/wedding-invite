@@ -1,24 +1,28 @@
 ﻿<script setup>
 defineProps({
-  venueKh: {
+  venueKhs: {
     type: String,
-    default: 'សណ្ឋាគារ សុខា ភ្នំពេញ'
+    default: 'គេហដ្ឋានខាងស្រី​ ស្ថិតនៅ ភូមិរហាងសួង ឃុំព្រែកហ្លួង ស្រុកឯកភ្នំ ខេត្តបាត់ដំបង'
   },
-  venueEn: {
+  venueEns: {
     type: String,
-    default: 'សណ្ឋាគារ សុខា ភ្នំពេញ'
+    default: 'The woman\'s house is located in Hang Suong village, Prek Luong commune, Ek Phnom district, Battambang province.'
   },
-  addressKh: {
+  addressKhs: {
     type: String,
-    default: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ'
+    default: 'ក្រោមសាលាបឋមសិក្សារហាលសួងប្រហែល៥០០ម៉ែត្រ'
   },
-  addressEn: {
+  addressEns: {
     type: String,
-    default: 'ផ្លូវជាតិលេខ ៦A សង្កាត់ជ្រោយចង្វារ រាជធានីភ្នំពេញ'
+    default: 'Under Rohal Suong Primary School, about 500 meters.'
   },
-  mapsUrl: {
+  mapsUrls: {
     type: String,
-    default: 'https://maps.google.com/?q=Sokha+Phnom+Penh+Hotel'
+    default: 'https://maps.app.goo.gl/bzUKRgyHbUCpk8mm9?g_st=atm'
+  },
+  eventTimeKhs: {
+    type: String,
+    default: 'ថ្ងៃសៅរ៍ ២៨ កុម្ភៈ ឆ្នាំ ២០២៦ វេលាម៉ោង១១:០០ ថ្ងៃត្រង់'
   }
 })
 </script>
@@ -34,13 +38,13 @@ defineProps({
       <div class="temple-panel p-6 sm:p-8 max-[390px]:p-4">
         <div class="grid sm:grid-cols-2 gap-6 items-center max-[390px]:gap-4">
           <div>
-            <p class="font-khmer-title text-lg text-[#f4ddb2] max-[390px]:text-base">{{ venueKh }}</p>
-            <p class="font-khmer-body text-sm tracking-[0.04em] text-[#d1ad67] mt-1">{{ venueEn }}</p>
+            <p class="font-khmer-title text-lg text-[#f4ddb2] max-[390px]:text-base">{{ venueKhs }}</p>
+            <p class="font-khmer-body text-sm tracking-[0.04em] text-[#d1ad67] mt-1">{{ venueEns }}</p>
 
             <div class="mt-4 space-y-2 text-sm text-[#e9d3a7]/90">
-              <p>{{ addressKh }}</p>
-              <p>{{ addressEn }}</p>
-              <p class="font-khmer-body text-xs tracking-[0.04em] text-[#cca661] max-[390px]:text-[10px]">ពិធីទទួលភ្ញៀវ ០៨:០០ ព្រឹក ដល់ ១២:០០ ថ្ងៃត្រង់</p>
+              <p>{{ addressKhs }}</p>
+              <p>{{ addressEns }}</p>
+              <p class="font-khmer-body text-xs tracking-[0.04em] text-[#cca661] max-[390px]:text-[10px]">{{ eventTimeKhs }}</p>
             </div>
           </div>
 
@@ -52,9 +56,9 @@ defineProps({
                 <p class="font-khmer-body text-sm mt-2 text-[#e8d3a7]">ផែនទីទីតាំង</p>
                 <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bf9c58]">ចូលទៅកាន់ទីតាំង</p>
                 <a
-                  :href="mapsUrl"
+                  :href="mapsUrls"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="inline-flex mt-4 rounded-full gold-btn px-4 py-2 text-xs tracking-[0.06em] transition"
                 >
                   បើកផែនទី

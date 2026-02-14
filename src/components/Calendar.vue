@@ -35,12 +35,12 @@ const eventDate = {
     <div class="temple-frame max-w-md mx-auto">
       <div class="temple-panel px-6 py-7 text-center max-[390px]:px-4 max-[390px]:py-5">
         <p class="font-khmer-body text-sm text-[#e8d3a7]/90">{{ eventDate.monthKh }}</p>
-        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#bd9b58]">{{ eventDate.monthEn }}</p>
+        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#bd9b58]">ថ្ងៃ</p>
 
         <p class="font-engraved text-7xl leading-none mt-3 engraved-text max-[390px]:text-6xl">{{ eventDate.day }}</p>
 
         <p class="font-khmer-title text-lg gold-title mt-3">{{ eventDate.weekdayKh }}</p>
-        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#d4bb86]/90">{{ eventDate.weekdayEn }}</p>
+        <p class="font-khmer-body text-xs tracking-[0.06em] text-[#d4bb86]/90">ខែ</p>
 
         <div class="ornament-divider mt-4">
           <div class="ornament-line"></div>

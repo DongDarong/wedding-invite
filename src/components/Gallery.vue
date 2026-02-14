@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
             :src="currentImageSrc"
             alt=""
             aria-hidden="true"
-            class="pointer-events-none absolute inset-0 z-[1] hidden max-[768px]:block w-full h-full object-cover scale-[1.08] blur-xl opacity-80"
+            class="pointer-events-none absolute inset-0 z-[1] hidden max-[768px]:block w-full h-full object-cover scale-[1.08] max-[768px]:blur-xl opacity-80"
           >
           <transition v-if="hasSlides" name="fade" mode="out-in">
             <div

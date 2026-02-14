@@ -37,10 +37,10 @@ function completeIntro() {
     <div class="absolute inset-0 flex items-center justify-center px-8 mt-auto text-center">
       <div class="max-w-2xl space-y-5">
         <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#d7b97a]/80 intro-fade" :class="{ 'intro-fade-lite': lite }">
-          លិខិតអញ្ជើញពិធីមង្គលការ
+          លិខិតអញ្ជើញកម្មពិធីមង្គលការ
         </p>
         <h1 class="font-khmer-title text-4xl sm:text-5xl md:text-6xl gold-title intro-title" :class="{ 'intro-title-lite': lite }">
-          រីណា និង រ៉ាឆា
+          រីណា ជាគូរ រ៉ាឆា
         </h1>
         <p class="font-khmer-body text-base sm:text-xl engraved-text intro-subtitle" :class="{ 'intro-subtitle-lite': lite }">
           ពិធីអាពាហ៍ពិពាហ៍
@@ -51,7 +51,7 @@ function completeIntro() {
             class="gold-btn font-khmer-body rounded-full px-6 py-2.5 text-xs tracking-[0.14em] transition"
             @click="completeIntro"
           >
-            Open Web
+            បើកធៀបអញ្ជើញ
           </button>
         </div>
       </div>
