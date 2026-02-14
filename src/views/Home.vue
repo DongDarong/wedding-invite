@@ -51,7 +51,7 @@ function updateDeviceState() {
   isMobile.value = mobileMediaQuery ? mobileMediaQuery.matches : false
   prefersReducedMotion.value = reducedMotionQuery ? reducedMotionQuery.matches : false
 
-  if (isMobile.value || prefersReducedMotion.value) {
+  if (prefersReducedMotion.value) {
     showIntro.value = false
   }
 }
@@ -113,7 +113,9 @@ onMounted(() => {
   window.addEventListener('pageshow', tryAutoPlay)
   document.addEventListener('visibilitychange', onVisibleRetry)
 
-  window.addEventListener('pointerdown', unlockAndPlay, { passive: true, once: true })
+  window.addEventListener('pointerdown', unlockAndPlay, { passive: true })
+  window.addEventListener('touchstart', unlockAndPlay, { passive: true })
+  window.addEventListener('click', unlockAndPlay, { passive: true })
   window.addEventListener('keydown', unlockAndPlay, { once: true })
   attachMediaListener(mobileMediaQuery, updateDeviceState)
   attachMediaListener(reducedMotionQuery, updateDeviceState)
@@ -123,6 +125,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('pageshow', tryAutoPlay)
   document.removeEventListener('visibilitychange', onVisibleRetry)
   window.removeEventListener('pointerdown', unlockAndPlay)
+  window.removeEventListener('touchstart', unlockAndPlay)
+  window.removeEventListener('click', unlockAndPlay)
   window.removeEventListener('keydown', unlockAndPlay)
   detachMediaListener(mobileMediaQuery, updateDeviceState)
   detachMediaListener(reducedMotionQuery, updateDeviceState)
