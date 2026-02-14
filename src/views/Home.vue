@@ -11,9 +11,13 @@ import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
 import weddingSong from '../assets/wealth-of-love.mp3'
 
+const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
+const reducedMotionQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null
+
 const showIntro = ref(true)
 const audioRef = ref(null)
-const isMobile = ref(false)
+const isMobile = ref(mobileMediaQuery ? mobileMediaQuery.matches : false)
+const prefersReducedMotion = ref(reducedMotionQuery ? reducedMotionQuery.matches : false)
 const weddingContent = {
   brideKh: 'រ៉ុង រីណា',
   groomKh: 'ឈឿន រ៉ាឆា',
@@ -43,8 +47,35 @@ const dustParticles = Array.from({ length: 18 }, (_, index) => ({
   delay: `${(index % 7) * 0.7}s`
 }))
 
-function updateMobileState() {
-  isMobile.value = window.matchMedia('(max-width: 768px)').matches
+function updateDeviceState() {
+  isMobile.value = mobileMediaQuery ? mobileMediaQuery.matches : false
+  prefersReducedMotion.value = reducedMotionQuery ? reducedMotionQuery.matches : false
+
+  if (isMobile.value || prefersReducedMotion.value) {
+    showIntro.value = false
+  }
+}
+
+function attachMediaListener(query, handler) {
+  if (!query) return
+  if (typeof query.addEventListener === 'function') {
+    query.addEventListener('change', handler)
+    return
+  }
+  if (typeof query.addListener === 'function') {
+    query.addListener(handler)
+  }
+}
+
+function detachMediaListener(query, handler) {
+  if (!query) return
+  if (typeof query.removeEventListener === 'function') {
+    query.removeEventListener('change', handler)
+    return
+  }
+  if (typeof query.removeListener === 'function') {
+    query.removeListener(handler)
+  }
 }
 
 function onIntroComplete() {
@@ -72,7 +103,7 @@ function onVisibleRetry() {
 }
 
 onMounted(() => {
-  updateMobileState()
+  updateDeviceState()
   nextTick(() => {
     tryAutoPlay()
     setTimeout(tryAutoPlay, 120)
@@ -82,30 +113,28 @@ onMounted(() => {
   window.addEventListener('pageshow', tryAutoPlay)
   document.addEventListener('visibilitychange', onVisibleRetry)
 
-  window.addEventListener('pointerdown', unlockAndPlay, { passive: true })
-  window.addEventListener('touchstart', unlockAndPlay, { passive: true })
-  window.addEventListener('click', unlockAndPlay, { passive: true })
-  window.addEventListener('keydown', unlockAndPlay)
-  window.addEventListener('resize', updateMobileState, { passive: true })
+  window.addEventListener('pointerdown', unlockAndPlay, { passive: true, once: true })
+  window.addEventListener('keydown', unlockAndPlay, { once: true })
+  attachMediaListener(mobileMediaQuery, updateDeviceState)
+  attachMediaListener(reducedMotionQuery, updateDeviceState)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('pageshow', tryAutoPlay)
   document.removeEventListener('visibilitychange', onVisibleRetry)
   window.removeEventListener('pointerdown', unlockAndPlay)
-  window.removeEventListener('touchstart', unlockAndPlay)
-  window.removeEventListener('click', unlockAndPlay)
   window.removeEventListener('keydown', unlockAndPlay)
-  window.removeEventListener('resize', updateMobileState)
+  detachMediaListener(mobileMediaQuery, updateDeviceState)
+  detachMediaListener(reducedMotionQuery, updateDeviceState)
 })
 </script>
 
 <template>
-  <div class="royal-page min-h-screen text-[#f6e7c5]">
+  <div class="royal-page min-h-[100dvh] text-[#f6e7c5]">
     <CinematicIntro
       v-if="showIntro"
-      :duration-ms="isMobile ? 4200 : 7600"
-      :lite="isMobile"
+      :duration-ms="isMobile ? 2400 : 7600"
+      :lite="isMobile || prefersReducedMotion"
       @complete="onIntroComplete"
     />
 
@@ -113,16 +142,16 @@ onBeforeUnmount(() => {
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(186,150,73,0.22),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(126,84,25,0.14),transparent_35%),linear-gradient(140deg,#1a2c23_0%,#14241d_56%,#21362a_100%)]"></div>
       <div class="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(255,236,191,0.02)_0,rgba(255,236,191,0.02)_2px,transparent_2px,transparent_6px)] opacity-70"></div>
       <div class="silk-overlay absolute inset-0"></div>
-      <div class="fog-layer"></div>
-      <div v-if="!isMobile" class="fog-layer layer-2"></div>
-      <div v-if="!isMobile" class="fog-layer layer-3"></div>
-      <div v-if="!isMobile" class="film-grain absolute inset-0"></div>
-      <div class="candle-glow top-[-4rem] left-[-4rem]"></div>
-      <div v-if="!isMobile" class="candle-glow right-[-5rem] top-[25%]"></div>
-      <div v-if="!isMobile" class="candle-glow left-[35%] bottom-[-6rem]"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer layer-2"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="fog-layer layer-3"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="film-grain absolute inset-0"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="candle-glow top-[-4rem] left-[-4rem]"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="candle-glow right-[-5rem] top-[25%]"></div>
+      <div v-if="!isMobile && !prefersReducedMotion" class="candle-glow left-[35%] bottom-[-6rem]"></div>
 
       <span
-        v-for="(p, index) in (isMobile ? lotusParticles.slice(0, 6) : lotusParticles)"
+        v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : lotusParticles)"
         :key="`lotus-${index}`"
         class="absolute text-[18px] text-[#d8b875]/55"
         :style="{
@@ -135,7 +164,7 @@ onBeforeUnmount(() => {
       </span>
 
       <span
-        v-for="(p, index) in (isMobile ? dustParticles.slice(0, 8) : dustParticles)"
+        v-for="(p, index) in (isMobile || prefersReducedMotion ? [] : dustParticles)"
         :key="`dust-${index}`"
         class="absolute w-[5px] h-[5px] rounded-full bg-[#c5b383] opacity-0"
         :style="{
