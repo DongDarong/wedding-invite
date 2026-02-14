@@ -44,7 +44,7 @@ async function sendRSVP() {
   <section class="rsvp-section animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
       <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">បញ្ជាក់ការចូលរួម</h3>
-      <p class="text-xs tracking-[0.06em] text-[#E6C27A]/80 mt-1 max-[390px]:text-[10px]">Confirm participation</p>
+      <p class="text-xs tracking-[0.06em] text-[#9E1B32]/80 mt-1 max-[390px]:text-[10px]">Confirm participation</p>
     </div>
 
     <div class="temple-frame max-w-2xl mx-auto">
@@ -69,7 +69,7 @@ async function sendRSVP() {
           {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើការបញ្ជាក់' }}
         </button>
 
-        <p v-if="status" class="text-center text-sm text-[#F2D7A1] mt-2 break-words">{{ status }}</p>
+        <p v-if="status" class="text-center text-sm text-[#B22222] mt-2 break-words">{{ status }}</p>
       </form>
     </div>
   </section>
