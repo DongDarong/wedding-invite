@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <section class="mt-12 text-center">
     <h2 class="font-khmer-title text-gradient-gold text-xl mb-2">
       Hashtag

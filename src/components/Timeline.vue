@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 const events = [
   {
     timeKh: '០៧:៣០ ព្រឹក',
