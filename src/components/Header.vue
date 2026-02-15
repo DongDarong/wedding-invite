@@ -16,7 +16,7 @@ defineProps({
   },
   groomEn: {
     type: String,
-    default: 'Chean Racha'
+    default: 'Chhoeun Racha'
   },
   brideFatherKh: {
     type: String,

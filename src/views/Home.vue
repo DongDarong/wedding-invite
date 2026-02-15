@@ -9,7 +9,7 @@ import Timeline from '../components/Timeline.vue'
 import Gallery from '../components/Gallery.vue'
 import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
-import { useLanguage } from '../composables/useLanguage'
+import Footer from '../components/Footer.vue'
 //import weddingSong from '../assets/wealth-of-love.mp3'
 
 const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
@@ -19,7 +19,6 @@ const showIntro = ref(true)
 const audioRef = ref(null)
 const isMobile = ref(mobileMediaQuery ? mobileMediaQuery.matches : false)
 const prefersReducedMotion = ref(reducedMotionQuery ? reducedMotionQuery.matches : false)
-const { isKh } = useLanguage()
 const weddingContent = {
   brideKh: 'រ៉ុង រីណា',
   groomKh: 'ឈឿន រ៉ាឆា',
@@ -35,7 +34,7 @@ Object.assign(weddingContent, {
   brideKh: 'រ៉ុង រីណា',
   groomKh: 'ឈឿន រ៉ាឆា',
   brideEn: 'Rong Rina',
-  groomEn: 'Chean Racha',
+  groomEn: 'Chhoeun Racha',
   monthKh: 'កុម្ភៈ',
   weekdayKh: 'ថ្ងៃសៅរ៍',
   eventTimeKh: 'ថ្ងៃសៅរ៍ ទី២៨ ខែកុម្ភៈ ឆ្នាំ២០២៦ វេលាម៉ោង ១១:០០ ថ្ងៃត្រង់'
@@ -212,25 +211,7 @@ onBeforeUnmount(() => {
             <RSVP />
             <Wishes />
           </div>
-
-          <footer class="home-footer mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
-            <p class="font-khmer-title text-sm">សូមអរគុណសម្រាប់ពាក្យជូនពរ</p>
-            <p class="text-[11px] tracking-[0.06em] mt-2">ក្តីស្រឡាញ់ និងព្រះពរ</p>
-            <a
-              href="https://dongdarong.github.io/dd-portfolio/"
-              target="_blank"
-              rel="noreferrer"
-              class="inline-block m-3 text-[11px] tracking-[0.12em] text-[#d7b97a] hover:text-[#f0dbb3] transition"
-            >
-              © Dong Darong (Click)
-            </a>
-            <router-link
-              to="/admin"
-              class="inline-flex mt-4 rounded-full px-4 py-2 text-xs tracking-[0.08em] gold-btn transition"
-            >
-              គ្រប់គ្រង
-            </router-link>
-          </footer>
+          <Footer />
         </div>
       </div>
     </main>
@@ -330,3 +311,4 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+
