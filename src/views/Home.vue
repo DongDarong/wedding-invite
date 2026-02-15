@@ -32,10 +32,10 @@ const weddingContent = {
 }
 
 Object.assign(weddingContent, {
-  brideKh: 'រីណា',
-  groomKh: 'រ៉ាឆា',
-  brideEn: 'Rina',
-  groomEn: 'Racha',
+  brideKh: 'រ៉ុង រីណា',
+  groomKh: 'ឈឿន រ៉ាឆា',
+  brideEn: 'Rong Rina',
+  groomEn: 'Chean Racha',
   monthKh: 'កុម្ភៈ',
   weekdayKh: 'ថ្ងៃសៅរ៍',
   eventTimeKh: 'ថ្ងៃសៅរ៍ ទី២៨ ខែកុម្ភៈ ឆ្នាំ២០២៦ វេលាម៉ោង ១១:០០ ថ្ងៃត្រង់'

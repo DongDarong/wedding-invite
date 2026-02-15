@@ -4,19 +4,19 @@ import { useLanguage } from '../composables/useLanguage'
 defineProps({
   brideKh: {
     type: String,
-    default: 'រីណា'
+    default: 'រ៉ុង​ រីណា'
   },
   groomKh: {
     type: String,
-    default: 'រ៉ាឆា'
+    default: 'ឈឿន រ៉ាឆា'
   },
   brideEn: {
     type: String,
-    default: 'Rina'
+    default: 'Rong Rina'
   },
   groomEn: {
     type: String,
-    default: 'Racha'
+    default: 'Chean Racha'
   },
   brideFatherKh: {
     type: String,
@@ -77,19 +77,32 @@ const { isKh, toggleLanguage } = useLanguage()
         {{ brideEn }}
       </p>
       <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
-        {{ isKh ? brideFatherKh + ' និង ' + brideMotherKh : 'Daughter of Mr. and Mrs.' }}
+        {{ isKh ? brideFatherKh + ' និង ' + brideMotherKh : 'Mr. Vun Chamrung and Mrs. Chhoeun Sokun' }}
       </p>
 
-      <p class="font-engraved text-xl text-[#d7bf8a]/95">&</p>
+      <div class="my-2 flex justify-center">
+  <p class="font-serif italic text-3xl text-[#d7bf8a] leading-none">
+    &
+  </p>
+</div>
 
-      <h1 class="font-khmer-title text-4xl sm:text-5xl max-[430px]:text-3xl max-[340px]:text-[1.65rem] gold-title leading-[1.35] break-keep text-center">
+
+      <h1 class="font-khmer-title
+         text-4xl sm:text-5xl
+         max-[430px]:text-3xl
+         max-[340px]:text-[1.65rem]
+         gold-title
+         leading-[1.55]
+         py-[0.25em]
+         break-keep
+         text-center">
         {{ groomKh }}
       </h1>
       <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">
         {{ groomEn }}
       </p>
       <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
-        {{ isKh ? groomFatherKh + ' និង ' + groomMotherKh : 'Son of Mr. and Mrs.' }}
+        {{ isKh ? groomFatherKh + ' និង ' + groomMotherKh : 'Mr. Voeun Sam Ath and Mrs. Thaong Sopheap' }}
       </p>
     </div>
 
@@ -102,3 +115,7 @@ const { isKh, toggleLanguage } = useLanguage()
     </div>
   </header>
 </template>
+
+
+
+
