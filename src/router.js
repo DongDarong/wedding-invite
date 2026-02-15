@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Admin from './views/Admin.vue'
 import AdminDashboard from './views/AdminDashboard.vue'
 import { auth } from './firebase'
+import { clearAuthToken, syncAuthToken } from './utils/authToken'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -31,8 +32,10 @@ function getCurrentUser() {
 
 router.beforeEach(async (to) => {
   const user = auth.currentUser || await getCurrentUser()
+  await syncAuthToken(user)
 
   if (to.meta.requiresAuth && !user) {
+    clearAuthToken()
     return { name: 'admin-login' }
   }
 

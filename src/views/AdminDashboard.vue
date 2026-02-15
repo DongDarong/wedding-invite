@@ -2,13 +2,13 @@
   <div class="min-h-screen px-5 py-10 admin-bg admin-ink">
     <div class="admin-overlay"></div>
     <div class="mx-auto max-w-3xl admin-container relative z-10">
-      <header class="flex items-center justify-between gap-4 mb-8 animate-[fade-up_1.2s_ease]">
+      <header class="admin-header flex items-center justify-between gap-4 mb-8 animate-[fade-up_1.2s_ease]">
         <div>
           <h1 class="text-2xl font-engraved gold-title">Admin Dashboard</h1>
           <p class="text-sm admin-muted">Royal RSVP Registry</p>
         </div>
         <button
-          class="gold-btn rounded-full px-4 py-2 text-xs tracking-[0.14em] uppercase transition"
+          class="admin-signout-btn gold-btn rounded-full px-4 py-2 text-xs tracking-[0.14em] uppercase transition"
           @click="logout"
         >
           Sign out
@@ -17,7 +17,7 @@
 
       <section class="space-y-4">
         <div class="temple-frame">
-          <div class="temple-panel p-5 sm:p-6 flex items-center justify-between">
+          <div class="temple-panel summary-grid p-5 sm:p-6 flex items-center justify-between">
             <div>
               <p class="text-sm admin-muted">Total RSVPs</p>
               <p class="text-2xl font-semibold admin-title">{{ total }}</p>
@@ -26,7 +26,7 @@
               <p class="text-sm admin-muted">Total Messages</p>
               <p class="text-2xl font-semibold admin-title">{{ totalMessages }}</p>
             </div>
-            <div class="text-right text-xs admin-muted">
+            <div class="summary-account text-right text-xs admin-muted">
               Signed in as<br>
               <span class="font-semibold admin-title">{{ user?.email }}</span>
             </div>
@@ -113,6 +113,7 @@ import { useRouter } from 'vue-router'
 import { auth, db } from '../firebase'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { clearAuthToken, syncAuthToken } from '../utils/authToken'
 
 const router = useRouter()
 
@@ -184,6 +185,7 @@ function stopListening() {
 
 async function logout() {
   await signOut(auth)
+  clearAuthToken()
   await router.push('/admin')
 }
 
@@ -195,6 +197,7 @@ function refresh() {
 onMounted(() => {
   unsubAuth = onAuthStateChanged(auth, async (u) => {
     user.value = u
+    await syncAuthToken(u)
     if (u) {
       startListening()
     } else {
@@ -243,48 +246,51 @@ onBeforeUnmount(() => {
 
 .table-wrap {
   overflow-x: auto;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--panel), var(--panel-soft));
+  background:
+    radial-gradient(circle at 100% 0, rgba(232, 207, 144, 0.08), transparent 38%),
+    linear-gradient(180deg, var(--panel), var(--panel-soft));
   box-shadow:
-    inset 0 1px 0 var(--line),
-    0 16px 30px rgba(0, 0, 0, 0.32);
+    inset 0 1px 0 rgba(232, 207, 144, 0.2),
+    0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
 .admin-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   background: transparent;
 }
 
 .admin-table thead th {
   text-align: left;
   font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--royal-black);
-  background: linear-gradient(180deg, var(--royal-gold-light), var(--royal-gold));
-  padding: 11px 13px;
-  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(232, 207, 144, 0.98), rgba(201, 164, 91, 0.95));
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(126, 100, 45, 0.55);
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
 .admin-table tbody td {
-  padding: 12px 13px;
+  padding: 12px 14px;
   vertical-align: top;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel-soft);
+  border-bottom: 1px solid rgba(201, 164, 91, 0.18);
+  background: rgba(26, 42, 34, 0.52);
+  transition: background-color 0.2s ease;
 }
 
 .admin-table tbody tr:nth-child(even) td {
-  background: var(--panel);
+  background: rgba(20, 34, 28, 0.58);
 }
 
 .admin-table tbody tr:hover td {
-  background: var(--royal-night);
+  background: rgba(26, 44, 35, 0.82);
 }
 
 .admin-table tbody tr:last-child td {
@@ -345,25 +351,48 @@ onBeforeUnmount(() => {
     max-width: 100%;
   }
 
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .admin-signout-btn {
+    width: 100%;
+  }
+
+  .summary-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .summary-account {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
   .admin-table thead {
     display: none;
   }
 
   .admin-table tbody tr {
     display: block;
-    padding: 10px 12px;
+    padding: 11px 12px;
     margin: 8px 6px;
-    border-radius: 10px;
-    background: var(--panel);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(20, 34, 28, 0.92), rgba(26, 42, 34, 0.9));
     border-bottom: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 rgba(232, 207, 144, 0.15);
   }
 
   .admin-table tbody td {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    padding: 6px 0;
-    border-bottom: 1px dashed var(--line);
+    padding: 7px 0;
+    border-bottom: 1px dashed rgba(201, 164, 91, 0.24);
     background: transparent;
   }
 

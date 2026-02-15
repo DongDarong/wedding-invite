@@ -2,14 +2,14 @@
   <div class="min-h-screen px-5 py-10 admin-bg admin-ink">
     <div class="admin-overlay"></div>
     <div class="mx-auto max-w-3xl admin-container relative z-10">
-      <header class="flex items-center justify-between gap-4 mb-8 animate-[fade-up_1.2s_ease]">
+      <header class="admin-header flex items-center justify-between gap-4 mb-8 animate-[fade-up_1.2s_ease]">
         <div>
           <h1 class="text-2xl font-engraved gold-title">Admin Login</h1>
           <p class="text-sm admin-muted">Royal RSVP Registry</p>
         </div>
         <router-link
           to="/"
-          class="gold-btn rounded-full px-4 py-2 text-xs tracking-[0.14em] uppercase transition"
+          class="admin-home-btn gold-btn rounded-full px-4 py-2 text-xs tracking-[0.14em] uppercase transition"
         >
           Back to Home
         </router-link>
@@ -51,6 +51,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { syncAuthToken } from '../utils/authToken'
 
 const router = useRouter()
 
@@ -64,7 +65,8 @@ async function login() {
   error.value = ''
   loading.value = true
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value)
+    const credential = await signInWithEmailAndPassword(auth, email.value, password.value)
+    await syncAuthToken(credential.user)
     await router.push('/admin/dashboard')
   } catch (err) {
     error.value = err?.message || 'Sign in failed.'
@@ -75,6 +77,7 @@ async function login() {
 
 onMounted(() => {
   unsubAuth = onAuthStateChanged(auth, async (user) => {
+    await syncAuthToken(user)
     if (user) {
       await router.replace('/admin/dashboard')
     }
@@ -153,6 +156,29 @@ onBeforeUnmount(() => {
     letter-spacing: 0.11em;
     padding-top: 0.62rem;
     padding-bottom: 0.62rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-bg {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    padding-top: 1rem;
+  }
+
+  .admin-container {
+    max-width: 100%;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .admin-home-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 
