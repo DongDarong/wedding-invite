@@ -38,11 +38,11 @@ defineProps({
 <template>
   <header class="text-center pt-8 animate-[fade-up_1.5s_ease] max-[390px]:pt-5">
     <p class="font-khmer-body text-[11px] tracking-[0.08em] text-[#7e642d]/80 max-[390px]:text-[10px]">
-      ពិធីមង្គលតាមប្រពៃណី
+      លិខិតអញ្ជើញចូលរួមពិធី​
     </p>
     <h2 class="font-khmer-title text-lg sm:text-xl mt-4 gold-title max-[390px]:mt-3 max-[390px]:text-base">សិរីមង្គលអាពាហ៍ពិពាហ៍</h2>
     <p class="mt-2 text-xs tracking-[0.08em] text-[#d7bf8a]/80 max-[390px]:text-[10px]">
-      លិខិតអញ្ជើញចូលរួមពិធី
+      Wedding celebration
     </p>
 
     <div class="ornament-divider mt-6">
@@ -52,7 +52,8 @@ defineProps({
     </div>
 
     <div class="mt-8 space-y-3 max-[390px]:mt-6 max-[390px]:space-y-2">
-      <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ brideKh }}</h1>
+      <h1 class="font-khmer-title​ text-4xl sm:text-5xl max-[430px]:text-3xl max-[340px]:text-[1.65rem] gold-title leading-[1.35]
+         break-keep text-center">{{ brideKh }}</h1>
       <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ brideEn }}</p>
       <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
          លោក {{ brideFatherKh }} និង លោកស្រី {{ brideMotherKh }}
@@ -60,7 +61,8 @@ defineProps({
 
       <p class="font-engraved text-xl text-[#d7bf8a]/95">&</p>
 
-      <h1 class="font-khmer-title text-4xl sm:text-5xl gold-title max-[430px]:text-3xl max-[340px]:text-[1.65rem]">{{ groomKh }}</h1>
+      <h1 class="font-khmer-title​ text-4xl sm:text-5xl max-[430px]:text-3xl max-[340px]:text-[1.65rem] gold-title leading-[1.35]
+         break-keep text-center">{{ groomKh }}</h1>
       <p class="font-engraved text-base engraved-text tracking-[0.2em] max-[430px]:text-sm max-[430px]:tracking-[0.14em]">{{ groomEn }}</p>
       <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
          លោក {{ groomFatherKh }} និង លោកស្រី {{ groomMotherKh }}

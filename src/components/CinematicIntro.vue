@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -42,12 +42,12 @@ function completeIntro() {
     </div>
 
     <div class="absolute inset-0 flex items-center justify-center px-8 mt-auto text-center">
-      <div class="intro-center max-w-2xl space-y-5" :class="{ 'intro-center-lite': lite }">
+      <div class="intro-center max-w-2xl space-y-5 " :class="{ 'intro-center-lite': lite }">
         <div class="intro-ornament"></div>
         <p class="font-khmer-body text-[11px] tracking-[0.3em] text-[#c9a45b]/85 intro-fade" :class="{ 'intro-fade-lite': lite }">
           លិខិតអញ្ជើញកម្មពិធីមង្គលការ
         </p>
-        <h1 class="font-khmer-title text-4xl sm:text-5xl md:text-6xl gold-title intro-title" :class="{ 'intro-title-lite': lite }">
+        <h1 class="font-khmer-title text-4xl sm:text-5xl md:text-6xl gold-title leading-[1.4] intro-title" :class="{ 'intro-title-lite': lite }">
           រីណា ជាគូរ រ៉ាឆា
         </h1>
         <p class="font-khmer-body text-base sm:text-xl engraved-text intro-subtitle" :class="{ 'intro-subtitle-lite': lite }">
