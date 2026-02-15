@@ -25,12 +25,60 @@
               placeholder="Email"
               class="w-full royal-input"
             >
-            <input
-              v-model="password"
-              type="password"
-              placeholder="Password"
-              class="w-full royal-input"
-            >
+            <div class="password-field">
+              <input
+                v-model="password"
+                :type="showPassword ? 'text' : 'password'"
+                placeholder="Password"
+                class="w-full royal-input pr-12"
+              >
+              <button
+                type="button"
+                class="password-toggle"
+                :aria-label="showPassword ? 'Hide password' : 'Show password'"
+                :title="showPassword ? 'Hide password' : 'Show password'"
+                @click="showPassword = !showPassword"
+              >
+                <svg
+                  v-if="showPassword"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="password-icon"
+                >
+                  <path
+                    d="M4 4l16 16M10.7 10.7A3 3 0 0012 15a3 3 0 002.3-1.1M9.9 5.1A10.3 10.3 0 0112 5c5 0 8.6 3.8 10 7-0.6 1.3-1.6 2.8-3.1 4M6.3 7.6C4.6 8.8 3.4 10.4 2 12c1.4 3.2 5 7 10 7 1.5 0 2.8-.3 4-.8"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  v-else
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="password-icon"
+                >
+                  <path
+                    d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                </svg>
+              </button>
+            </div>
             <button
               class="gold-btn w-full rounded-xl py-3 text-xs tracking-[0.14em] uppercase transition"
               :disabled="loading"
@@ -57,6 +105,7 @@ const router = useRouter()
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const loading = ref(false)
 const error = ref('')
 let unsubAuth = null
@@ -131,6 +180,35 @@ onBeforeUnmount(() => {
 .admin-muted {
   color: var(--royal-gold);
   opacity: 0.8;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.password-toggle:hover {
+  opacity: 1;
+}
+
+.password-icon {
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 @media (min-width: 1024px) {

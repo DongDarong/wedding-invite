@@ -20,7 +20,7 @@ defineProps({
   },
   brideFatherKh: {
     type: String,
-    default: 'លោក វុន ចំរុង'
+    default: 'លោក វុន ចំរ៉ុង'
   },
   brideMotherKh: {
     type: String,

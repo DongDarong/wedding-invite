@@ -34,74 +34,43 @@
         </div>
 
         <div class="temple-frame">
-          <div class="temple-panel p-5 sm:p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-lg font-semibold admin-title">RSVP Entries</h2>
-              <button class="text-sm admin-action transition" @click="refresh">
-                Refresh
+          <div class="temple-panel p-4 sm:p-5 component-switch-panel">
+            <div class="component-switch" role="tablist">
+              <button
+                type="button"
+                class="component-switch-btn"
+                :class="{ 'is-active': activeView === 'rsvp' }"
+                @click="activeView = 'rsvp'"
+                :aria-pressed="activeView === 'rsvp'"
+              >
+                RSVP Entries
               </button>
-            </div>
-
-            <div v-if="rsvps.length === 0" class="text-sm admin-muted">
-              No RSVPs yet.
-            </div>
-
-            <div v-else class="table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Attendance</th>
-                    <th>Guests</th>
-                    <th class="text-right">Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in rsvps" :key="item.id">
-                    <td data-label="Name" class="font-semibold admin-title">{{ item.name || 'Unknown' }}</td>
-                    <td data-label="Attendance" class="text-xs admin-muted-strong">{{ item.attendance || '-' }}</td>
-                    <td data-label="Guests" class="text-xs admin-muted-strong">{{ item.guests || '-' }}</td>
-                    <td data-label="Time" class="text-right text-xs admin-time">{{ formatTime(item.time) }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <button
+                type="button"
+                class="component-switch-btn"
+                :class="{ 'is-active': activeView === 'messages' }"
+                @click="activeView = 'messages'"
+                :aria-pressed="activeView === 'messages'"
+              >
+                Messages
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="temple-frame">
-          <div class="temple-panel p-5 sm:p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-lg font-semibold admin-title">Messages</h2>
-              <button class="text-sm admin-action transition" @click="refresh">
-                Refresh
-              </button>
-            </div>
+        <RsvpEntriesPanel
+          v-if="activeView === 'rsvp'"
+          :items="rsvps"
+          :refresh="refresh"
+          :format-time="formatTime"
+        />
 
-            <div v-if="messages.length === 0" class="text-sm admin-muted">
-              No messages yet.
-            </div>
-
-            <div v-else class="table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Message</th>
-                    <th class="text-right">Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in messages" :key="item.id">
-                    <td data-label="Name" class="font-semibold admin-title">{{ item.name || 'Unknown' }}</td>
-                    <td data-label="Message" class="text-sm admin-ink-soft message-text message-cell">{{ item.text || '-' }}</td>
-                    <td data-label="Time" class="text-right text-xs admin-time">{{ formatTime(item.time) }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <MessagesPanel
+          v-else
+          :items="messages"
+          :refresh="refresh"
+          :format-time="formatTime"
+        />
       </section>
     </div>
   </div>
@@ -114,6 +83,8 @@ import { auth, db } from '../firebase'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { clearAuthToken, syncAuthToken } from '../utils/authToken'
+import RsvpEntriesPanel from '../components/RsvpEntriesPanel.vue'
+import MessagesPanel from '../components/MessagesPanel.vue'
 
 const router = useRouter()
 
@@ -121,6 +92,7 @@ const user = ref(null)
 const error = ref('')
 const rsvps = ref([])
 const messages = ref([])
+const activeView = ref('rsvp')
 
 let unsubscribe = null
 let unsubscribeMessages = null
@@ -213,7 +185,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped>
+<style>
 .admin-bg {
   position: relative;
   background:
@@ -242,6 +214,48 @@ onBeforeUnmount(() => {
     linear-gradient(130deg, var(--panel), var(--panel-soft)),
     radial-gradient(circle at 20% 0%, var(--royal-night), transparent 35%);
   border: 1px solid var(--line);
+}
+
+.component-switch-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.component-switch {
+  display: inline-flex;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(20, 34, 28, 0.38);
+  padding: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.component-switch-btn {
+  border: none;
+  background: transparent;
+  color: var(--royal-gold);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  letter-spacing: 0.13em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.component-switch-btn.is-active {
+  background: var(--royal-gold);
+  color: var(--royal-night);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.38);
+}
+
+.component-switch-btn:not(.is-active):hover {
+  color: var(--royal-gold-light);
 }
 
 .table-wrap {
@@ -411,6 +425,14 @@ onBeforeUnmount(() => {
   .message-cell {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .component-switch {
+    justify-content: space-between;
+  }
+
+  .component-switch-btn {
+    flex: 1;
   }
 }
 
