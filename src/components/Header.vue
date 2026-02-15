@@ -24,7 +24,7 @@ defineProps({
   },
   brideMotherKh: {
     type: String,
-    default: 'លោកស្រី ឈឿន សុគន្ធ'
+    default: 'លោកស្រី ឈឿន សុឃឿន'
   },
   groomFatherKh: {
     type: String,
@@ -77,7 +77,7 @@ const { isKh, toggleLanguage } = useLanguage()
         {{ brideEn }}
       </p>
       <p class="font-khmer-body text-sm text-[#dcc79b]/90 max-[430px]:text-xs">
-        {{ isKh ? brideFatherKh + ' និង ' + brideMotherKh : 'Mr. Vun Chamrung and Mrs. Chhoeun Sokun' }}
+        {{ isKh ? brideFatherKh + ' និង ' + brideMotherKh : 'Mr. Vun Chamrung and Ms. Chhoeun Sokhoeun' }}
       </p>
 
       <div class="my-2 flex justify-center">

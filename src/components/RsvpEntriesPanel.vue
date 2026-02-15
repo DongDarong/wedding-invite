@@ -12,7 +12,7 @@
         </button>
       </div>
 
-      <div v-if="items.length === 0" class="text-sm admin-muted">
+      <div v-if="rows.length === 0" class="text-sm admin-muted">
         No RSVPs yet.
       </div>
 
@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in items" :key="item.id || index">
+            <tr v-for="(item, index) in rows" :key="item.id ?? `rsvp-${index}`">
               <td
                 data-label="No."
                 class="font-semibold admin-title text-xs admin-muted-strong"
@@ -67,15 +67,24 @@ const props = defineProps({
   },
   refresh: {
     type: Function,
-    required: true
+    default: () => {}
   },
   formatTime: {
     type: Function,
-    required: true
+    default: (value) => {
+      try {
+        return new Date(value).toLocaleString()
+      } catch {
+        return '-'
+      }
+    }
   }
 })
 
-const items = computed(() => props.items ?? [])
+const rows = computed(() => {
+  if (!Array.isArray(props.items)) return []
+  return props.items.filter((item) => item && typeof item === 'object')
+})
 
 const attendanceLabels = {
   attending: 'Will attend with pleasure',
@@ -96,12 +105,18 @@ function formatAttendance(value) {
 
 function formatGuests(value) {
   if (!value) return '-'
-  return guestLabels[value] ?? (Number.isNaN(Number(value)) ? value : `${value} guest${value === '1' ? '' : 's'}`)
+  const numericGuests = Number(value)
+  if (Number.isNaN(numericGuests)) return guestLabels[value] ?? value
+  return guestLabels[String(value)] ?? `${numericGuests} guest${numericGuests === 1 ? '' : 's'}`
 }
 
 function formatEntryTime(value) {
   if (!value) return '-'
-  const normalized = value?.toMillis ? value.toMillis() : value
-  return props.formatTime(normalized)
+  try {
+    const normalized = value?.toMillis ? value.toMillis() : value
+    return props.formatTime(normalized)
+  } catch {
+    return '-'
+  }
 }
 </script>

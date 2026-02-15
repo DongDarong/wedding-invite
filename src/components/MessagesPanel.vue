@@ -12,7 +12,7 @@
         </button>
       </div>
 
-      <div v-if="items.length === 0" class="text-sm admin-muted">
+      <div v-if="rows.length === 0" class="text-sm admin-muted">
         No messages yet.
       </div>
 
@@ -27,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in items" :key="item.id || index">
+            <tr v-for="(item, index) in rows" :key="item.id ?? `message-${index}`">
               <td
                 data-label="No."
                 class="font-semibold admin-title text-xs admin-muted-strong"
@@ -62,19 +62,32 @@ const props = defineProps({
   },
   refresh: {
     type: Function,
-    required: true
+    default: () => {}
   },
   formatTime: {
     type: Function,
-    required: true
+    default: (value) => {
+      try {
+        return new Date(value).toLocaleString()
+      } catch {
+        return '-'
+      }
+    }
   }
 })
 
-const items = computed(() => props.items ?? [])
+const rows = computed(() => {
+  if (!Array.isArray(props.items)) return []
+  return props.items.filter((item) => item && typeof item === 'object')
+})
 
 function formatEntryTime(value) {
   if (!value) return '-'
-  const normalized = value?.toMillis ? value.toMillis() : value
-  return props.formatTime(normalized)
+  try {
+    const normalized = value?.toMillis ? value.toMillis() : value
+    return props.formatTime(normalized)
+  } catch {
+    return '-'
+  }
 }
 </script>

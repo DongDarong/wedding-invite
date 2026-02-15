@@ -117,10 +117,12 @@ function startListening() {
   unsubscribe = onSnapshot(
     rsvpQuery,
     (snap) => {
-      rsvps.value = snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }))
+      rsvps.value = snap.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        .filter((entry) => entry.id !== '_meta' && entry.type !== 'system')
     },
     (err) => {
       error.value = err.message || 'Failed to load RSVPs.'
