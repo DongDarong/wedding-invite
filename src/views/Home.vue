@@ -10,7 +10,7 @@ import Gallery from '../components/Gallery.vue'
 import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
 import Footer from '../components/Footer.vue'
-//import weddingSong from '../assets/wealth-of-love.mp3'
+import weddingSong from '../assets/wealth-of-love.mp3'
 
 const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
 const reducedMotionQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null

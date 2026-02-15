@@ -2,60 +2,37 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useLanguage } from '../composables/useLanguage'
 
-const imageModules = import.meta.glob('../assets/images/*.{jpg,jpeg,png,webp,gif}', {
+const portraitModules = import.meta.glob('../assets/images/portrait/*.{jpg,jpeg,png,webp,gif}', {
+  eager: true,
+  import: 'default'
+})
+
+const nonPortraitModules = import.meta.glob('../assets/images/non-portrait/*.{jpg,jpeg,png,webp,gif}', {
   eager: true,
   import: 'default'
 })
 
 const { isKh } = useLanguage()
-
-const slides = Object.entries(imageModules)
-  .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath, undefined, { numeric: true }))
-  .map(([, src], index) => ({
-    src,
-    alt: `Wedding memory photo ${index + 1}`
-  }))
-
 const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
 const currentSlide = ref(0)
 const isMobile = ref(mobileMediaQuery ? mobileMediaQuery.matches : false)
-const imageOrientations = ref(new Map())
 let timer = null
 
-const visibleSlides = computed(() => slides.filter((slide) => {
-  const orientation = imageOrientations.value.get(slide.src)
+function toSlides(modules) {
+  return Object.entries(modules)
+    .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath, undefined, { numeric: true }))
+    .map(([, src], index) => ({
+      src,
+      alt: `Wedding memory photo ${index + 1}`
+    }))
+}
 
-  if (!orientation) return true
+const portraitSlides = toSlides(portraitModules)
+const nonPortraitSlides = toSlides(nonPortraitModules)
 
-  if (isMobile.value) {
-    return orientation === 'portrait'
-  }
-
-  return orientation !== 'portrait'
-}))
-
+const visibleSlides = computed(() => (isMobile.value ? portraitSlides : nonPortraitSlides))
 const hasSlides = computed(() => visibleSlides.value.length > 0)
 const activeSlide = computed(() => (hasSlides.value ? visibleSlides.value[currentSlide.value] : null))
-const currentImageSrc = computed(() => (activeSlide.value ? activeSlide.value.src : ''))
-const currentIsLandscape = computed(() => imageOrientations.value.get(currentImageSrc.value) === 'landscape')
-
-function detectImageOrientations() {
-  slides.forEach((slide) => {
-    const image = new Image()
-    image.onload = () => {
-      const nextMap = new Map(imageOrientations.value)
-      if (image.naturalHeight > image.naturalWidth) {
-        nextMap.set(slide.src, 'portrait')
-      } else if (image.naturalWidth > image.naturalHeight) {
-        nextMap.set(slide.src, 'landscape')
-      } else {
-        nextMap.set(slide.src, 'square')
-      }
-      imageOrientations.value = nextMap
-    }
-    image.src = slide.src
-  })
-}
 
 function updateMobileState() {
   isMobile.value = mobileMediaQuery ? mobileMediaQuery.matches : false
@@ -105,7 +82,6 @@ watch(visibleSlides, () => {
 
 onMounted(() => {
   updateMobileState()
-  detectImageOrientations()
   attachMediaListener(mobileMediaQuery, updateMobileState)
   syncAutoSlide()
 })
@@ -131,18 +107,10 @@ onBeforeUnmount(() => {
       <div
         class="gallery-stage relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9] max-h-[78vh] rounded-2xl overflow-hidden shadow-[0_16px_44px_rgba(0,0,0,0.55)] sm:shadow-[0_22px_58px_rgba(0,0,0,0.62)]"
       >
-          <img
-            v-if="hasSlides && currentIsLandscape"
-            :src="currentImageSrc"
-            alt=""
-            aria-hidden="true"
-            class="pointer-events-none absolute inset-0 z-[1] hidden max-[768px]:block w-full h-full object-cover scale-[1.08] max-[768px]:blur-xl opacity-80"
-          >
           <transition v-if="hasSlides" name="fade" mode="out-in">
             <div
               :key="activeSlide.src"
               class="cinematic-zoom relative z-[1] w-full h-full"
-              :class="currentIsLandscape ? 'landscape-mobile' : ''"
             >
               <img
                 :src="activeSlide.src"
@@ -150,7 +118,6 @@ onBeforeUnmount(() => {
                 loading="lazy"
                 decoding="async"
                 class="w-full h-full object-contain object-center p-1.5 sm:p-2 lg:p-2.5"
-                :class="currentIsLandscape ? 'max-[768px]:p-0 max-[768px]:scale-[0.95]' : ''"
               >
             </div>
           </transition>
@@ -209,15 +176,6 @@ onBeforeUnmount(() => {
 @media (max-width: 768px) {
   .cinematic-zoom {
     animation-duration: 5.2s;
-  }
-
-  .cinematic-zoom.landscape-mobile {
-    animation-name: ken-burns-landscape-mobile;
-  }
-
-  @keyframes ken-burns-landscape-mobile {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.04); }
   }
 }
 </style>
