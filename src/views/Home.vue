@@ -9,7 +9,7 @@ import Timeline from '../components/Timeline.vue'
 import Gallery from '../components/Gallery.vue'
 import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
-import weddingSong from '../assets/wealth-of-love.mp3'
+//import weddingSong from '../assets/wealth-of-love.mp3'
 
 const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
 const reducedMotionQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null
@@ -176,9 +176,9 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <main class="relative z-10 mx-auto max-w-5xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 max-[390px]:px-2 max-[390px]:pt-4">
+    <main class="home-main relative z-10 mx-auto max-w-5xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 max-[390px]:px-2 max-[390px]:pt-4">
       <div class="temple-frame">
-        <div class="temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(28,45,36,0.84),rgba(18,31,25,0.9)),radial-gradient(circle_at_20%_0%,rgba(255,228,155,0.08),transparent_35%)] border-[rgba(255,223,141,0.18)]">
+        <div class="home-shell temple-panel px-4 pb-10 pt-4 sm:px-8 sm:pt-6 sm:pb-12 max-[390px]:px-3 max-[390px]:pb-8 bg-[linear-gradient(130deg,rgba(28,45,36,0.84),rgba(18,31,25,0.9)),radial-gradient(circle_at_20%_0%,rgba(255,228,155,0.08),transparent_35%)] border-[rgba(255,223,141,0.18)]">
           <Header
             :bride-kh="weddingContent.brideKh"
             :groom-kh="weddingContent.groomKh"
@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
             :groom-en="weddingContent.groomEn"
           />
 
-          <div class="space-y-10 mt-8 sm:mt-12 max-[390px]:space-y-7 max-[390px]:mt-6">
+          <div class="home-stack space-y-10 mt-8 sm:mt-12 max-[390px]:space-y-7 max-[390px]:mt-6">
             <Countdown :target-date-iso="weddingContent.dateISO" />
             <Calendar
               :month-kh="weddingContent.monthKh"
@@ -201,7 +201,7 @@ onBeforeUnmount(() => {
             <Wishes />
           </div>
 
-          <footer class="mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
+          <footer class="home-footer mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
             <p class="font-khmer-title text-sm">សូមអរគុណសម្រាប់ពាក្យជូនពរ</p>
             <p class="text-[11px] tracking-[0.06em] mt-2">ក្តីស្រឡាញ់ និងព្រះពរ</p>
             <a
@@ -226,3 +226,95 @@ onBeforeUnmount(() => {
     <audio ref="audioRef" :src="weddingSong" loop preload="auto" autoplay playsinline></audio>
   </div>
 </template>
+
+<style scoped>
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .home-main {
+    max-width: 69rem;
+    padding-top: 2rem;
+    padding-bottom: 3.8rem;
+  }
+
+  .home-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.8rem;
+    padding-bottom: 2.9rem;
+  }
+
+  .home-stack {
+    margin-top: 2.35rem;
+    gap: 0;
+  }
+
+  .home-stack > * + * {
+    margin-top: 2.4rem;
+  }
+
+  .home-footer {
+    margin-top: 3.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201, 164, 91, 0.2);
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .home-main {
+    max-width: 74rem;
+    padding-top: 2.25rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .home-shell {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .home-stack {
+    margin-top: 2.75rem;
+    gap: 0;
+  }
+
+  .home-stack > * + * {
+    margin-top: 3rem;
+  }
+
+  .home-footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(201, 164, 91, 0.22);
+  }
+}
+
+@media (min-width: 1536px) {
+  .home-main {
+    max-width: 79rem;
+    padding-top: 2.6rem;
+    padding-bottom: 4.8rem;
+  }
+
+  .home-shell {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 2.2rem;
+    padding-bottom: 3.6rem;
+  }
+
+  .home-stack {
+    margin-top: 3rem;
+    gap: 0;
+  }
+
+  .home-stack > * + * {
+    margin-top: 3.35rem;
+  }
+
+  .home-footer {
+    margin-top: 4.4rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid rgba(201, 164, 91, 0.24);
+  }
+}
+</style>
