@@ -16,7 +16,7 @@ const { isKh } = useLanguage()
           <a
             :href="abaQr"
             download="aba-qr.jpg"
-            class="qr-download inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
+            class="qr-download inline-flex mt-2 rounded-full p-3  text-[10px] tracking-[0.08em] gold-btn transition"
           >
             Download ABA QR
           </a>
@@ -29,7 +29,7 @@ const { isKh } = useLanguage()
           <a
             :href="aclidaQr"
             download="acleda-qr.jpg"
-            class="qr-download inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
+            class="qr-download inline-flex mt-2 rounded-full p-3 text-[10px] tracking-[0.08em] gold-btn transition"
           >
             Download ACLEDA QR
           </a>
@@ -55,7 +55,7 @@ const { isKh } = useLanguage()
     </a>
     <router-link
       to="/admin"
-      class="inline-flex mt-4 rounded-full px-4 py-2 text-xs tracking-[0.08em] gold-btn transition"
+      class="inline-flex mt-4 rounded-full p-3 text-xs tracking-[0.08em] gold-btn transition"
     >
       {{ isKh ? 'គ្រប់គ្រង' : 'Admin' }}
     </router-link>
