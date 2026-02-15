@@ -133,6 +133,20 @@ onBeforeUnmount(() => {
   opacity: 0.8;
 }
 
+@media (min-width: 1024px) {
+  .admin-container {
+    max-width: 56rem;
+  }
+
+  .admin-header {
+    margin-bottom: 2.2rem;
+  }
+
+  .temple-panel {
+    padding: 2rem 2.25rem;
+  }
+}
+
 @media (max-width: 430px) {
   .admin-bg {
     padding-left: 0.75rem;

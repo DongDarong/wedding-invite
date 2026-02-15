@@ -522,6 +522,22 @@ onBeforeUnmount(() => {
     max-width: 72rem;
   }
 
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr minmax(220px, 1fr);
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .table-wrap {
+    max-height: 32rem;
+    overflow-y: auto;
+  }
+
+  .admin-header {
+    margin-bottom: 2.1rem;
+  }
+
   .admin-table thead th,
   .admin-table tbody td {
     padding: 14px 16px;

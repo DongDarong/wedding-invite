@@ -10,28 +10,26 @@ const { isKh } = useLanguage()
   <footer class="home-footer mt-12 text-center text-[#d9c291]/85 animate-[fade-up_1.5s_ease] max-[390px]:mt-9">
     <div class="qr-grid mb-6">
       <article class="qr-card temple-frame">
-        <div class="temple-panel p-3">
-          <img :src="abaQr" alt="ABA QR Code" class="w-full rounded-lg">
-          <p class="mt-2 text-xs tracking-[0.08em] text-[#d7b97a]">ABA QR</p>
+        <div class="temple-panel qr-panel p-3">
+          <img :src="abaQr" alt="ABA QR Code" class="qr-image w-full rounded-lg">
+          <p class="qr-label mt-2 text-xs tracking-[0.08em] text-[#d7b97a]">ABA QR</p>
           <a
             :href="abaQr"
             download="aba-qr.jpg"
-            class="inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
-            
+            class="qr-download inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
           >
             Download ABA QR
           </a>
         </div>
       </article>
       <article class="qr-card temple-frame">
-        <div class="temple-panel p-3">
-          <img :src="aclidaQr" alt="ACLEDA QR Code" class="w-full rounded-lg">
-          <p class="mt-2 text-xs tracking-[0.08em] text-[#d7b97a]">ACLEDA QR</p>
+        <div class="temple-panel qr-panel p-3">
+          <img :src="aclidaQr" alt="ACLEDA QR Code" class="qr-image w-full rounded-lg">
+          <p class="qr-label mt-2 text-xs tracking-[0.08em] text-[#d7b97a]">ACLEDA QR</p>
           <a
             :href="aclidaQr"
             download="acleda-qr.jpg"
-            class="inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
-            
+            class="qr-download inline-flex mt-2 rounded-full px-3 py-1.5 text-[10px] tracking-[0.08em] gold-btn transition"
           >
             Download ACLEDA QR
           </a>
@@ -77,6 +75,29 @@ const { isKh } = useLanguage()
   max-width: 190px;
 }
 
+.qr-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.qr-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border: 1px solid rgba(201, 164, 91, 0.35);
+}
+
+.qr-label {
+  font-weight: 600;
+}
+
+.qr-download {
+  min-width: 124px;
+  justify-content: center;
+}
+
 
 .gratitude-title {
   font-family: 'Noto Serif Khmer', serif;
@@ -88,6 +109,30 @@ const { isKh } = useLanguage()
   font-size: 0.78rem;
 }
 
+@media (min-width: 1024px) {
+  .qr-grid {
+    gap: 1rem;
+  }
+
+  .qr-card {
+    max-width: 220px;
+  }
+
+  .qr-image {
+    height: 280px;
+  }
+
+  .gratitude-title {
+    font-size: 0.92rem;
+  }
+
+  .gratitude-body {
+    font-size: 0.84rem;
+    line-height: 1.8;
+    max-width: 58rem;
+  }
+}
+
 @media (max-width: 640px) {
   .qr-grid {
     grid-template-columns: 1fr;
@@ -95,6 +140,12 @@ const { isKh } = useLanguage()
 
   .qr-card {
     max-width: 210px;
+  }
+
+  .qr-image {
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
   }
 }
 

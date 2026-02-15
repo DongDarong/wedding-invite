@@ -233,6 +233,7 @@ onBeforeUnmount(() => {
     padding-right: 2rem;
     padding-top: 1.8rem;
     padding-bottom: 2.9rem;
+    backdrop-filter: blur(6px);
   }
 
   .home-stack {
@@ -263,6 +264,7 @@ onBeforeUnmount(() => {
     padding-right: 2.5rem;
     padding-top: 2rem;
     padding-bottom: 3.25rem;
+    backdrop-filter: blur(7px);
   }
 
   .home-stack {
@@ -293,6 +295,7 @@ onBeforeUnmount(() => {
     padding-right: 3rem;
     padding-top: 2.2rem;
     padding-bottom: 3.6rem;
+    backdrop-filter: blur(8px);
   }
 
   .home-stack {

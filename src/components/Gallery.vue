@@ -168,6 +168,16 @@ onBeforeUnmount(() => {
   animation: ken-burns 6.8s ease-out both;
 }
 
+@media (min-width: 1024px) {
+  .gallery-stage {
+    max-height: 72vh;
+  }
+
+  .cinematic-zoom img {
+    padding: 0.7rem;
+  }
+}
+
 @keyframes ken-burns {
   0% { transform: scale(1); }
   100% { transform: scale(1.08); }

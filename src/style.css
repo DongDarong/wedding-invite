@@ -328,6 +328,33 @@ button {
   }
 }
 
+@media (min-width: 1024px) {
+  body {
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+
+  .temple-frame {
+    border-radius: 1.3rem;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 233, 168, 0.25),
+      0 18px 46px rgba(0, 0, 0, 0.58);
+  }
+
+  .temple-panel {
+    border-radius: 1.08rem;
+  }
+
+  .royal-input {
+    font-size: 0.96rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .gold-btn {
+    min-height: 2.65rem;
+  }
+}
+
 @media (hover: none) and (pointer: coarse) {
   .gold-btn:hover:not(:disabled) {
     transform: none;
