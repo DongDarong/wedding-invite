@@ -27,6 +27,11 @@ const timeLeft = computed(() => {
   }
 })
 
+function toKhmerDigits(value) {
+  const khmerDigits = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩']
+  return String(value).replace(/\d/g, (digit) => khmerDigits[Number(digit)])
+}
+
 const units = [
   { key: 'days', kh: 'ថ្ងៃ', en: 'day' },
   { key: 'hours', kh: 'ម៉ោង', en: 'hour' },
@@ -61,7 +66,7 @@ onBeforeUnmount(() => {
         class="temple-frame"
       >
         <div class="temple-panel px-3 py-4 text-center h-full max-[390px]:px-2 max-[390px]:py-3">
-          <p class="font-engraved text-3xl sm:text-4xl engraved-text max-[390px]:text-2xl">{{ timeLeft[unit.key] }}</p>
+          <p class="font-engraved text-3xl sm:text-4xl engraved-text max-[390px]:text-2xl">{{ toKhmerDigits(timeLeft[unit.key]) }}</p>
           <p class="font-khmer-body text-xs text-[#e8d3a7]/85 mt-2 max-[390px]:mt-1">{{ unit.kh }}</p>
           <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bd9b58]/85 mt-1">{{ unit.en }}</p>
         </div>

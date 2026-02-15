@@ -23,6 +23,11 @@ const eventDate = {
   weekdayEn: props.weekdayKh,
   year: String(date.getFullYear())
 }
+
+function toKhmerDigits(value) {
+  const khmerDigits = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩']
+  return String(value).replace(/\d/g, (digit) => khmerDigits[Number(digit)])
+}
 </script>
 
 <template>
@@ -37,14 +42,14 @@ const eventDate = {
         <p class="font-khmer-body text-sm text-[#e8d3a7]/90">{{ eventDate.weekdayKh }}</p>
         <p class="font-khmer-body text-xs tracking-[0.06em] text-[#bd9b58]">Saturday</p>
 
-        <p class="font-engraved text-7xl leading-none mt-3 engraved-text max-[390px]:text-6xl">{{ eventDate.day }}</p>
+        <p class="font-engraved text-7xl leading-none mt-3 engraved-text max-[390px]:text-6xl">{{ toKhmerDigits(eventDate.day) }}</p>
 
         <p class="font-khmer-title text-lg gold-title mt-3">{{ eventDate.monthKh }}</p>
         <p class="font-khmer-body text-xs tracking-[0.06em] text-[#d4bb86]/90">February</p>
 
         <div class="ornament-divider mt-4">
           <div class="ornament-line"></div>
-          <span class="font-engraved tracking-[0.18em]">{{ eventDate.year }}</span>
+          <span class="font-engraved tracking-[0.18em]">{{ toKhmerDigits(eventDate.year) }}</span>
           <div class="ornament-line"></div>
         </div>
       </div>
