@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useLanguage } from '../composables/useLanguage'
 
 const props = defineProps({
   targetDateIso: {
@@ -8,6 +9,7 @@ const props = defineProps({
   }
 })
 
+const { isKh } = useLanguage()
 const targetDate = computed(() => new Date(props.targetDateIso).getTime())
 const now = ref(Date.now())
 let timer = null
@@ -32,11 +34,15 @@ function toKhmerDigits(value) {
   return String(value).replace(/\d/g, (digit) => khmerDigits[Number(digit)])
 }
 
+function formatNumber(value) {
+  return isKh.value ? toKhmerDigits(value) : value
+}
+
 const units = [
-  { key: 'days', kh: 'ថ្ងៃ', en: 'day' },
-  { key: 'hours', kh: 'ម៉ោង', en: 'hour' },
-  { key: 'minutes', kh: 'នាទី', en: 'minute' },
-  { key: 'seconds', kh: 'វិនាទី', en: 'second' }
+  { key: 'days', kh: 'ថ្ងៃ', en: 'Days' },
+  { key: 'hours', kh: 'ម៉ោង', en: 'Hours' },
+  { key: 'minutes', kh: 'នាទី', en: 'Minutes' },
+  { key: 'seconds', kh: 'វិនាទី', en: 'Seconds' }
 ]
 
 onMounted(() => {
@@ -55,8 +61,10 @@ onBeforeUnmount(() => {
 <template>
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
-      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រាប់ថយក្រោយ</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Countdown</p>
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">{{ isKh ? 'រាប់ថយក្រោយ' : 'Countdown' }}</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">
+        {{ isKh ? 'ពេលវេលានៅសល់' : 'Time Remaining' }}
+      </p>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-[390px]:gap-2">
@@ -66,9 +74,8 @@ onBeforeUnmount(() => {
         class="temple-frame"
       >
         <div class="temple-panel px-3 py-4 text-center h-full max-[390px]:px-2 max-[390px]:py-3">
-          <p class="font-engraved text-3xl sm:text-4xl engraved-text max-[390px]:text-2xl">{{ toKhmerDigits(timeLeft[unit.key]) }}</p>
-          <p class="font-khmer-body text-xs text-[#e8d3a7]/85 mt-2 max-[390px]:mt-1">{{ unit.kh }}</p>
-          <p class="font-khmer-body text-[10px] tracking-[0.06em] text-[#bd9b58]/85 mt-1">{{ unit.en }}</p>
+          <p class="font-engraved text-3xl sm:text-4xl engraved-text max-[390px]:text-2xl">{{ formatNumber(timeLeft[unit.key]) }}</p>
+          <p class="font-khmer-body text-xs text-[#e8d3a7]/85 mt-2 max-[390px]:mt-1">{{ isKh ? unit.kh : unit.en }}</p>
         </div>
       </article>
     </div>

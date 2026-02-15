@@ -9,6 +9,7 @@ import Timeline from '../components/Timeline.vue'
 import Gallery from '../components/Gallery.vue'
 import RSVP from '../components/RSVP.vue'
 import Wishes from '../components/Wishes.vue'
+import { useLanguage } from '../composables/useLanguage'
 //import weddingSong from '../assets/wealth-of-love.mp3'
 
 const mobileMediaQuery = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)') : null
@@ -18,6 +19,7 @@ const showIntro = ref(true)
 const audioRef = ref(null)
 const isMobile = ref(mobileMediaQuery ? mobileMediaQuery.matches : false)
 const prefersReducedMotion = ref(reducedMotionQuery ? reducedMotionQuery.matches : false)
+const { isKh } = useLanguage()
 const weddingContent = {
   brideKh: 'រ៉ុង រីណា',
   groomKh: 'ឈឿន រ៉ាឆា',
@@ -28,6 +30,16 @@ const weddingContent = {
   weekdayKh: 'ថ្ងៃសៅរ៍',
   eventTimeKh: 'ថ្ងៃសៅរ៍ ២៨ កុម្ភៈ ឆ្នាំ ២០២៦ វេលាម៉ោង១១:០០ ថ្ងៃត្រង់'
 }
+
+Object.assign(weddingContent, {
+  brideKh: 'រីណា',
+  groomKh: 'រ៉ាឆា',
+  brideEn: 'Rina',
+  groomEn: 'Racha',
+  monthKh: 'កុម្ភៈ',
+  weekdayKh: 'ថ្ងៃសៅរ៍',
+  eventTimeKh: 'ថ្ងៃសៅរ៍ ទី២៨ ខែកុម្ភៈ ឆ្នាំ២០២៦ វេលាម៉ោង ១១:០០ ថ្ងៃត្រង់'
+})
 
 const lotusParticles = Array.from({ length: 12 }, (_, index) => ({
   left: `${6 + index * 8}%`,

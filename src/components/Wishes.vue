@@ -2,7 +2,9 @@
 import { computed, onMounted, ref } from 'vue'
 import { db } from '../firebase'
 import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { useLanguage } from '../composables/useLanguage'
 
+const { isKh } = useLanguage()
 const name = ref('')
 const message = ref('')
 const messages = ref([])
@@ -15,7 +17,9 @@ async function submitWish() {
   status.value = ''
 
   if (!name.value || !message.value) {
-    status.value = 'សូមបញ្ចូលឈ្មោះ និងពាក្យជូនពរ'
+    status.value = isKh.value
+      ? 'សូមបញ្ចូលឈ្មោះ និងពាក្យជូនពរ'
+      : 'Please enter your name and message.'
     return
   }
 
@@ -28,11 +32,15 @@ async function submitWish() {
       time: Date.now()
     })
 
-    status.value = 'សូមអរគុណសម្រាប់ពាក្យជូនពរ'
+    status.value = isKh.value
+      ? 'សូមអរគុណសម្រាប់ពាក្យជូនពរ'
+      : 'Thank you for your blessing message.'
     name.value = ''
     message.value = ''
-  } catch (error) {
-    status.value = 'មិនអាចផ្ញើសារបាន សូមព្យាយាមម្ដងទៀត'
+  } catch {
+    status.value = isKh.value
+      ? 'មិនអាចផ្ញើសារបាន សូមព្យាយាមម្ដងទៀត'
+      : 'Unable to send message. Please try again.'
   } finally {
     sending.value = false
   }
@@ -54,21 +62,21 @@ onMounted(() => {
       <div class="blessing-frame p-[1px] rounded-[24px]">
         <div class="blessing-panel rounded-[23px] p-5 sm:p-7">
           <div class="text-center">
-            <h3 class="font-engraved text-xl sm:text-2xl blessing-title">ផ្ញើរសារជូនពរ</h3>
-            <p class="blessing-subtitle text-[11px] sm:text-xs tracking-[0.06em] mt-2">Send a greeting message</p>
+            <h3 class="font-engraved text-xl sm:text-2xl blessing-title">{{ isKh ? 'ផ្ញើសារជូនពរ' : 'Send Your Blessings' }}</h3>
+            <p class="blessing-subtitle text-[11px] sm:text-xs tracking-[0.06em] mt-2">{{ isKh ? 'សូមទុកពាក្យជូនពរ' : 'Send a greeting message' }}</p>
           </div>
 
           <form class="wishes-form mt-5 sm:mt-6 space-y-3 sm:space-y-4" @submit.prevent="submitWish">
             <input
               v-model="name"
               class="blessing-input"
-              placeholder="ឈ្មោះ"
+              :placeholder="isKh ? 'ឈ្មោះ' : 'Name'"
             >
             <textarea
               v-model="message"
               rows="5"
               class="blessing-input blessing-textarea"
-              placeholder="សូមសរសេរពាក្យជូនពរ"
+              :placeholder="isKh ? 'សូមសរសេរពាក្យជូនពរ' : 'Write your blessing message'"
             ></textarea>
 
             <button
@@ -76,7 +84,7 @@ onMounted(() => {
               class="blessing-button w-full rounded-xl px-5 py-3 font-khmer-body text-xs tracking-[0.06em] transition"
               :disabled="sending"
             >
-              {{ sending ? 'កំពុងផ្ញើ...' : 'ផ្ញើពាក្យជូនពរ' }}
+              {{ sending ? (isKh ? 'កំពុងផ្ញើ...' : 'Sending...') : (isKh ? 'ផ្ញើពាក្យជូនពរ' : 'Send Message') }}
             </button>
 
             <p v-if="status" class="blessing-status text-sm text-center break-words">{{ status }}</p>
@@ -84,7 +92,7 @@ onMounted(() => {
 
           <div class="mt-6 sm:mt-7">
             <p class="blessing-recent-label font-khmer-body text-xs tracking-[0.06em] text-center mb-3">
-              សារជូនពរចុងក្រោយ
+              {{ isKh ? 'សារជូនពរចុងក្រោយ' : 'Recent Messages' }}
             </p>
             <div class="wishes-list space-y-2.5 sm:space-y-3 max-h-[290px] sm:max-h-[320px] overflow-auto pr-1">
               <article
@@ -92,12 +100,12 @@ onMounted(() => {
                 :key="wish.id"
                 class="blessing-note rounded-xl px-4 py-3"
               >
-                <p class="blessing-note-name font-khmer-title text-sm">{{ wish.name || 'ភ្ញៀវ' }}</p>
+                <p class="blessing-note-name font-khmer-title text-sm">{{ wish.name || (isKh ? 'ភ្ញៀវ' : 'Guest') }}</p>
                 <p class="blessing-note-text text-sm mt-1 whitespace-pre-wrap break-words">{{ wish.text || '' }}</p>
               </article>
 
               <p v-if="latestMessages.length === 0" class="blessing-empty text-sm text-center py-4">
-                មិនទាន់មានសារជូនពរ
+                {{ isKh ? 'មិនទាន់មានសារជូនពរ' : 'No messages yet.' }}
               </p>
             </div>
           </div>

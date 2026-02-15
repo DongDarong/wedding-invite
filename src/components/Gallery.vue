@@ -1,10 +1,13 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useLanguage } from '../composables/useLanguage'
 
 const imageModules = import.meta.glob('../assets/images/*.{jpg,jpeg,png,webp,gif}', {
   eager: true,
   import: 'default'
 })
+
+const { isKh } = useLanguage()
 
 const slides = Object.entries(imageModules)
   .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath, undefined, { numeric: true }))
@@ -118,8 +121,10 @@ onBeforeUnmount(() => {
 <template>
   <section class="animate-[fade-up_1.5s_ease]">
     <div class="text-center mb-5">
-      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">រូបភាពអនុស្សាវរីយ៍</h3>
-      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">Souvenir pictures</p>
+      <h3 class="font-khmer-title text-xl gold-title max-[390px]:text-lg">{{ isKh ? 'រូបភាពអនុស្សាវរីយ៍' : 'Photo Gallery' }}</h3>
+      <p class="text-xs tracking-[0.06em] text-[#d4bb86]/75 mt-1 max-[390px]:text-[10px]">
+        {{ isKh ? 'សម្រាំងរូបភាពពិសេស' : 'Souvenir Pictures' }}
+      </p>
     </div>
 
     <div class="max-w-4xl mx-auto">
@@ -151,16 +156,16 @@ onBeforeUnmount(() => {
           </transition>
           <div
             v-else
-            class="h-full w-full grid place-items-center bg-[linear-gradient(145deg,rgba(232, 207, 144,0.88),rgba(19,31,24,0.95))] text-[#d9c18d]"
+            class="h-full w-full grid place-items-center bg-[linear-gradient(145deg,rgba(232,207,144,0.88),rgba(19,31,24,0.95))] text-[#d9c18d]"
           >
-            <p class="font-khmer-body text-sm tracking-[0.06em]">No matching images for this screen size</p>
+            <p class="font-khmer-body text-sm tracking-[0.06em]">{{ isKh ? 'មិនមានរូបភាពត្រូវនឹងទំហំអេក្រង់នេះទេ' : 'No matching images for this screen size' }}</p>
           </div>
 
           <div class="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.32))] sm:bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.52))]"></div>
 
           <div class="absolute z-[3] bottom-3 sm:bottom-4 left-4 right-4 text-center">
             <p class="font-khmer-body text-[10px] sm:text-[11px] tracking-[0.06em] text-[#e8cf90] drop-shadow-[0_2px_5px_rgba(0,0,0,0.75)]">
-              អនុស្សាវរីយ៍ក្រោមពន្លឺមាស
+              {{ isKh ? 'អនុស្សាវរីយ៍ក្រោមពន្លឺមាស' : 'Golden Memories' }}
             </p>
           </div>
       </div>
@@ -171,7 +176,7 @@ onBeforeUnmount(() => {
           :key="slide.alt"
           type="button"
           class="h-2.5 rounded-full transition-all duration-300"
-          :class="index === currentSlide ? 'w-8 bg-[#e8cf90] shadow-[0_0_10px_rgba(201, 164, 91,0.8)]' : 'w-2.5 bg-[#a27c3b]/75'"
+          :class="index === currentSlide ? 'w-8 bg-[#e8cf90] shadow-[0_0_10px_rgba(201,164,91,0.8)]' : 'w-2.5 bg-[#a27c3b]/75'"
           @click="currentSlide = index"
         ></button>
       </div>
